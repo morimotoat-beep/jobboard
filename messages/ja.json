@@ -1,0 +1,150 @@
+{
+  "common": {
+    "siteTitle": "アカデミアノート Jobs",
+    "tagline": "研究者のための求人情報サイト"
+  },
+  "home": {
+    "title": "求人を探す",
+    "comingSoon": "現在準備中です。もうしばらくお待ちください。"
+  },
+  "search": {
+    "all": "すべて",
+    "any": "指定なし",
+    "country": "国・地域",
+    "prefecture": "都道府県",
+    "deadline": "締切",
+    "within7": "7日以内",
+    "within30": "30日以内",
+    "within90": "90日以内",
+    "keywordPlaceholder": "タイトル・要約から検索",
+    "searchButton": "この条件で検索",
+    "results": "{count}件の求人",
+    "empty": "条件に合う求人は見つかりませんでした。",
+    "prev": "前へ",
+    "next": "次へ",
+    "pageInfo": "{page} / {totalPages} ページ"
+  },
+  "listing": {
+    "deadlineLabel": "締切",
+    "locationLabel": "勤務地",
+    "postedOn": "掲載日",
+    "deadlineSoon": "締切間近",
+    "apply": "応募はこちら（外部サイト）",
+    "externalNote": "応募手続き・詳細の確認は、掲載元の公式ページで行ってください。当サイトは応募情報を受け取りません。",
+    "back": "一覧に戻る",
+    "machineTranslated": "この求人は自動翻訳されています（原文：{lang}）",
+    "report": "この求人を通報する",
+    "reported": "通報を受け付けました。ご協力ありがとうございます。"
+  },
+  "nav": {
+    "postJob": "求人を掲載",
+    "links": "求人リンク集",
+    "terms": "利用規約",
+    "privacy": "プライバシーポリシー"
+  },
+  "links": {
+    "title": "世界の研究者求人サイト リンク集",
+    "intro": "海外ポスドク・教員公募などを探せる主要サイトをまとめました。求人内容は各サイトでご確認ください。",
+    "disclaimer": "当ページは外部サイトへのリンク集です。各サイトの求人情報の転載・複製は行っていません。",
+    "categories": {
+      "domestic": "国内（日本）",
+      "international": "海外・国際",
+      "field": "分野特化"
+    }
+  },
+  "post": {
+    "title": "求人を投稿する",
+    "intro": "掲載は無料です。入力したメールアドレス宛に確認メールが届き、メール内のリンクから公開手続きを行うと掲載されます。求職者の応募情報は当サイトでは扱いません。",
+    "postLanguage": "投稿言語",
+    "titleLabel": "求人タイトル",
+    "titlePlaceholder": "例：◯◯大学◯◯研究室 特任助教の公募",
+    "summaryLabel": "要約",
+    "summaryPlaceholder": "募集内容・応募資格・待遇などの概要（4000字以内）",
+    "deadlineLabel": "応募締切日",
+    "urlLabel": "応募・詳細ページのURL",
+    "urlPlaceholder": "https://…（大学・研究機関の公式ページ）",
+    "emailLabel": "連絡先メールアドレス（非公開）",
+    "emailNote": "確認メール・編集用リンクの送付にのみ使用します。サイト上には表示されません。",
+    "submit": "確認メールを送信",
+    "submitting": "送信中…",
+    "successTitle": "確認メールを送信しました",
+    "successBody": "{email} 宛に確認メールをお送りしました。メール内のリンクから掲載内容の確認と公開を行ってください。",
+    "errors": {
+      "required": "必須項目です。",
+      "titleTooLong": "タイトルは200字以内で入力してください。",
+      "summaryTooLong": "要約は4000字以内で入力してください。",
+      "invalidUrl": "http(s):// から始まる有効なURLを入力してください。",
+      "invalidEmail": "有効なメールアドレスを入力してください。",
+      "invalidDeadline": "締切日は今日以降（2年以内）の日付を指定してください。",
+      "invalidChoice": "選択内容が正しくありません。",
+      "rateLimited": "このメールアドレスからの投稿が多すぎます。明日以降に再度お試しください。",
+      "sendFailed": "処理に失敗しました。時間をおいて再度お試しください。"
+    }
+  },
+  "manage": {
+    "title": "投稿の管理",
+    "status": "状態",
+    "statusLabels": {
+      "draft": "未公開（メール確認待ち）",
+      "published": "公開中",
+      "expired": "掲載終了（締切超過）",
+      "link_flagged": "リンク確認中",
+      "hidden": "非公開"
+    },
+    "publish": "この内容で公開する",
+    "publishedBanner": "求人を公開しました。",
+    "updatedBanner": "更新しました。",
+    "editTitle": "内容を編集",
+    "update": "更新する",
+    "viewPublic": "公開ページを見る",
+    "deleteTitle": "この求人を削除",
+    "deleteWarning": "削除すると元に戻せません。",
+    "deleteConfirm": "完全に削除する"
+  },
+  "email": {
+    "confirmSubject": "【アカデミアノート Jobs】求人投稿の確認",
+    "confirmBody": "求人の投稿を受け付けました。\n\n以下のリンクから掲載内容を確認し、「公開する」ボタンを押すと掲載されます。\nこのリンクは掲載後の編集・削除にも使用します。大切に保管してください。\n\n{url}\n\n※このメールに心当たりがない場合は破棄してください。",
+    "linkFlaggedSubject": "【アカデミアノート Jobs】掲載求人のリンクが確認できません",
+    "linkFlaggedBody": "掲載中の求人「{title}」の応募・詳細URLに3日連続でアクセスできない状態（404等）を確認したため、求人を一時非表示にしました。\n\nURLをご確認のうえ、以下の管理ページから修正・保存いただくと再公開されます。リンクが回復した場合は自動的に再公開されます。\n\n{url}"
+  },
+  "filters": {
+    "field": {
+      "label": "研究分野",
+      "field_math": "数学・統計学",
+      "field_physics": "物理学",
+      "field_chemistry": "化学",
+      "field_biology": "生物学・生命科学",
+      "field_earth": "地球科学・宇宙科学",
+      "field_medicine": "医学・歯学・健康科学",
+      "field_pharmacy": "薬学",
+      "field_agriculture": "農学・獣医学・水産学",
+      "field_engineering": "工学",
+      "field_informatics": "情報科学・データサイエンス",
+      "field_environment": "環境科学",
+      "field_interdisciplinary": "学際・その他"
+    },
+    "jobType": {
+      "label": "職種",
+      "job_professor": "教授",
+      "job_assoc_prof": "准教授",
+      "job_lecturer": "講師",
+      "job_assistant_prof": "助教",
+      "job_fixed_faculty": "特任教員（任期付）",
+      "job_postdoc": "ポスドク・研究員",
+      "job_technical": "技術職・研究支援",
+      "job_grad_student": "大学院生募集"
+    },
+    "employmentType": {
+      "label": "雇用形態",
+      "emp_fixed": "任期付（有期）",
+      "emp_permanent": "常勤（無期）",
+      "emp_tenure_track": "テニュアトラック"
+    }
+  },
+  "languageNames": {
+    "ja": "日本語",
+    "en": "English",
+    "zh": "中文",
+    "ko": "한국어"
+  }
+}

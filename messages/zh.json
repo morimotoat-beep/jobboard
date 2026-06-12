@@ -1,0 +1,150 @@
+{
+  "common": {
+    "siteTitle": "Academia Note Jobs",
+    "tagline": "面向研究人员的招聘信息网站"
+  },
+  "home": {
+    "title": "查找职位",
+    "comingSoon": "正在筹备中，敬请期待。"
+  },
+  "search": {
+    "all": "全部",
+    "any": "不限",
+    "country": "国家/地区",
+    "prefecture": "都道府县（日本）",
+    "deadline": "截止日期",
+    "within7": "7天内",
+    "within30": "30天内",
+    "within90": "90天内",
+    "keywordPlaceholder": "搜索标题与摘要",
+    "searchButton": "搜索",
+    "results": "共{count}条职位",
+    "empty": "没有符合条件的职位。",
+    "prev": "上一页",
+    "next": "下一页",
+    "pageInfo": "第 {page} / {totalPages} 页"
+  },
+  "listing": {
+    "deadlineLabel": "截止日期",
+    "locationLabel": "工作地点",
+    "postedOn": "发布日期",
+    "deadlineSoon": "即将截止",
+    "apply": "前往官方页面申请",
+    "externalNote": "申请及详情请前往发布机构的官方页面。本网站不收集求职者信息。",
+    "back": "返回列表",
+    "machineTranslated": "此信息为机器翻译（原文：{lang}）",
+    "report": "举报此信息",
+    "reported": "已收到您的举报，感谢配合。"
+  },
+  "nav": {
+    "postJob": "发布招聘",
+    "links": "招聘网站链接",
+    "terms": "服务条款",
+    "privacy": "隐私政策"
+  },
+  "links": {
+    "title": "全球研究者招聘网站链接集",
+    "intro": "汇总了可查找海外博士后、教职公募等的主要网站。具体职位请在各网站确认。",
+    "disclaimer": "本页面仅为外部网站链接集，不转载、复制各网站的招聘信息。",
+    "categories": {
+      "domestic": "日本国内",
+      "international": "海外·国际",
+      "field": "特定领域"
+    }
+  },
+  "post": {
+    "title": "发布招聘信息",
+    "intro": "发布免费。系统将向您填写的邮箱发送确认邮件，点击邮件中的链接确认内容后即可发布。本网站不处理求职者的应聘信息。",
+    "postLanguage": "发布语言",
+    "titleLabel": "职位标题",
+    "titlePlaceholder": "例：XX大学XX研究室 特聘助理教授招聘",
+    "summaryLabel": "摘要",
+    "summaryPlaceholder": "招聘内容、应聘资格、待遇等概要（4000字以内）",
+    "deadlineLabel": "申请截止日期",
+    "urlLabel": "申请·详情页面URL",
+    "urlPlaceholder": "https://…（大学·研究机构官方页面）",
+    "emailLabel": "联系邮箱（不公开）",
+    "emailNote": "仅用于发送确认邮件和编辑链接，不会显示在网站上。",
+    "submit": "发送确认邮件",
+    "submitting": "发送中…",
+    "successTitle": "确认邮件已发送",
+    "successBody": "我们已向 {email} 发送确认邮件。请通过邮件中的链接确认并发布您的招聘信息。",
+    "errors": {
+      "required": "此项为必填。",
+      "titleTooLong": "标题不得超过200字。",
+      "summaryTooLong": "摘要不得超过4000字。",
+      "invalidUrl": "请输入以 http(s):// 开头的有效URL。",
+      "invalidEmail": "请输入有效的邮箱地址。",
+      "invalidDeadline": "截止日期须为今天以后（两年以内）。",
+      "invalidChoice": "选择无效。",
+      "rateLimited": "该邮箱提交过于频繁，请明天再试。",
+      "sendFailed": "处理失败，请稍后重试。"
+    }
+  },
+  "manage": {
+    "title": "管理您的招聘信息",
+    "status": "状态",
+    "statusLabels": {
+      "draft": "未发布（待邮件确认）",
+      "published": "已发布",
+      "expired": "已结束（超过截止日期）",
+      "link_flagged": "链接审核中",
+      "hidden": "已隐藏"
+    },
+    "publish": "发布此信息",
+    "publishedBanner": "您的招聘信息已发布。",
+    "updatedBanner": "已更新。",
+    "editTitle": "编辑内容",
+    "update": "保存修改",
+    "viewPublic": "查看公开页面",
+    "deleteTitle": "删除此信息",
+    "deleteWarning": "删除后无法恢复。",
+    "deleteConfirm": "确认删除"
+  },
+  "email": {
+    "confirmSubject": "【Academia Note Jobs】确认您的招聘信息",
+    "confirmBody": "我们已收到您发布的招聘信息。\n\n请点击以下链接确认内容，并按下发布按钮后即可公开。\n此链接也用于之后的编辑和删除，请妥善保管。\n\n{url}\n\n如果这不是您本人的操作，请忽略此邮件。",
+    "linkFlaggedSubject": "【Academia Note Jobs】您发布的招聘信息链接无法访问",
+    "linkFlaggedBody": "您发布的招聘信息「{title}」的申请·详情URL已连续3天无法访问（404等），该信息已被暂时隐藏。\n\n请确认URL是否正确，并通过以下管理页面修改保存后即可重新发布。如链接恢复，也会自动重新发布。\n\n{url}"
+  },
+  "filters": {
+    "field": {
+      "label": "研究领域",
+      "field_math": "数学·统计学",
+      "field_physics": "物理学",
+      "field_chemistry": "化学",
+      "field_biology": "生物学·生命科学",
+      "field_earth": "地球科学·空间科学",
+      "field_medicine": "医学·口腔医学·健康科学",
+      "field_pharmacy": "药学",
+      "field_agriculture": "农学·兽医学·水产学",
+      "field_engineering": "工学",
+      "field_informatics": "信息科学·数据科学",
+      "field_environment": "环境科学",
+      "field_interdisciplinary": "跨学科·其他"
+    },
+    "jobType": {
+      "label": "职位类型",
+      "job_professor": "教授",
+      "job_assoc_prof": "副教授",
+      "job_lecturer": "讲师",
+      "job_assistant_prof": "助理教授",
+      "job_fixed_faculty": "特聘教员（聘期制）",
+      "job_postdoc": "博士后·研究员",
+      "job_technical": "技术·研究支持岗",
+      "job_grad_student": "研究生招募"
+    },
+    "employmentType": {
+      "label": "聘用形式",
+      "emp_fixed": "固定期限（聘期制）",
+      "emp_permanent": "长期（无固定期限）",
+      "emp_tenure_track": "终身教职轨道"
+    }
+  },
+  "languageNames": {
+    "ja": "日本語",
+    "en": "English",
+    "zh": "中文",
+    "ko": "한국어"
+  }
+}

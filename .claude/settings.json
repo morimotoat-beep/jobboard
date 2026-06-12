@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(node -v)",
+      "PowerShell(npm -v)",
+      "PowerShell(npm run build)",
+      "PowerShell(npm install next-intl)"
+    ],
+    "deny": [
+      "Read(.env)",
+      "Read(.env.*)",
+      "Read(.credentials/**)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\morim\\projects\\jobboard"
+    ]
+  }
+}

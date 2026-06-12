@@ -1,0 +1,150 @@
+{
+  "common": {
+    "siteTitle": "Academia Note Jobs",
+    "tagline": "Job board for researchers"
+  },
+  "home": {
+    "title": "Find positions",
+    "comingSoon": "Coming soon. Please check back later."
+  },
+  "search": {
+    "all": "All",
+    "any": "Any",
+    "country": "Country / Region",
+    "prefecture": "Prefecture (Japan)",
+    "deadline": "Deadline",
+    "within7": "Within 7 days",
+    "within30": "Within 30 days",
+    "within90": "Within 90 days",
+    "keywordPlaceholder": "Search title and summary",
+    "searchButton": "Search",
+    "results": "{count} positions found",
+    "empty": "No positions match your filters.",
+    "prev": "Previous",
+    "next": "Next",
+    "pageInfo": "Page {page} of {totalPages}"
+  },
+  "listing": {
+    "deadlineLabel": "Deadline",
+    "locationLabel": "Location",
+    "postedOn": "Posted on",
+    "deadlineSoon": "Closing soon",
+    "apply": "Apply on official site",
+    "externalNote": "Applications and full details are handled on the institution's official page. This site does not collect applicant information.",
+    "back": "Back to list",
+    "machineTranslated": "This listing is machine-translated (original: {lang})",
+    "report": "Report this listing",
+    "reported": "Report received. Thank you."
+  },
+  "nav": {
+    "postJob": "Post a job",
+    "links": "Job site directory",
+    "terms": "Terms of Service",
+    "privacy": "Privacy Policy"
+  },
+  "links": {
+    "title": "Researcher Job Site Directory",
+    "intro": "Major sites for finding postdoc and faculty positions worldwide. Check each site for listing details.",
+    "disclaimer": "This page is a directory of external links. We do not reproduce or republish listings from these sites.",
+    "categories": {
+      "domestic": "Japan (domestic)",
+      "international": "International",
+      "field": "Field-specific"
+    }
+  },
+  "post": {
+    "title": "Post a job",
+    "intro": "Posting is free. A confirmation email will be sent to the address you enter; follow the link inside to review and publish your listing. This site does not handle applicant information.",
+    "postLanguage": "Posting language",
+    "titleLabel": "Job title",
+    "titlePlaceholder": "e.g., Assistant Professor opening, XX Lab, XX University",
+    "summaryLabel": "Summary",
+    "summaryPlaceholder": "Outline of the position, qualifications, conditions (max 4000 characters)",
+    "deadlineLabel": "Application deadline",
+    "urlLabel": "URL for application / details",
+    "urlPlaceholder": "https://… (official institutional page)",
+    "emailLabel": "Contact email (not published)",
+    "emailNote": "Used only to send the confirmation and edit links. Never shown on the site.",
+    "submit": "Send confirmation email",
+    "submitting": "Sending…",
+    "successTitle": "Confirmation email sent",
+    "successBody": "We sent a confirmation email to {email}. Open the link inside to review and publish your listing.",
+    "errors": {
+      "required": "This field is required.",
+      "titleTooLong": "Title must be 200 characters or less.",
+      "summaryTooLong": "Summary must be 4000 characters or less.",
+      "invalidUrl": "Enter a valid URL starting with http(s)://.",
+      "invalidEmail": "Enter a valid email address.",
+      "invalidDeadline": "Deadline must be today or later (within 2 years).",
+      "invalidChoice": "Invalid selection.",
+      "rateLimited": "Too many submissions from this email address. Please try again tomorrow.",
+      "sendFailed": "Something went wrong. Please try again later."
+    }
+  },
+  "manage": {
+    "title": "Manage your listing",
+    "status": "Status",
+    "statusLabels": {
+      "draft": "Not published (awaiting confirmation)",
+      "published": "Published",
+      "expired": "Closed (past deadline)",
+      "link_flagged": "Link under review",
+      "hidden": "Hidden"
+    },
+    "publish": "Publish this listing",
+    "publishedBanner": "Your listing is now published.",
+    "updatedBanner": "Listing updated.",
+    "editTitle": "Edit listing",
+    "update": "Save changes",
+    "viewPublic": "View public page",
+    "deleteTitle": "Delete this listing",
+    "deleteWarning": "This cannot be undone.",
+    "deleteConfirm": "Delete permanently"
+  },
+  "email": {
+    "confirmSubject": "[Academia Note Jobs] Confirm your job listing",
+    "confirmBody": "We received your job listing.\n\nOpen the link below to review it and press the publish button to make it public.\nKeep this link safe — it is also used to edit or delete the listing later.\n\n{url}\n\nIf you did not request this, please ignore this email.",
+    "linkFlaggedSubject": "[Academia Note Jobs] We could not reach your listing's link",
+    "linkFlaggedBody": "The application URL of your listing \"{title}\" has been unreachable (404, etc.) for 3 consecutive days, so the listing has been temporarily hidden.\n\nPlease check the URL and update it from the management page below — saving your changes will republish the listing. It will also be republished automatically if the link recovers.\n\n{url}"
+  },
+  "filters": {
+    "field": {
+      "label": "Research Field",
+      "field_math": "Mathematics & Statistics",
+      "field_physics": "Physics",
+      "field_chemistry": "Chemistry",
+      "field_biology": "Biology & Life Sciences",
+      "field_earth": "Earth & Space Sciences",
+      "field_medicine": "Medicine, Dentistry & Health Sciences",
+      "field_pharmacy": "Pharmaceutical Sciences",
+      "field_agriculture": "Agriculture, Veterinary & Fisheries",
+      "field_engineering": "Engineering",
+      "field_informatics": "Information Science & Data Science",
+      "field_environment": "Environmental Science",
+      "field_interdisciplinary": "Interdisciplinary & Other"
+    },
+    "jobType": {
+      "label": "Position Type",
+      "job_professor": "Professor",
+      "job_assoc_prof": "Associate Professor",
+      "job_lecturer": "Lecturer",
+      "job_assistant_prof": "Assistant Professor",
+      "job_fixed_faculty": "Project / Fixed-term Faculty",
+      "job_postdoc": "Postdoc / Researcher",
+      "job_technical": "Technical / Research Support",
+      "job_grad_student": "Graduate Student Positions"
+    },
+    "employmentType": {
+      "label": "Employment Type",
+      "emp_fixed": "Fixed-term",
+      "emp_permanent": "Permanent",
+      "emp_tenure_track": "Tenure-track"
+    }
+  },
+  "languageNames": {
+    "ja": "日本語",
+    "en": "English",
+    "zh": "中文",
+    "ko": "한국어"
+  }
+}
