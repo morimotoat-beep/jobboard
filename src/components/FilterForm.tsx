@@ -26,7 +26,7 @@ export default function FilterForm({ values }: { values: FilterValues }) {
   const t = useTranslations();
 
   return (
-    <form method="get" action={`/${locale}`} className="rounded-lg bg-brand-tab p-4">
+    <form method="get" action={`/${locale}/jobs`} className="rounded-lg bg-brand-tab p-4">
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
         <label className="block text-sm">
           <span className="mb-1 block font-medium">{t("filters.field.label")}</span>

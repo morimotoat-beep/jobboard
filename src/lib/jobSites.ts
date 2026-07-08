@@ -9,7 +9,7 @@ export type JobSite = {
 };
 
 export type JobSiteCategory = {
-  key: "domestic" | "international" | "field";
+  key: "domestic" | "intl_public" | "intl_commercial" | "field";
   sites: JobSite[];
 };
 
@@ -30,28 +30,8 @@ export const JOB_SITE_CATEGORIES: JobSiteCategory[] = [
     ],
   },
   {
-    key: "international",
+    key: "intl_public",
     sites: [
-      {
-        name: "Nature Careers",
-        url: "https://www.nature.com/naturecareers/",
-        desc: {
-          ja: "Nature誌が運営する国際的な研究職求人サイト。世界のポスドク・PI公募が集まる。",
-          en: "International research jobs from the publisher of Nature.",
-          zh: "《自然》杂志运营的国际科研职位网站。",
-          ko: "Nature가 운영하는 국제 연구직 채용 사이트.",
-        },
-      },
-      {
-        name: "Science Careers",
-        url: "https://jobs.sciencecareers.org/",
-        desc: {
-          ja: "Science誌（AAAS）運営の求人サイト。米国を中心に幅広い分野をカバー。",
-          en: "Job board run by Science / AAAS, with broad coverage centered on the US.",
-          zh: "《科学》杂志（AAAS）运营的招聘网站。",
-          ko: "Science(AAAS)가 운영하는 채용 사이트.",
-        },
-      },
       {
         name: "EURAXESS",
         url: "https://euraxess.ec.europa.eu/jobs/search",
@@ -60,6 +40,41 @@ export const JOB_SITE_CATEGORIES: JobSiteCategory[] = [
           en: "The EU's official portal for research jobs and fellowships across Europe.",
           zh: "欧盟官方的研究职位与奖学金信息门户。",
           ko: "EU 공식 연구자 채용·펠로우십 포털.",
+        },
+      },
+      {
+        name: "Science Careers",
+        url: "https://jobs.sciencecareers.org/",
+        desc: {
+          ja: "非営利学会AAAS（Science誌）運営の求人サイト。米国を中心に幅広い分野をカバー。",
+          en: "Job board run by AAAS (publisher of Science), a non-profit society. Broad coverage centered on the US.",
+          zh: "非营利学会AAAS（《科学》杂志）运营的招聘网站。",
+          ko: "비영리 학회 AAAS(Science誌)가 운영하는 채용 사이트.",
+        },
+      },
+      {
+        name: "AcademicJobsOnline",
+        url: "https://academicjobsonline.org/",
+        desc: {
+          ja: "大学運営の非営利な公募システム。無料で、物理・数学系の教員公募が豊富。",
+          en: "A non-profit, university-run application system. Free, and strong in physics and math.",
+          zh: "由大学运营的非营利招聘系统，免费，物理·数学类职位丰富。",
+          ko: "대학이 운영하는 비영리 공모 시스템. 무료이며 물리·수학 분야가 강함.",
+        },
+      },
+    ],
+  },
+  {
+    key: "intl_commercial",
+    sites: [
+      {
+        name: "Nature Careers",
+        url: "https://www.nature.com/naturecareers/",
+        desc: {
+          ja: "Nature誌（Springer Nature）が運営する国際的な研究職求人サイト。世界のポスドク・PI公募が集まる。",
+          en: "International research jobs from Springer Nature, publisher of Nature.",
+          zh: "《自然》杂志（Springer Nature）运营的国际科研职位网站。",
+          ko: "Nature(Springer Nature)가 운영하는 국제 연구직 채용 사이트.",
         },
       },
       {
@@ -100,16 +115,6 @@ export const JOB_SITE_CATEGORIES: JobSiteCategory[] = [
           en: "International academic jobs, strongest in Europe.",
           zh: "以欧洲为主的国际学术职位网站。",
           ko: "유럽 중심의 국제 아카데미아 채용 사이트.",
-        },
-      },
-      {
-        name: "AcademicJobsOnline",
-        url: "https://academicjobsonline.org/",
-        desc: {
-          ja: "北米中心の公募システム。物理・数学系の教員公募が豊富。",
-          en: "North America–focused application system; strong in physics and math.",
-          zh: "以北美为主的招聘系统，物理·数学类职位丰富。",
-          ko: "북미 중심 시스템, 물리·수학 분야 공모가 많음.",
         },
       },
     ],

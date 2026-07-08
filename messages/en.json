@@ -7,6 +7,58 @@
     "title": "Find positions",
     "comingSoon": "Coming soon. Please check back later."
   },
+  "lp": {
+    "hero": {
+      "title1": "Your next stage in research,",
+      "title2": "anywhere in the world.",
+      "sub": "Posting and searching are completely free. A global job board connecting researchers and labs.",
+      "trust": "We simply connect researchers with openings. Every application step happens on the university's official page — we never hold your personal information.",
+      "ctaFind": "Find positions",
+      "ctaPost": "Post a job"
+    },
+    "map": {
+      "heading": "Research positions from around the world",
+      "desc": "Countries with open positions are highlighted in green. Start exploring from wherever you want to go.",
+      "badge": "{name}: {count}"
+    },
+    "features": {
+      "heading": "Why use this site",
+      "desc": "We simply connect seekers and posters — that's what keeps it simple and safe.",
+      "f1Title": "A bridge to official pages",
+      "f1Body": "When you find a position, you apply on the university's or lab's official page. We never hold your personal information.",
+      "f2Title": "Anyone can post",
+      "f2Body": "No account, completely free. Just fill in the form and confirm by email — anyone can publish a listing.",
+      "f3Title": "Connected to the world",
+      "f3Body": "Four languages (JA / EN / ZH / KO). Find positions worldwide and reach a global audience.",
+      "f4Title": "Always fresh, automatically",
+      "f4Body": "Expired listings are hidden automatically, so you only ever see active openings."
+    },
+    "howto": {
+      "heading": "How to use",
+      "desc": "Just three steps, whether you're searching or posting.",
+      "badge": "No account needed — completely free!",
+      "seekTitle": "For job seekers",
+      "seekS1": "Search with filters",
+      "seekS2": "View the details",
+      "seekS3": "Apply on the university's official page",
+      "postTitle": "For labs & universities",
+      "postS1": "Fill in the form (include the URL of your official page or call for applications)",
+      "postS2": "Click the link in the email",
+      "postS3": "Published — edit & delete anytime"
+    },
+    "jobs": {
+      "heading": "Latest positions",
+      "desc": "Check out the latest open positions.",
+      "viewAll": "View all positions",
+      "empty": "No listings yet — be the first to post!"
+    },
+    "links": {
+      "heading": "More job boards, all in one place",
+      "desc": "We organize major researcher job sites by category.",
+      "button": "Browse the directory",
+      "note": "Click a site name to open its official page. We do not republish any listings."
+    }
+  },
   "search": {
     "all": "All",
     "any": "Any",
@@ -38,6 +90,7 @@
   },
   "nav": {
     "postJob": "Post a job",
+    "findJobs": "Find positions",
     "links": "Job site directory",
     "terms": "Terms of Service",
     "privacy": "Privacy Policy"
@@ -48,7 +101,8 @@
     "disclaimer": "This page is a directory of external links. We do not reproduce or republish listings from these sites.",
     "categories": {
       "domestic": "Japan (domestic)",
-      "international": "International",
+      "intl_public": "International (public & non-profit)",
+      "intl_commercial": "International (commercial)",
       "field": "Field-specific"
     }
   },

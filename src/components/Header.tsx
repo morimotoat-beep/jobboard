@@ -14,6 +14,12 @@ export default function Header() {
         </Link>
         <nav className="flex flex-wrap items-center gap-1">
           <Link
+            href="/jobs"
+            className="mr-1 rounded px-2 py-1 text-sm text-white underline hover:bg-brand-card hover:text-foreground"
+          >
+            {t("nav.findJobs")}
+          </Link>
+          <Link
             href="/links"
             className="mr-1 rounded px-2 py-1 text-sm text-white underline hover:bg-brand-card hover:text-foreground"
           >

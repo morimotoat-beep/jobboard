@@ -93,6 +93,41 @@ export async function searchListings(
   return { items: (data ?? []) as unknown as PublicListing[], total: count ?? 0 };
 }
 
+// LP「新着求人」用
+export async function getLatestListings(limit: number): Promise<PublicListing[]> {
+  const supabase = createServiceClient();
+  const { data, error } = await supabase
+    .from("listings")
+    .select(PUBLIC_LISTING_COLUMNS)
+    .eq("status", "published")
+    .gte("deadline", todayUtc())
+    .order("created_at", { ascending: false })
+    .limit(limit);
+  if (error) {
+    throw new Error(`新着求人の取得に失敗しました: ${error.message}`);
+  }
+  return (data ?? []) as unknown as PublicListing[];
+}
+
+// LP世界地図用：公開中求人の国別件数
+export async function getCountryCounts(): Promise<Record<string, number>> {
+  const supabase = createServiceClient();
+  const { data, error } = await supabase
+    .from("listings")
+    .select("country")
+    .eq("status", "published")
+    .gte("deadline", todayUtc())
+    .limit(1000);
+  if (error) {
+    throw new Error(`国別件数の取得に失敗しました: ${error.message}`);
+  }
+  const counts: Record<string, number> = {};
+  for (const row of (data ?? []) as { country: string }[]) {
+    counts[row.country] = (counts[row.country] ?? 0) + 1;
+  }
+  return counts;
+}
+
 // 管理画面用。呼び出し側で必ず管理者認証を確認すること
 export async function getAllListingsForAdmin(): Promise<Listing[]> {
   const supabase = createServiceClient();
