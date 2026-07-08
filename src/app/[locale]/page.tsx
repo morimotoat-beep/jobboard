@@ -110,9 +110,11 @@ export default async function HomePage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations();
+  // ビルド時の静的生成でDBに到達できなくてもLP自体は生成できるようにする
+  // （DBが空・一時的に不通でも地図と新着が空になるだけ。ISRで後から復帰）
   const [counts, latest] = await Promise.all([
-    getCountryCounts(),
-    getLatestListings(8),
+    getCountryCounts().catch(() => ({}) as Record<string, number>),
+    getLatestListings(8).catch(() => []),
   ]);
 
   return (
