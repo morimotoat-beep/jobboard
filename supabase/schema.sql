@@ -34,6 +34,10 @@ create table if not exists public.listings (
   employment_type text not null check (employment_type in (
     'emp_fixed', 'emp_permanent', 'emp_tenure_track'
   )),
+  -- 機関種別（募集元の種類）
+  organization_type text not null default 'university' check (organization_type in (
+    'university', 'research_institute', 'company'
+  )),
 
   -- 勤務地：国は ISO 3166-1 alpha-2（例 JP / US）、都道府県は日本のみ任意
   country text not null check (country ~ '^[A-Z]{2}$'),

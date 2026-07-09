@@ -53,6 +53,9 @@ export default async function JobDetailPage({
             <span className="rounded bg-brand-tab px-2 py-0.5">
               {t(`filters.employmentType.${listing.employment_type}`)}
             </span>
+            <span className="rounded bg-brand-tab px-2 py-0.5">
+              {t(`filters.organizationType.${listing.organization_type}`)}
+            </span>
           </div>
 
           <h2 className="mb-2 text-2xl font-bold">

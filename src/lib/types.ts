@@ -4,6 +4,7 @@ import type {
   JobTypeCode,
   ListingStatus,
   Locale,
+  OrganizationTypeCode,
 } from "./filters";
 
 // listings テーブルの1行（supabase/schema.sql と対応）
@@ -23,6 +24,7 @@ export type Listing = {
   field: FieldCode;
   job_type: JobTypeCode;
   employment_type: EmploymentTypeCode;
+  organization_type: OrganizationTypeCode;
   country: string; // ISO 3166-1 alpha-2
   prefecture: string | null;
   deadline: string; // YYYY-MM-DD
@@ -49,4 +51,4 @@ export type PublicListing = Omit<
 >;
 
 export const PUBLIC_LISTING_COLUMNS =
-  "id, title, summary, title_ja, title_en, title_zh, title_ko, summary_ja, summary_en, summary_zh, summary_ko, field, job_type, employment_type, country, prefecture, deadline, external_url, post_language, status, created_at, updated_at";
+  "id, title, summary, title_ja, title_en, title_zh, title_ko, summary_ja, summary_en, summary_zh, summary_ko, field, job_type, employment_type, organization_type, country, prefecture, deadline, external_url, post_language, status, created_at, updated_at";

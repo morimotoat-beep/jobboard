@@ -39,6 +39,14 @@ export const EMPLOYMENT_TYPE_CODES = [
 ] as const;
 export type EmploymentTypeCode = (typeof EMPLOYMENT_TYPE_CODES)[number];
 
+// 機関種別（募集元の種類）
+export const ORGANIZATION_TYPE_CODES = [
+  "university",
+  "research_institute",
+  "company",
+] as const;
+export type OrganizationTypeCode = (typeof ORGANIZATION_TYPE_CODES)[number];
+
 export const LISTING_STATUSES = [
   "draft",
   "published",

@@ -3,6 +3,7 @@ import {
   EMPLOYMENT_TYPE_CODES,
   FIELD_CODES,
   JOB_TYPE_CODES,
+  ORGANIZATION_TYPE_CODES,
 } from "./filters";
 import { PREFECTURE_CODES } from "./prefectures";
 import { PUBLIC_LISTING_COLUMNS, type Listing, type PublicListing } from "./types";
@@ -13,6 +14,7 @@ export type SearchFilters = {
   field?: string;
   jobType?: string;
   employmentType?: string;
+  organizationType?: string;
   country?: string;
   prefecture?: string;
   deadlineWithinDays?: number;
@@ -48,6 +50,12 @@ export async function searchListings(
     (EMPLOYMENT_TYPE_CODES as readonly string[]).includes(filters.employmentType)
   ) {
     query = query.eq("employment_type", filters.employmentType);
+  }
+  if (
+    filters.organizationType &&
+    (ORGANIZATION_TYPE_CODES as readonly string[]).includes(filters.organizationType)
+  ) {
+    query = query.eq("organization_type", filters.organizationType);
   }
   if (filters.country && /^[A-Z]{2}$/.test(filters.country)) {
     query = query.eq("country", filters.country);

@@ -85,6 +85,7 @@ export default async function ManagePage({
               field: listing.field,
               job_type: listing.job_type,
               employment_type: listing.employment_type,
+              organization_type: listing.organization_type,
               country: listing.country,
               prefecture: listing.prefecture,
               deadline: listing.deadline,

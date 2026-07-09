@@ -7,6 +7,7 @@ import {
   FIELD_CODES,
   JOB_TYPE_CODES,
   LOCALES,
+  ORGANIZATION_TYPE_CODES,
   type Locale,
 } from "@/lib/filters";
 import { COUNTRY_CODES, getCountryName } from "@/lib/countries";
@@ -19,6 +20,7 @@ type InitialValues = {
   field?: string;
   job_type?: string;
   employment_type?: string;
+  organization_type?: string;
   country?: string;
   prefecture?: string | null;
   deadline?: string;
@@ -144,7 +146,7 @@ export default function PostForm({ mode, action, initial = {} }: Props) {
         {fieldError("summary")}
       </div>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
           <label className={labelClass} htmlFor="field">
             {t("filters.field.label")}
@@ -187,6 +189,28 @@ export default function PostForm({ mode, action, initial = {} }: Props) {
             ))}
           </select>
           {fieldError("job_type")}
+        </div>
+
+        <div>
+          <label className={labelClass} htmlFor="organization_type">
+            {t("filters.organizationType.label")}
+          </label>
+          <select
+            id="organization_type"
+            name="organization_type"
+            defaultValue={current.organization_type ?? ""}
+            className={inputClass}
+          >
+            <option value="" disabled>
+              --
+            </option>
+            {ORGANIZATION_TYPE_CODES.map((c) => (
+              <option key={c} value={c}>
+                {t(`filters.organizationType.${c}`)}
+              </option>
+            ))}
+          </select>
+          {fieldError("organization_type")}
         </div>
 
         <div>

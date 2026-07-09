@@ -11,8 +11,8 @@
     "hero": {
       "title1": "Your next stage in research,",
       "title2": "anywhere in the world.",
-      "sub": "Posting and searching are completely free. A global job board connecting researchers and labs.",
-      "trust": "We simply connect researchers with openings. Every application step happens on the university's official page — we never hold your personal information.",
+      "sub": "Posting and searching are completely free. From universities and research institutes to companies — a job board connecting research careers worldwide.",
+      "trust": "We simply connect researchers with openings. Every application step happens on the hiring organization's official page — we never hold your personal information.",
       "ctaFind": "Find positions",
       "ctaPost": "Post a job"
     },
@@ -26,7 +26,7 @@
       "heading": "Why use this site",
       "desc": "We simply connect seekers and posters — that's what keeps it simple and safe.",
       "f1Title": "A bridge to official pages",
-      "f1Body": "When you find a position, you apply on the university's or lab's official page. We never hold your personal information.",
+      "f1Body": "When you find a position, you apply on the hiring organization's official page (university, research institute or company). We never hold your personal information.",
       "f2Title": "Anyone can post",
       "f2Body": "No account, completely free. Just fill in the form and confirm by email — anyone can publish a listing.",
       "f3Title": "Connected to the world",
@@ -41,7 +41,7 @@
       "seekTitle": "For job seekers",
       "seekS1": "Search with filters",
       "seekS2": "View the details",
-      "seekS3": "Apply on the university's official page",
+      "seekS3": "Apply on the hiring organization's official page",
       "postTitle": "For labs & universities",
       "postS1": "Fill in the form (include the URL of your official page or call for applications)",
       "postS2": "Click the link in the email",
@@ -195,6 +195,12 @@
       "emp_fixed": "Fixed-term",
       "emp_permanent": "Permanent",
       "emp_tenure_track": "Tenure-track"
+    },
+    "organizationType": {
+      "label": "Organization type",
+      "university": "University",
+      "research_institute": "Research institute",
+      "company": "Company"
     }
   },
   "languageNames": {

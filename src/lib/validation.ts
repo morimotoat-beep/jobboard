@@ -3,6 +3,7 @@ import {
   FIELD_CODES,
   JOB_TYPE_CODES,
   LOCALES,
+  ORGANIZATION_TYPE_CODES,
 } from "./filters";
 import { COUNTRY_CODES } from "./countries";
 import { PREFECTURE_CODES } from "./prefectures";
@@ -13,6 +14,7 @@ export type ListingInput = {
   field: string;
   job_type: string;
   employment_type: string;
+  organization_type: string;
   country: string;
   prefecture: string | null;
   deadline: string;
@@ -36,6 +38,7 @@ export function parseListingForm(formData: FormData): {
     field: get("field"),
     job_type: get("job_type"),
     employment_type: get("employment_type"),
+    organization_type: get("organization_type"),
     country: get("country"),
     prefecture: get("prefecture") || null,
     deadline: get("deadline"),
@@ -60,6 +63,9 @@ export function parseListingForm(formData: FormData): {
   }
   if (!(EMPLOYMENT_TYPE_CODES as readonly string[]).includes(data.employment_type)) {
     errors.employment_type = "invalidChoice";
+  }
+  if (!(ORGANIZATION_TYPE_CODES as readonly string[]).includes(data.organization_type)) {
+    errors.organization_type = "invalidChoice";
   }
   if (!(COUNTRY_CODES as readonly string[]).includes(data.country)) {
     errors.country = "invalidChoice";

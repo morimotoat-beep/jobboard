@@ -3,6 +3,7 @@ import {
   EMPLOYMENT_TYPE_CODES,
   FIELD_CODES,
   JOB_TYPE_CODES,
+  ORGANIZATION_TYPE_CODES,
   type Locale,
 } from "@/lib/filters";
 import { COUNTRY_CODES, getCountryName } from "@/lib/countries";
@@ -12,6 +13,7 @@ export type FilterValues = {
   field: string;
   jobType: string;
   employmentType: string;
+  organizationType: string;
   country: string;
   prefecture: string;
   within: string;
@@ -61,6 +63,20 @@ export default function FilterForm({ values }: { values: FilterValues }) {
             {EMPLOYMENT_TYPE_CODES.map((c) => (
               <option key={c} value={c}>
                 {t(`filters.employmentType.${c}`)}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <label className="block text-sm">
+          <span className="mb-1 block font-medium">
+            {t("filters.organizationType.label")}
+          </span>
+          <select name="org" defaultValue={values.organizationType} className={selectClass}>
+            <option value="">{t("search.all")}</option>
+            {ORGANIZATION_TYPE_CODES.map((c) => (
+              <option key={c} value={c}>
+                {t(`filters.organizationType.${c}`)}
               </option>
             ))}
           </select>
