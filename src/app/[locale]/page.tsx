@@ -89,7 +89,7 @@ export default async function HomePage({
         <section className="bg-waves relative overflow-hidden px-4 pt-20 pb-24">
           <div
             aria-hidden="true"
-            className="text-outline-ghost pointer-events-none absolute top-6 -left-[3vw] text-[17vw] leading-none font-black tracking-tight whitespace-nowrap select-none sm:-top-3 sm:text-[12vw]"
+            className="text-watermark pointer-events-none absolute top-6 -left-[3vw] text-[14vw] leading-none font-black tracking-tight whitespace-nowrap select-none sm:-top-3 sm:text-[10vw]"
           >
             NEXT STAGE
           </div>

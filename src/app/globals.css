@@ -49,9 +49,3 @@ body {
   background-size: cover;
   background-position: center;
 }
-
-/* ヒーロー背景用：輪郭だけのゴースト文字（薄いネイビーのアウトライン） */
-.text-outline-ghost {
-  color: transparent;
-  -webkit-text-stroke: 1.5px rgba(30, 58, 95, 0.14);
-}
