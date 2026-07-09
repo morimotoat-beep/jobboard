@@ -1,5 +1,7 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import Header from "@/components/Header";
+import FeatureCards from "@/components/FeatureCards";
+import HowtoCards from "@/components/HowtoCards";
 import JobSitesPreview from "@/components/JobSitesPreview";
 import JobsCarousel from "@/components/JobsCarousel";
 import RegionMap from "@/components/RegionMap";
@@ -31,7 +33,7 @@ function PatternSection({
   children?: React.ReactNode;
 }) {
   return (
-    <section className={`relative overflow-hidden px-4 py-20 ${bgClass}`}>
+    <section className={`relative overflow-hidden px-4 pt-11 pb-20 ${bgClass}`}>
       {/* ウォーターマーク英字：左右交互に置き、画面端で切って紙面的なリズムを作る */}
       <div
         aria-hidden="true"
@@ -144,83 +146,7 @@ export default async function HomePage({
           )}
         </PatternSection>
 
-        {/* 3. 特徴（白） */}
-        <PatternSection
-          bgClass="bg-waves"
-          align="right"
-          word="FEATURES"
-          title={t("lp.features.heading")}
-          desc={t("lp.features.desc")}
-        >
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {(["f1", "f2", "f3", "f4"] as const).map((key, i) => (
-              <Reveal key={key} delay={i * 100}>
-                <div className="h-full rounded-lg border border-gray-200 bg-white p-7 text-left">
-                  <p className="mb-4 text-sm font-bold tracking-widest text-brand-primary">
-                    <span className="inline-block bg-brand-point px-2 py-0.5">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                  </p>
-                  <h3 className="mb-3 text-base font-bold [word-break:keep-all] text-brand-primary">
-                    {t(`lp.features.${key}Title`)}
-                  </h3>
-                  <p className="text-sm leading-relaxed text-gray-600">
-                    {t(`lp.features.${key}Body`)}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </PatternSection>
-
-        {/* 4. 使い方 */}
-        <PatternSection
-          bgClass="bg-[#eef1f6]"
-          align="left"
-          word="HOW TO USE"
-          title={t("lp.howto.heading")}
-          desc={t("lp.howto.desc")}
-        >
-          <Reveal className="mb-10 text-center">
-            <span className="inline-block rounded-full bg-brand-point px-6 py-2 text-sm font-bold text-brand-primary">
-              {t("lp.howto.badge")}
-            </span>
-          </Reveal>
-
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            {(["seek", "post"] as const).map((side, i) => (
-              <Reveal key={side} delay={i * 150}>
-                <div className="h-full rounded-lg border border-gray-200 bg-white p-8">
-                  <h3 className="mb-8 text-center text-lg font-bold text-brand-primary">
-                    {t(`lp.howto.${side}Title`)}
-                  </h3>
-                  <ol>
-                    {([1, 2, 3] as const).map((n) => (
-                      <li key={n}>
-                        <div className="flex items-center gap-4">
-                          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-primary text-sm font-bold text-white">
-                            {n}
-                          </span>
-                          <span className="text-sm leading-relaxed font-medium sm:text-base">
-                            {t(`lp.howto.${side}S${n}`)}
-                          </span>
-                        </div>
-                        {n < 3 && (
-                          <div
-                            aria-hidden="true"
-                            className="my-1 ml-4 h-6 border-l border-gray-300"
-                          />
-                        )}
-                      </li>
-                    ))}
-                  </ol>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </PatternSection>
-
-        {/* 5. 新着求人（ネイビー） */}
+        {/* 3. 新着求人（ネイビー） */}
         <PatternSection
           bgClass="bg-brand-primary"
           dark
@@ -267,6 +193,33 @@ export default async function HomePage({
               {t("lp.jobs.viewAll")} →
             </Link>
           </Reveal>
+        </PatternSection>
+
+        {/* 4. 特徴（白） */}
+        <PatternSection
+          bgClass="bg-waves"
+          align="left"
+          word="FEATURES"
+          title={t("lp.features.heading")}
+          desc={t("lp.features.desc")}
+        >
+          <FeatureCards />
+        </PatternSection>
+
+        {/* 5. 使い方 */}
+        <PatternSection
+          bgClass="bg-[#eef1f6]"
+          align="right"
+          word="HOW TO USE"
+          title={t("lp.howto.heading")}
+          desc={t("lp.howto.desc")}
+        >
+          <Reveal className="mb-10 text-center">
+            <span className="inline-block rounded-full bg-brand-point px-6 py-2 text-sm font-bold text-brand-primary">
+              {t("lp.howto.badge")}
+            </span>
+          </Reveal>
+          <HowtoCards />
         </PatternSection>
 
         {/* 6. 外部求人サイト一覧（白） */}
