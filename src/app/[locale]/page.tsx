@@ -89,7 +89,7 @@ export default async function HomePage({
         <section className="bg-waves relative overflow-hidden px-4 pt-20 pb-24">
           <div
             aria-hidden="true"
-            className="text-outline-ghost pointer-events-none absolute -top-3 -left-[3vw] text-[17vw] leading-none font-black tracking-tight whitespace-nowrap select-none sm:text-[12vw]"
+            className="text-outline-ghost pointer-events-none absolute top-6 -left-[3vw] text-[17vw] leading-none font-black tracking-tight whitespace-nowrap select-none sm:-top-3 sm:text-[12vw]"
           >
             NEXT STAGE
           </div>
@@ -113,13 +113,13 @@ export default async function HomePage({
               <div className="flex flex-col justify-center gap-3 sm:flex-row">
                 <Link
                   href="/jobs"
-                  className="rounded-md bg-brand-primary px-8 py-3 text-center font-bold text-white transition hover:opacity-90"
+                  className="rounded-md border border-gray-300 bg-white px-8 py-3 text-center font-bold text-brand-primary shadow-sm transition hover:bg-brand-tab"
                 >
                   {t("lp.hero.ctaFind")}
                 </Link>
                 <Link
                   href="/post"
-                  className="rounded-md border border-brand-primary bg-white px-8 py-3 text-center font-bold text-brand-primary transition hover:bg-brand-tab"
+                  className="rounded-md bg-brand-green px-8 py-3 text-center font-bold text-white shadow-sm transition hover:brightness-95"
                 >
                   {t("lp.hero.ctaPost")}
                 </Link>
