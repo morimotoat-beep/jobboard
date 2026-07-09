@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import Reveal from "./Reveal";
@@ -8,21 +8,49 @@ import Reveal from "./Reveal";
 const SIDES = ["seek", "post"] as const;
 type Side = (typeof SIDES)[number];
 
+const iconProps = {
+  width: 18,
+  height: 18,
+  viewBox: "0 0 24 24",
+  fill: "none",
+  stroke: "currentColor",
+  strokeWidth: 2,
+  strokeLinecap: "round",
+  strokeLinejoin: "round",
+  "aria-hidden": true,
+} as const;
+
+// 検索（虫めがね）／拡声器（announcement）アイコン
+const SearchIcon = (
+  <svg {...iconProps}>
+    <circle cx="11" cy="11" r="7" />
+    <path d="M21 21l-4.3-4.3" />
+  </svg>
+);
+const MegaphoneIcon = (
+  <svg {...iconProps}>
+    <path d="m3 11 18-5v12L3 14v-3z" />
+    <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6" />
+  </svg>
+);
+
 // カードごとの設定。カードは両方ネイビー塗りで統一し、
 // CTAだけ配色を分ける（探す＝白地×ネイビー文字／載せる＝キーカラー緑）。
 const SIDE_CONFIG: Record<
   Side,
-  { href: string; ctaKey: string; button: string }
+  { href: string; ctaKey: string; button: string; icon: ReactNode }
 > = {
   seek: {
     href: "/jobs",
     ctaKey: "nav.findJobs",
     button: "bg-white text-brand-primary hover:bg-brand-tab",
+    icon: SearchIcon,
   },
   post: {
     href: "/post",
     ctaKey: "nav.postJob",
     button: "bg-brand-green text-white hover:brightness-95",
+    icon: MegaphoneIcon,
   },
 };
 
@@ -46,8 +74,11 @@ function HowtoPanel({ side }: { side: Side }) {
         className="pointer-events-none absolute top-24 left-8 h-10 w-10 rounded-full bg-white/[0.05]"
       />
 
-      {/* 見出し */}
-      <div className="relative px-8 pt-7 pb-3 text-center">
+      {/* 見出し（左上にアイコン＋タイトル） */}
+      <div className="relative flex items-center gap-3 px-8 pt-7 pb-3">
+        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/15 text-white">
+          {cfg.icon}
+        </span>
         <h3 className="text-lg font-bold tracking-wide text-white">
           {t(`lp.howto.${side}Title`)}
         </h3>
@@ -81,7 +112,7 @@ function HowtoPanel({ side }: { side: Side }) {
             href={cfg.href}
             className={`block rounded-md px-6 py-3 text-center text-sm font-bold shadow-sm transition ${cfg.button}`}
           >
-            {t(cfg.ctaKey)}
+            {t(cfg.ctaKey)} <span aria-hidden="true">→</span>
           </Link>
         </div>
       </div>

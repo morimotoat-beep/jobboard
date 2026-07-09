@@ -35,17 +35,17 @@
       "f4Body": "Expired listings are hidden automatically, so you only ever see active openings."
     },
     "howto": {
-      "heading": "How to use",
-      "desc": "Just three steps, whether you're searching or posting.",
+      "heading": "How it works",
+      "desc": "Whether you're searching or posting, you can start in 3 minutes.",
       "badge": "No account needed — completely free!",
-      "seekTitle": "For job seekers",
-      "seekS1": "Search with filters",
-      "seekS2": "View the details",
-      "seekS3": "Apply on the hiring organization's official page",
-      "postTitle": "For labs & universities",
-      "postS1": "Fill in the form (include the URL of your official page or call for applications)",
-      "postS2": "Click the link in the email",
-      "postS3": "Published — edit & delete anytime"
+      "seekTitle": "Search",
+      "seekS1": "Filter and search",
+      "seekS2": "View details",
+      "seekS3": "Apply on the official site",
+      "postTitle": "Post",
+      "postS1": "Fill the form",
+      "postS2": "Verify by email",
+      "postS3": "Go live"
     },
     "jobs": {
       "heading": "Latest positions",
