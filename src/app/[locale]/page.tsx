@@ -113,7 +113,7 @@ export default async function HomePage({
               <div className="flex flex-col justify-center gap-3 sm:flex-row">
                 <Link
                   href="/jobs"
-                  className="rounded-md border border-gray-300 bg-white px-8 py-3 text-center font-bold text-brand-primary shadow-sm transition hover:bg-brand-tab"
+                  className="rounded-md bg-brand-primary px-8 py-3 text-center font-bold text-white shadow-sm transition hover:brightness-90"
                 >
                   {t("lp.hero.ctaFind")}
                 </Link>

@@ -42,7 +42,7 @@ export default function Header() {
         <nav className="flex items-center gap-2">
           <Link
             href="/jobs"
-            className="rounded-md border border-gray-300 bg-white px-3.5 py-1.5 text-sm font-bold whitespace-nowrap text-brand-primary shadow-sm transition hover:bg-brand-tab"
+            className="rounded-md bg-brand-primary px-3.5 py-1.5 text-sm font-bold whitespace-nowrap text-white shadow-sm transition hover:brightness-90"
           >
             {t("nav.findJobs")}
           </Link>
