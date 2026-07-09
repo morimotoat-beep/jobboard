@@ -1,14 +1,25 @@
 import "server-only";
 
-// DeepL による自動翻訳（v1.1 §3）
+// DeepL による自動翻訳（v1.1 §3 / v1.2 英語ピボット拡張）
 // - 投稿確定時に1回だけ翻訳してDBに保存（表示のたびに翻訳しない）
-// - 日⇔英の2方向のみ。中韓はカラムだけ用意し翻訳実行は後日
+// - 日⇔英に加え、中韓求人は英訳(title_en/summary_en)を生成する
+//   （英語ピボットのセマンティック検索から中韓求人が漏れないようにするため）
 // - DEEPL_API_KEY 未設定や翻訳失敗時は null を返し、原文表示にフォールバック
 
-type Lang = "ja" | "en";
+type Lang = "ja" | "en" | "zh" | "ko";
 
-const DEEPL_SOURCE: Record<Lang, string> = { ja: "JA", en: "EN" };
-const DEEPL_TARGET: Record<Lang, string> = { ja: "JA", en: "EN-US" };
+const DEEPL_SOURCE: Record<Lang, string> = {
+  ja: "JA",
+  en: "EN",
+  zh: "ZH",
+  ko: "KO",
+};
+const DEEPL_TARGET: Record<Lang, string> = {
+  ja: "JA",
+  en: "EN-US",
+  zh: "ZH",
+  ko: "KO",
+};
 
 async function callDeepl(
   texts: string[],
@@ -89,6 +100,20 @@ export async function buildListingTranslations(input: {
     if (translated) {
       cols[`title_${target}`] = translated[0];
       cols[`summary_${target}`] = translated[1];
+    }
+  }
+
+  // 中韓求人は英語ピボットのセマンティック検索から漏れないよう英訳のみ生成する。
+  // 日本語訳は既存方針どおり生成しない。翻訳失敗時は英訳カラムを未設定のまま返す。
+  if (lang === "zh" || lang === "ko") {
+    const translated = await translateTexts(
+      [input.title, input.summary],
+      lang,
+      "en"
+    );
+    if (translated) {
+      cols.title_en = translated[0];
+      cols.summary_en = translated[1];
     }
   }
 
