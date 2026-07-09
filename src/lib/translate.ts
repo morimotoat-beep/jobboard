@@ -12,7 +12,7 @@ const DEEPL_TARGET: Record<Lang, string> = { ja: "JA", en: "EN-US" };
 
 async function callDeepl(
   texts: string[],
-  source: Lang,
+  source: Lang | null,
   target: Lang
 ): Promise<string[] | null> {
   const key = process.env.DEEPL_API_KEY;
@@ -32,7 +32,9 @@ async function callDeepl(
       },
       body: JSON.stringify({
         text: texts,
-        source_lang: DEEPL_SOURCE[source],
+        // source が null のときは source_lang を送らず DeepL に自動判定させる
+        // （中国語・韓国語のクエリ翻訳を可能にするため）
+        ...(source ? { source_lang: DEEPL_SOURCE[source] } : {}),
         target_lang: DEEPL_TARGET[target],
       }),
       signal: AbortSignal.timeout(15000),
@@ -91,6 +93,67 @@ export async function buildListingTranslations(input: {
   }
 
   return cols;
+}
+
+// --- 自由文検索クエリの翻訳（v1.2 §多言語検索）--------------------------------
+// 検索欄に入力された語を日本語・英語に訳し、翻訳カラム横断検索の検索語に使う。
+// DeepL 無料枠（月50万字）を守るため、同一クエリはキャッシュから返し再翻訳しない。
+
+const QUERY_CACHE_MAX = 500;
+const QUERY_CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 24時間
+
+type QueryCacheEntry = { value: string | null; expires: number };
+
+// モジュールスコープの簡易LRUキャッシュ。Map は挿入順を保持するので、
+// 参照時に delete→set し直すことで「最近使った順」を維持する。
+const queryCache = new Map<string, QueryCacheEntry>();
+
+function normalizeQuery(text: string): string {
+  return text.trim().toLowerCase().replace(/\s+/g, " ");
+}
+
+function queryCacheGet(key: string): QueryCacheEntry | undefined {
+  const entry = queryCache.get(key);
+  if (!entry) return undefined;
+  if (entry.expires <= Date.now()) {
+    queryCache.delete(key);
+    return undefined;
+  }
+  // アクセスされたエントリを最新（末尾）に移動
+  queryCache.delete(key);
+  queryCache.set(key, entry);
+  return entry;
+}
+
+function queryCacheSet(key: string, value: string | null): void {
+  queryCache.delete(key);
+  queryCache.set(key, { value, expires: Date.now() + QUERY_CACHE_TTL_MS });
+  // 上限超過分を古い方（先頭）から捨てる
+  while (queryCache.size > QUERY_CACHE_MAX) {
+    const oldest = queryCache.keys().next().value;
+    if (oldest === undefined) break;
+    queryCache.delete(oldest);
+  }
+}
+
+// 検索クエリを target 言語に翻訳する。source は指定せず DeepL の自動判定に任せる。
+// - キャッシュヒット時は DeepL を呼ばない
+// - キー未設定・翻訳失敗時は null（呼び出し側は原文で検索）
+export async function translateQuery(
+  text: string,
+  target: "ja" | "en"
+): Promise<string | null> {
+  const normalized = normalizeQuery(text);
+  if (!normalized) return null;
+
+  const key = `${target}:${normalized}`;
+  const cached = queryCacheGet(key);
+  if (cached) return cached.value;
+
+  const translated = await callDeepl([text], null, target);
+  const value = translated ? translated[0] : null;
+  queryCacheSet(key, value);
+  return value;
 }
 
 // 更新時に古い翻訳が残らないよう、全翻訳カラムを一旦クリアするための値

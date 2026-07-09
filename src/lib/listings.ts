@@ -6,9 +6,29 @@ import {
   ORGANIZATION_TYPE_CODES,
 } from "./filters";
 import { PREFECTURE_CODES } from "./prefectures";
+import { expandSynonyms } from "./searchSynonyms";
+import { translateQuery } from "./translate";
 import { PUBLIC_LISTING_COLUMNS, type Listing, type PublicListing } from "./types";
 
 export const PAGE_SIZE = 20;
+
+// 自由文検索の対象カラム（各言語カラムに原文がミラーされている）
+const SEARCH_TEXT_COLUMNS = [
+  "title_ja",
+  "title_en",
+  "title_zh",
+  "title_ko",
+  "summary_ja",
+  "summary_en",
+  "summary_zh",
+  "summary_ko",
+] as const;
+
+// PostgREST の .or() は値中の , ( ) や LIKE のワイルドカード % _、
+// バックスラッシュで構文が壊れるため、これらを空白に置換してから使う。
+function sanitizeForOr(term: string): string {
+  return term.replace(/[,()%_\\]/g, " ").trim();
+}
 
 export type SearchFilters = {
   field?: string;
@@ -74,19 +94,61 @@ export async function searchListings(
     query = query.lte("deadline", until);
   }
 
-  // PostgREST の or() 構文を壊す文字は除去してから部分一致検索
-  // 原文に加えて日英の翻訳カラムも対象にする（英語求人を日本語キーワードで見つけられる）
-  const keyword = filters.keyword?.replace(/[,()%_\\]/g, " ").trim();
-  if (keyword) {
-    const targets = [
-      "title",
-      "summary",
-      "title_ja",
-      "title_en",
-      "summary_ja",
-      "summary_en",
-    ];
-    query = query.or(targets.map((c) => `${c}.ilike.*${keyword}*`).join(","));
+  // 自由文検索：原文キーワードを日英に翻訳し、全翻訳カラムを横断して部分一致検索する。
+  // これにより「英語で検索した人が日本語求人の英訳カラムにも当たる」など、
+  // 言語をまたいだ取りこぼしを減らす（v1.2）。
+  const rawKeyword = filters.keyword?.trim() ?? "";
+  if (rawKeyword) {
+    // 検索語集合（サニタイズ後の重複・原文と同一の訳は自動的に除外される）
+    const terms = new Set<string>();
+    const addTerm = (t: string | null | undefined) => {
+      if (!t) return;
+      const s = sanitizeForOr(t);
+      if (s) terms.add(s);
+    };
+    addTerm(rawKeyword);
+
+    // 翻訳スキップ条件：2文字未満・100文字超はDeepLを呼ばず原文のみで検索
+    // （ボット・無意味クエリでの無料枠消費を防ぐ）
+    if (rawKeyword.length >= 2 && rawKeyword.length <= 100) {
+      // translateQuery は失敗時 null を返すのみで例外は投げない
+      const [ja, en] = await Promise.all([
+        translateQuery(rawKeyword, "ja"),
+        translateQuery(rawKeyword, "en"),
+      ]);
+      addTerm(ja);
+      addTerm(en);
+    }
+
+    // 訳語割れ対策：原文・日訳・英訳のいずれかが同義語グループに一致したら、
+    // そのグループの全語を検索語に加える（例: 「박사후연구원」→「ポスドク」）。
+    for (const word of expandSynonyms(terms)) {
+      addTerm(word);
+    }
+
+    // .or() の肥大化を防ぐため検索語は上限15語に制限する
+    const MAX_TERMS = 15;
+    const searchTerms = [...terms].slice(0, MAX_TERMS);
+
+    const orParts: string[] = [];
+    for (const term of searchTerms) {
+      for (const col of SEARCH_TEXT_COLUMNS) {
+        orParts.push(`${col}.ilike.*${term}*`);
+      }
+    }
+    if (orParts.length > 0) {
+      query = query.or(orParts.join(","));
+    }
+
+    // 一時デバッグ（DEBUG_SEARCH=1 のときだけ出力）：
+    // この検索がどの経路を通ったかを判別する。現状このリポジトリに
+    // ベクトル/RPC 経路は無く、自由文検索は常に ILIKE 経路を通る。
+    if (process.env.DEBUG_SEARCH === "1") {
+      console.error(
+        `[searchListings] path=ILIKE keyword=${JSON.stringify(rawKeyword)} ` +
+          `terms=${JSON.stringify(searchTerms)} orConditions=${orParts.length}`
+      );
+    }
   }
 
   const page = Math.max(1, filters.page ?? 1);
