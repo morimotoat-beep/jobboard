@@ -76,6 +76,9 @@ function JobCard({
             {new Intl.DateTimeFormat(locale, { dateStyle: "medium" }).format(deadline)}
           </p>
           <div className="flex flex-wrap gap-1">
+            <span className="rounded border border-brand-primary/30 bg-white px-1.5 py-0.5 text-[10px] font-medium text-brand-primary">
+              {t(`filters.organizationType.${listing.organization_type}`)}
+            </span>
             <span className="rounded bg-brand-tab px-1.5 py-0.5 text-[10px]">
               {t(`filters.jobType.${listing.job_type}`)}
             </span>

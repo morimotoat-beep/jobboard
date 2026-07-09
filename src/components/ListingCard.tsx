@@ -31,6 +31,9 @@ export default function ListingCard({ listing }: { listing: PublicListing }) {
           <span className="rounded border border-gray-300 bg-white px-2 py-0.5 font-medium text-gray-600">
             {t(`languageNames.${listing.post_language}`)}
           </span>
+          <span className="rounded border border-brand-primary/30 bg-white px-2 py-0.5 font-medium text-brand-primary">
+            {t(`filters.organizationType.${listing.organization_type}`)}
+          </span>
           <span className="rounded bg-brand-tab px-2 py-0.5">
             {t(`filters.field.${listing.field}`)}
           </span>
