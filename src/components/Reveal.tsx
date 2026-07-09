@@ -19,8 +19,11 @@ export default function Reveal({
     const el = ref.current;
     if (!el) return;
     if (typeof IntersectionObserver === "undefined") {
-      setVisible(true);
-      return;
+      // IntersectionObserver 非対応環境では即表示する。
+      // effect 内で同期的に setState すると react-hooks ルールに触れるため、
+      // 次フレームに逃がす（表示結果は実質同じ）。
+      const id = requestAnimationFrame(() => setVisible(true));
+      return () => cancelAnimationFrame(id);
     }
     const observer = new IntersectionObserver(
       ([entry]) => {

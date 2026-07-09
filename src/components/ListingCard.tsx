@@ -1,13 +1,12 @@
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import RegionMap from "@/components/RegionMap";
+import DeadlineSoonBadge from "@/components/DeadlineSoonBadge";
 import { getCountryName } from "@/lib/countries";
 import { localizedTitle } from "@/lib/localize";
 import { getPrefectureLabel } from "@/lib/prefectures";
 import type { Locale } from "@/lib/filters";
 import type { PublicListing } from "@/lib/types";
-
-const SOON_MS = 7 * 24 * 60 * 60 * 1000;
 
 export function formatLocation(locale: Locale, listing: PublicListing): string {
   if (listing.country === "JP" && listing.prefecture) {
@@ -20,7 +19,6 @@ export default function ListingCard({ listing }: { listing: PublicListing }) {
   const locale = useLocale() as Locale;
   const t = useTranslations();
   const deadline = new Date(`${listing.deadline}T00:00:00`);
-  const isSoon = deadline.getTime() - Date.now() <= SOON_MS;
 
   return (
     <li>
@@ -42,11 +40,7 @@ export default function ListingCard({ listing }: { listing: PublicListing }) {
           <span className="rounded bg-brand-tab px-2 py-0.5">
             {t(`filters.employmentType.${listing.employment_type}`)}
           </span>
-          {isSoon && (
-            <span className="rounded bg-brand-accent px-2 py-0.5 font-bold text-white">
-              {t("listing.deadlineSoon")}
-            </span>
-          )}
+          <DeadlineSoonBadge deadline={listing.deadline} />
         </div>
         <h3 className="mb-1 font-bold text-brand-primary">{localizedTitle(listing, locale)}</h3>
         <p className="text-sm text-gray-700">

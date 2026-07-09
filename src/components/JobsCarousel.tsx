@@ -6,6 +6,7 @@ import { Link } from "@/i18n/navigation";
 import { getCountryName } from "@/lib/countries";
 import { getPrefectureLabel } from "@/lib/prefectures";
 import { localizedTitle } from "@/lib/localize";
+import { useDeadlineSoon } from "@/lib/useDeadlineSoon";
 import type { FieldCode, Locale } from "@/lib/filters";
 import type { PublicListing } from "@/lib/types";
 // 分野ごとのビジュアル（カード上部の色帯）
@@ -24,8 +25,6 @@ const FIELD_BG: Record<FieldCode, string> = {
   field_interdisciplinary: "#eef1f5",
 };
 
-const SOON_MS = 7 * 24 * 60 * 60 * 1000;
-
 function JobCard({
   listing,
   map,
@@ -37,7 +36,7 @@ function JobCard({
   const t = useTranslations();
   const bg = FIELD_BG[listing.field];
   const deadline = new Date(`${listing.deadline}T00:00:00`);
-  const isSoon = deadline.getTime() - Date.now() <= SOON_MS;
+  const isSoon = useDeadlineSoon(listing.deadline);
   const location =
     listing.country === "JP" && listing.prefecture
       ? `${getCountryName(locale, "JP")} / ${getPrefectureLabel(locale, listing.prefecture)}`
