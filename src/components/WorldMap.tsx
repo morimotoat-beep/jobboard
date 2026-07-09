@@ -76,37 +76,65 @@ export default function WorldMap({ counts }: { counts: Record<string, number> })
   const highlighted = new Set(entries.map(([code]) => NUMERIC_ID[code]));
 
   return (
-    <div className="relative mx-auto w-full max-w-4xl">
-      <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} className="w-full" aria-hidden="true">
-        {LAND_PATHS.map((land) => (
-          <path
-            key={land.id}
-            d={land.d}
-            fill={highlighted.has(land.id) ? "#7dc436" : "#ffffff"}
-            stroke={highlighted.has(land.id) ? "#ffffff" : "#c3ccd9"}
-            strokeWidth="0.6"
-          />
-        ))}
-      </svg>
+    <div className="mx-auto w-full max-w-4xl">
+      {/* 地図：スマホは横スクロールで拡大表示（狭い画面で潰れないように） */}
+      <div
+        className="overflow-x-auto pb-2 sm:overflow-visible sm:pb-0"
+        style={{ scrollbarWidth: "thin" }}
+      >
+        <div className="relative mx-auto min-w-[600px] sm:min-w-0">
+          <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} className="w-full" aria-hidden="true">
+            {LAND_PATHS.map((land) => (
+              <path
+                key={land.id}
+                d={land.d}
+                fill={highlighted.has(land.id) ? "#7dc436" : "#ffffff"}
+                stroke={highlighted.has(land.id) ? "#ffffff" : "#c3ccd9"}
+                strokeWidth="0.6"
+              />
+            ))}
+          </svg>
 
-      {/* バッジ：クリックでその国のフィルター付き検索結果へ */}
-      {entries.map(([code, count]) => {
-        const pos = project(code);
-        if (!pos) return null;
-        return (
-          <Link
-            key={code}
-            href={{ pathname: "/jobs", query: { country: code } }}
-            className="absolute -translate-x-1/2 -translate-y-[160%] rounded-full border border-gray-200 bg-white px-2 py-0.5 text-[10px] font-bold whitespace-nowrap text-brand-primary shadow-sm transition hover:bg-brand-tab hover:shadow sm:text-xs"
-            style={{ left: `${pos.x}%`, top: `${pos.y}%` }}
-          >
-            {t("lp.map.badge", {
-              name: getCountryName(locale, code),
-              count,
-            })}
-          </Link>
-        );
-      })}
+          {/* バッジ：クリックでその国のフィルター付き検索結果へ */}
+          {entries.map(([code, count]) => {
+            const pos = project(code);
+            if (!pos) return null;
+            return (
+              <Link
+                key={code}
+                href={{ pathname: "/jobs", query: { country: code } }}
+                className="absolute -translate-x-1/2 -translate-y-[160%] rounded-full border border-gray-200 bg-white px-2 py-0.5 text-[10px] font-bold whitespace-nowrap text-brand-primary shadow-sm transition hover:bg-brand-tab hover:shadow sm:text-xs"
+                style={{ left: `${pos.x}%`, top: `${pos.y}%` }}
+              >
+                {t("lp.map.badge", {
+                  name: getCountryName(locale, code),
+                  count,
+                })}
+              </Link>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* 国リスト：スマホのみ。地図が小さくてもタップで各国の検索結果へ飛べる */}
+      {entries.length > 0 && (
+        <ul className="mt-4 flex flex-wrap justify-center gap-2 sm:hidden">
+          {entries.map(([code, count]) => (
+            <li key={code}>
+              <Link
+                href={{ pathname: "/jobs", query: { country: code } }}
+                className="inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-white px-3 py-1.5 text-xs font-bold text-brand-primary shadow-sm transition hover:bg-brand-tab"
+              >
+                <span className="h-2 w-2 rounded-full bg-[#7dc436]" />
+                {t("lp.map.badge", {
+                  name: getCountryName(locale, code),
+                  count,
+                })}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
