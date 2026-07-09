@@ -19,14 +19,14 @@ export type FilterValues = {
 };
 
 const selectClass =
-  "w-full rounded border border-gray-300 bg-white px-2 py-1.5 text-sm";
+  "w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm shadow-sm focus:border-brand-primary focus:outline-none";
 
 export default function FilterForm({ values }: { values: FilterValues }) {
   const locale = useLocale() as Locale;
   const t = useTranslations();
 
   return (
-    <form method="get" action={`/${locale}/jobs`} className="rounded-lg bg-brand-tab p-4">
+    <form method="get" action={`/${locale}/jobs`} className="rounded-2xl bg-white p-6 shadow-md">
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
         <label className="block text-sm">
           <span className="mb-1 block font-medium">{t("filters.field.label")}</span>
@@ -107,11 +107,11 @@ export default function FilterForm({ values }: { values: FilterValues }) {
           name="q"
           defaultValue={values.q}
           placeholder={t("search.keywordPlaceholder")}
-          className="flex-1 rounded border border-gray-300 bg-white px-3 py-1.5 text-sm"
+          className="flex-1 rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm shadow-sm focus:border-brand-primary focus:outline-none"
         />
         <button
           type="submit"
-          className="rounded bg-brand-primary px-6 py-1.5 text-sm font-bold text-white hover:brightness-105"
+          className="rounded-full bg-brand-primary px-8 py-2 text-sm font-bold text-white shadow-md transition hover:brightness-105"
         >
           {t("search.searchButton")}
         </button>

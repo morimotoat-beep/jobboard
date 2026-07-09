@@ -64,27 +64,38 @@ export default async function JobsPage({
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
-      <main className="mx-auto w-full max-w-4xl flex-1 px-4 py-6">
-        <h2 className="mb-1 text-2xl font-bold">{t("home.title")}</h2>
-        <p className="mb-4 text-sm text-gray-600">{t("common.tagline")}</p>
-
-        <FilterForm values={values} />
-
-        <p className="mt-6 mb-3 text-sm text-gray-600">
-          {t("search.results", { count: total })}
-        </p>
-
-        {items.length === 0 ? (
-          <div className="rounded-lg bg-brand-tab p-8 text-center text-gray-600">
-            {t("search.empty")}
+      <main className="bg-waves flex-1 px-4 py-10">
+        <div className="mx-auto w-full max-w-4xl">
+          <div className="mb-8 text-center">
+            <h2 className="mb-3 text-3xl font-black text-brand-primary sm:text-4xl">
+              <span className="marker-highlight px-2">{t("home.title")}</span>
+            </h2>
+            <p className="text-sm text-gray-600">{t("common.tagline")}</p>
           </div>
-        ) : (
-          <ul className="space-y-3">
-            {items.map((listing) => (
-              <ListingCard key={listing.id} listing={listing} />
-            ))}
-          </ul>
-        )}
+
+          <FilterForm values={values} />
+
+          <p className="mt-8 mb-3 text-sm font-medium text-gray-600">
+            {t("search.results", { count: total })}
+          </p>
+
+          {items.length === 0 ? (
+            <div className="rounded-2xl bg-white p-8 text-center shadow-md">
+              <p className="mb-4 text-sm text-gray-600">{t("search.empty")}</p>
+              <Link
+                href="/post"
+                className="inline-block rounded-full border-2 border-brand-primary bg-white px-8 py-2.5 font-bold text-brand-primary transition hover:bg-brand-tab"
+              >
+                {t("lp.hero.ctaPost")}
+              </Link>
+            </div>
+          ) : (
+            <ul className="space-y-3">
+              {items.map((listing) => (
+                <ListingCard key={listing.id} listing={listing} />
+              ))}
+            </ul>
+          )}
 
         {totalPages > 1 && (
           <nav className="mt-6 flex items-center justify-center gap-4 text-sm">
@@ -94,7 +105,7 @@ export default async function JobsPage({
                   pathname: "/jobs",
                   query: { ...query, page: String(page - 1) },
                 }}
-                className="rounded bg-white px-3 py-1 shadow-sm"
+                className="rounded-full bg-white px-4 py-1.5 font-medium shadow-sm transition hover:bg-brand-tab"
               >
                 {t("search.prev")}
               </Link>
@@ -106,13 +117,14 @@ export default async function JobsPage({
                   pathname: "/jobs",
                   query: { ...query, page: String(page + 1) },
                 }}
-                className="rounded bg-white px-3 py-1 shadow-sm"
+                className="rounded-full bg-white px-4 py-1.5 font-medium shadow-sm transition hover:bg-brand-tab"
               >
                 {t("search.next")}
               </Link>
             )}
           </nav>
         )}
+        </div>
       </main>
     </div>
   );

@@ -22,18 +22,25 @@ export async function sendEmail({ to, subject, text }: SendEmailArgs): Promise<{
     return { ok: true };
   }
 
-  const res = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ from, to: [to], subject, text }),
-  });
+  try {
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ from, to: [to], subject, text }),
+      // Resend が応答しない場合にサーバーアクションごとハングしないよう上限を設ける
+      signal: AbortSignal.timeout(10000),
+    });
 
-  if (!res.ok) {
-    console.error("Resend API error:", res.status, await res.text());
+    if (!res.ok) {
+      console.error("Resend API error:", res.status, await res.text());
+      return { ok: false };
+    }
+    return { ok: true };
+  } catch (e) {
+    console.error("Resend API error:", e);
     return { ok: false };
   }
-  return { ok: true };
 }

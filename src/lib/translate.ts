@@ -10,7 +10,7 @@ type Lang = "ja" | "en";
 const DEEPL_SOURCE: Record<Lang, string> = { ja: "JA", en: "EN" };
 const DEEPL_TARGET: Record<Lang, string> = { ja: "JA", en: "EN-US" };
 
-export async function translateTexts(
+async function callDeepl(
   texts: string[],
   source: Lang,
   target: Lang
@@ -48,6 +48,18 @@ export async function translateTexts(
     console.error("DeepL API error:", e);
     return null;
   }
+}
+
+export async function translateTexts(
+  texts: string[],
+  source: Lang,
+  target: Lang
+): Promise<string[] | null> {
+  if (!process.env.DEEPL_API_KEY) return null;
+  // 一時的な失敗（タイムアウト・5xx）に備えて1回だけリトライする
+  const first = await callDeepl(texts, source, target);
+  if (first) return first;
+  return callDeepl(texts, source, target);
 }
 
 // 投稿・更新時に翻訳カラムの値を組み立てる。

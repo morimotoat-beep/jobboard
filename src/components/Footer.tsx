@@ -5,8 +5,12 @@ export default function Footer() {
   const t = useTranslations();
 
   return (
-    <footer className="bg-brand-tab px-4 py-6 text-center text-xs text-gray-600">
-      <nav className="mb-2 flex flex-wrap justify-center gap-4">
+    <footer className="bg-brand-tab px-4 py-8 text-center text-xs text-gray-600">
+      <p className="mb-1 text-sm font-black text-brand-primary">
+        {t("common.siteTitle")}
+      </p>
+      <p className="mb-4">{t("common.tagline")}</p>
+      <nav className="mb-3 flex flex-wrap justify-center gap-4">
         <Link href="/links" className="underline">
           {t("nav.links")}
         </Link>

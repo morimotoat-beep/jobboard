@@ -19,7 +19,8 @@
     "map": {
       "heading": "전 세계의 연구 포지션이 여기에",
       "desc": "공고가 있는 국가가 초록색으로 표시됩니다. 관심 있는 나라부터 찾아보세요.",
-      "badge": "{name} {count}건"
+      "badge": "{name} {count}건",
+      "empty": "아직 등록된 공고가 없습니다. 공고가 게시되면 이 지도에서 국가별 건수를 볼 수 있습니다."
     },
     "features": {
       "heading": "이 사이트의 특징",
@@ -153,7 +154,8 @@
     "viewPublic": "공개 페이지 보기",
     "deleteTitle": "이 공고 삭제",
     "deleteWarning": "삭제하면 되돌릴 수 없습니다.",
-    "deleteConfirm": "영구 삭제"
+    "deleteConfirm": "영구 삭제",
+    "errorBanner": "처리에 실패했습니다. 잠시 후 다시 시도해 주세요."
   },
   "email": {
     "confirmSubject": "[Academia Note Jobs] 공고 등록 확인",

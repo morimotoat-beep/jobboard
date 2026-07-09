@@ -130,16 +130,16 @@ export default async function HomePage({
 
           <div className="mx-auto flex max-w-5xl flex-col items-center gap-8 md:flex-row md:gap-4">
             <Reveal className="flex-1 text-center md:text-left">
-              <h1 className="mb-4 text-3xl leading-snug font-black sm:text-4xl lg:text-5xl">
+              <h1 className="mb-4 text-3xl leading-snug font-black [word-break:keep-all] sm:text-4xl lg:text-5xl">
                 <span className="block">{t("lp.hero.title1")}</span>
                 <span className="block">{t("lp.hero.title2")}</span>
               </h1>
-              <p className="mb-4 text-sm leading-relaxed text-gray-600 sm:text-base">
+              <p className="mb-4 text-base leading-relaxed text-gray-700 sm:text-lg">
                 {t("lp.hero.sub")}
               </p>
               <div className="mb-8 flex items-start justify-center gap-2 md:justify-start">
                 <ShieldIcon className="w-9 shrink-0" />
-                <p className="max-w-md text-left text-xs leading-relaxed text-gray-600">
+                <p className="max-w-md text-left text-sm leading-relaxed text-gray-700">
                   {t("lp.hero.trust")}
                 </p>
               </div>
@@ -178,6 +178,11 @@ export default async function HomePage({
           <Reveal delay={150}>
             <WorldMap counts={counts} />
           </Reveal>
+          {Object.keys(counts).length === 0 && (
+            <p className="mx-auto mt-6 max-w-xl rounded-full bg-white/70 px-6 py-2 text-center text-sm text-gray-700">
+              {t("lp.map.empty")}
+            </p>
+          )}
         </PatternSection>
 
         {/* 3. 特徴（白波模様） */}
@@ -203,7 +208,7 @@ export default async function HomePage({
               <Reveal key={key} delay={i * 100}>
                 <div className="h-full rounded-2xl bg-white p-6 text-center shadow-md">
                   <Illust className="mx-auto mb-4 w-32" />
-                  <h3 className="mb-2 text-lg font-bold text-brand-primary">
+                  <h3 className="mb-2 text-lg font-bold [word-break:keep-all] text-brand-primary">
                     {t(`lp.features.${key}Title`)}
                   </h3>
                   <p className="text-sm leading-relaxed text-gray-600">
@@ -299,8 +304,14 @@ export default async function HomePage({
         >
           {latest.length === 0 ? (
             <Reveal>
-              <div className="mx-auto max-w-3xl rounded-2xl bg-white p-8 text-center text-sm text-gray-600 shadow-md">
-                {t("lp.jobs.empty")}
+              <div className="mx-auto max-w-3xl rounded-2xl bg-white p-8 text-center shadow-md">
+                <p className="mb-4 text-sm text-gray-600">{t("lp.jobs.empty")}</p>
+                <Link
+                  href="/post"
+                  className="inline-block rounded-full border-2 border-brand-primary bg-white px-8 py-2.5 font-bold text-brand-primary transition hover:bg-brand-tab"
+                >
+                  {t("lp.hero.ctaPost")}
+                </Link>
               </div>
             </Reveal>
           ) : (

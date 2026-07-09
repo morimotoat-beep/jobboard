@@ -41,6 +41,12 @@ export default async function ManagePage({
           </div>
         )}
 
+        {sp.error === "1" && (
+          <div className="mb-4 rounded-lg border border-brand-accent bg-white p-4 text-sm font-bold text-brand-accent">
+            {t("manage.errorBanner")}
+          </div>
+        )}
+
         <div className="mb-6 rounded-lg bg-white p-4 shadow-sm">
           <p className="text-sm">
             <span className="font-medium text-gray-500">{t("manage.status")}: </span>

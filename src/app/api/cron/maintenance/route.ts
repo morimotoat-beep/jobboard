@@ -28,7 +28,7 @@ async function checkUrl(url: string): Promise<"ok" | "gone" | "unknown"> {
     const res = await fetch(url, {
       method: "GET",
       redirect: "follow",
-      signal: AbortSignal.timeout(8000),
+      signal: AbortSignal.timeout(6000),
       headers: {
         "User-Agent":
           "AcademiaNoteJobsBot/1.0 (+https://jobs.academianote.site)",
@@ -78,7 +78,13 @@ export async function GET(req: Request) {
   const now = new Date().toISOString();
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
-  for (const listing of (targets ?? []) as Listing[]) {
+  // リンクチェックは並列（最大5同時）で実行する。
+  // 直列だとタイムアウト多発時に 25件 × 6秒 で関数の実行時間制限（60秒）を超えるため。
+  const listings = (targets ?? []) as Listing[];
+  const CONCURRENCY = 5;
+  const flaggedListings: Listing[] = [];
+
+  async function processListing(listing: Listing): Promise<void> {
     const check = await checkUrl(listing.external_url);
     result.checked++;
 
@@ -87,7 +93,7 @@ export async function GET(req: Request) {
         .from("listings")
         .update({ last_link_checked_at: now })
         .eq("id", listing.id);
-      continue;
+      return;
     }
 
     if (check === "ok") {
@@ -102,7 +108,7 @@ export async function GET(req: Request) {
         })
         .eq("id", listing.id);
       if (restored) result.restored++;
-      continue;
+      return;
     }
 
     // gone（404/410）
@@ -120,15 +126,26 @@ export async function GET(req: Request) {
 
     if (shouldFlag) {
       result.flagged++;
-      const locale = listing.post_language;
-      const t = await getTranslations({ locale, namespace: "email" });
-      const manageUrl = `${siteUrl}/${locale}/manage/${listing.edit_token}`;
-      await sendEmail({
-        to: listing.poster_email,
-        subject: t("linkFlaggedSubject"),
-        text: t("linkFlaggedBody", { title: listing.title, url: manageUrl }),
-      });
+      flaggedListings.push(listing);
     }
+  }
+
+  for (let i = 0; i < listings.length; i += CONCURRENCY) {
+    const batch = listings.slice(i, i + CONCURRENCY);
+    // 1件の失敗で残りを止めない
+    await Promise.allSettled(batch.map(processListing));
+  }
+
+  // 通知メールはチェック完了後にまとめて送る（メール送信の遅延がチェックを妨げないように）
+  for (const listing of flaggedListings) {
+    const locale = listing.post_language;
+    const t = await getTranslations({ locale, namespace: "email" });
+    const manageUrl = `${siteUrl}/${locale}/manage/${listing.edit_token}`;
+    await sendEmail({
+      to: listing.poster_email,
+      subject: t("linkFlaggedSubject"),
+      text: t("linkFlaggedBody", { title: listing.title, url: manageUrl }),
+    });
   }
 
   return NextResponse.json(result);

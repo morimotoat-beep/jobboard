@@ -19,7 +19,8 @@
     "map": {
       "heading": "Research positions from around the world",
       "desc": "Countries with open positions are highlighted in green. Start exploring from wherever you want to go.",
-      "badge": "{name}: {count}"
+      "badge": "{name}: {count}",
+      "empty": "No openings yet. Once jobs are posted, you'll see per-country counts on this map."
     },
     "features": {
       "heading": "Why use this site",
@@ -153,7 +154,8 @@
     "viewPublic": "View public page",
     "deleteTitle": "Delete this listing",
     "deleteWarning": "This cannot be undone.",
-    "deleteConfirm": "Delete permanently"
+    "deleteConfirm": "Delete permanently",
+    "errorBanner": "Something went wrong. Please try again in a moment."
   },
   "email": {
     "confirmSubject": "[Academia Note Jobs] Confirm your job listing",

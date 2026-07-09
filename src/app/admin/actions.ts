@@ -15,6 +15,8 @@ const UUID_RE =
 export async function adminLoginAction(formData: FormData): Promise<void> {
   const password = String(formData.get("password") ?? "");
   if (!verifyPassword(password)) {
+    // 総当たり対策：失敗時は1秒待ってから返す
+    await new Promise((r) => setTimeout(r, 1000));
     redirect("/admin/login?error=1");
   }
   await createAdminSession();

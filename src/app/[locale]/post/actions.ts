@@ -107,7 +107,7 @@ export async function updateListingAction(
   const supabase = createServiceClient();
   const { data: existing } = await supabase
     .from("listings")
-    .select("id, status")
+    .select("id, status, title, summary, post_language")
     .eq("edit_token", token)
     .maybeSingle();
   if (!existing) {
@@ -120,15 +120,22 @@ export async function updateListingAction(
       ? "published"
       : existing.status;
 
-  // 内容が変わった可能性があるため翻訳を作り直す（古い翻訳は一旦クリア）
-  const translations = await buildListingTranslations(data);
+  // タイトル・要約・投稿言語が変わったときだけ翻訳を作り直す。
+  // 変わっていなければ既存の翻訳をそのまま残す（DeepL の呼び出し回数と、
+  // 一時的な翻訳失敗で既存の訳が消えるリスクの両方を減らす）。
+  const contentChanged =
+    existing.title !== data.title ||
+    existing.summary !== data.summary ||
+    existing.post_language !== data.post_language;
+  const translationUpdate = contentChanged
+    ? { ...CLEARED_TRANSLATION_COLUMNS, ...(await buildListingTranslations(data)) }
+    : {};
 
   const { error } = await supabase
     .from("listings")
     .update({
       ...data,
-      ...CLEARED_TRANSLATION_COLUMNS,
-      ...translations,
+      ...translationUpdate,
       status,
       link_check_failures: 0,
     })
@@ -150,7 +157,9 @@ export async function publishListingAction(formData: FormData): Promise<void> {
     .eq("edit_token", token)
     .eq("status", "draft");
   if (error) {
-    throw new Error(`公開処理に失敗しました: ${error.message}`);
+    // ユーザーに素のエラー画面を見せず、管理ページにエラーバナーを表示する
+    console.error("publishListingAction error:", error);
+    redirect(`/${locale}/manage/${token}?error=1`);
   }
   redirect(`/${locale}/manage/${token}?published=1`);
 }
@@ -165,7 +174,8 @@ export async function deleteListingAction(formData: FormData): Promise<void> {
     .delete()
     .eq("edit_token", token);
   if (error) {
-    throw new Error(`削除処理に失敗しました: ${error.message}`);
+    console.error("deleteListingAction error:", error);
+    redirect(`/${locale}/manage/${token}?error=1`);
   }
   redirect(`/${locale}`);
 }
