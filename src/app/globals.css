@@ -7,6 +7,7 @@
   --color-brand-accent: #ad3a2d;
   --color-brand-bg: #f6f7f9;
   --color-brand-tab: #eef1f5;
+  --color-brand-point: #ffd43b;
 }
 
 :root {
@@ -35,7 +36,13 @@ body {
   color: rgba(255, 255, 255, 0.08);
 }
 
-/* 見出し用の控えめなハイライト（下半分に薄いネイビーの帯） */
+/* 見出し用の蛍光マーカー（下半分にビビッドイエローの帯） */
 .marker-highlight {
-  background: linear-gradient(transparent 64%, rgba(30, 58, 95, 0.12) 64%);
+  background: linear-gradient(transparent 62%, rgba(255, 212, 59, 0.55) 62%);
+}
+
+/* ヒーロー背景用：輪郭だけのゴースト文字（薄いネイビーのアウトライン） */
+.text-outline-ghost {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(30, 58, 95, 0.14);
 }

@@ -68,7 +68,7 @@ export default async function JobsPage({
         <div className="mx-auto w-full max-w-4xl">
           <div className="mb-8 text-center">
             <h2 className="mb-3 text-3xl font-bold tracking-tight text-brand-primary sm:text-4xl">
-              {t("home.title")}
+              <span className="marker-highlight px-2">{t("home.title")}</span>
             </h2>
             <p className="text-sm text-gray-500">{t("common.tagline")}</p>
           </div>
