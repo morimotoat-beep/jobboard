@@ -206,9 +206,10 @@ export default async function HomePage({
           <FeatureCards />
         </PatternSection>
 
-        {/* 5. 使い方 */}
+        {/* 5. 使い方（ネイビー背景） */}
         <PatternSection
-          bgClass="bg-[#eef1f6]"
+          bgClass="bg-brand-primary"
+          dark
           align="right"
           word="HOW TO USE"
           title={t("lp.howto.heading")}
