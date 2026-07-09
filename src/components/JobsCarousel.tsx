@@ -8,32 +8,20 @@ import { getPrefectureLabel } from "@/lib/prefectures";
 import { localizedTitle } from "@/lib/localize";
 import type { FieldCode, Locale } from "@/lib/filters";
 import type { PublicListing } from "@/lib/types";
-import {
-  BuildingIcon,
-  FlaskIcon,
-  GlobeIcon,
-  MicroscopeIcon,
-  PaperIcon,
-  SparkleIcon,
-  TestTubeIcon,
-} from "./illustrations";
-
-type IconComponent = (props: { className?: string }) => React.ReactElement;
-
-// 分野ごとのビジュアル（カード上部の色＋アイコン）
-const FIELD_VISUAL: Record<FieldCode, { bg: string; Icon: IconComponent }> = {
-  field_math: { bg: "#eef6d6", Icon: PaperIcon },
-  field_physics: { bg: "#deeaea", Icon: TestTubeIcon },
-  field_chemistry: { bg: "#c9e265", Icon: FlaskIcon },
-  field_biology: { bg: "#eef6d6", Icon: MicroscopeIcon },
-  field_earth: { bg: "#deeaea", Icon: GlobeIcon },
-  field_medicine: { bg: "#eef6d6", Icon: MicroscopeIcon },
-  field_pharmacy: { bg: "#c9e265", Icon: FlaskIcon },
-  field_agriculture: { bg: "#eef6d6", Icon: SparkleIcon },
-  field_engineering: { bg: "#deeaea", Icon: BuildingIcon },
-  field_informatics: { bg: "#c9e265", Icon: PaperIcon },
-  field_environment: { bg: "#eef6d6", Icon: GlobeIcon },
-  field_interdisciplinary: { bg: "#deeaea", Icon: SparkleIcon },
+// 分野ごとのビジュアル（カード上部の色帯）
+const FIELD_BG: Record<FieldCode, string> = {
+  field_math: "#e7ecf3",
+  field_physics: "#dde5ef",
+  field_chemistry: "#eef1f5",
+  field_biology: "#e7ecf3",
+  field_earth: "#dde5ef",
+  field_medicine: "#eef1f5",
+  field_pharmacy: "#e7ecf3",
+  field_agriculture: "#dde5ef",
+  field_engineering: "#eef1f5",
+  field_informatics: "#e7ecf3",
+  field_environment: "#dde5ef",
+  field_interdisciplinary: "#eef1f5",
 };
 
 const SOON_MS = 7 * 24 * 60 * 60 * 1000;
@@ -41,8 +29,7 @@ const SOON_MS = 7 * 24 * 60 * 60 * 1000;
 function JobCard({ listing }: { listing: PublicListing }) {
   const locale = useLocale() as Locale;
   const t = useTranslations();
-  const visual = FIELD_VISUAL[listing.field];
-  const Icon = visual.Icon;
+  const bg = FIELD_BG[listing.field];
   const deadline = new Date(`${listing.deadline}T00:00:00`);
   const isSoon = deadline.getTime() - Date.now() <= SOON_MS;
   const location =
@@ -54,14 +41,13 @@ function JobCard({ listing }: { listing: PublicListing }) {
     <li className="w-64 shrink-0 snap-start">
       <Link
         href={`/jobs/${listing.id}`}
-        className="block h-full overflow-hidden rounded-2xl bg-white shadow-md transition hover:shadow-lg"
+        className="block h-full overflow-hidden rounded-lg border border-gray-200 bg-white transition hover:shadow-md"
       >
         <div
-          className="relative flex h-28 flex-col items-center justify-center gap-1"
-          style={{ backgroundColor: visual.bg }}
+          className="relative flex h-20 flex-col items-center justify-center"
+          style={{ backgroundColor: bg }}
         >
-          <Icon className="w-12" />
-          <span className="text-xs font-bold">
+          <span className="text-sm font-bold text-brand-primary">
             {t(`filters.field.${listing.field}`)}
           </span>
           {isSoon && (

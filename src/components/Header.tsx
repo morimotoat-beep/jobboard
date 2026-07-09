@@ -7,27 +7,27 @@ export default function Header() {
   const t = useTranslations();
 
   return (
-    <header className="bg-brand-primary px-4 py-3">
-      <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-between gap-2">
-        <Link href="/" className="text-lg font-bold text-white">
+    <header className="border-b border-gray-200 bg-white px-4 py-3">
+      <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-2">
+        <Link href="/" className="text-lg font-bold tracking-tight text-brand-primary">
           {t("common.siteTitle")}
         </Link>
         <nav className="flex flex-wrap items-center gap-1">
           <Link
             href="/jobs"
-            className="mr-1 rounded px-2 py-1 text-sm text-white underline hover:bg-brand-card hover:text-foreground"
+            className="mr-1 rounded px-2 py-1 text-sm text-gray-700 transition hover:text-brand-primary"
           >
             {t("nav.findJobs")}
           </Link>
           <Link
             href="/links"
-            className="mr-1 rounded px-2 py-1 text-sm text-white underline hover:bg-brand-card hover:text-foreground"
+            className="mr-1 rounded px-2 py-1 text-sm text-gray-700 transition hover:text-brand-primary"
           >
             {t("nav.links")}
           </Link>
           <Link
             href="/post"
-            className="mr-2 rounded bg-white px-3 py-1 text-sm font-bold text-brand-primary hover:brightness-95"
+            className="mr-2 rounded-md bg-brand-primary px-3 py-1.5 text-sm font-bold text-white transition hover:opacity-90"
           >
             {t("nav.postJob")}
           </Link>
@@ -36,10 +36,10 @@ export default function Header() {
               key={l}
               href="/"
               locale={l}
-              className={`rounded px-2 py-1 text-sm ${
+              className={`rounded px-2 py-1 text-xs transition ${
                 l === locale
-                  ? "bg-white font-bold text-brand-primary"
-                  : "bg-brand-tab text-gray-600"
+                  ? "bg-brand-primary font-bold text-white"
+                  : "text-gray-500 hover:text-brand-primary"
               }`}
             >
               {t(`languageNames.${l}`)}

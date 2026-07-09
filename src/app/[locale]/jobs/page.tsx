@@ -64,13 +64,13 @@ export default async function JobsPage({
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
-      <main className="bg-waves flex-1 px-4 py-10">
+      <main className="flex-1 bg-white px-4 py-12">
         <div className="mx-auto w-full max-w-4xl">
           <div className="mb-8 text-center">
-            <h2 className="mb-3 text-3xl font-black text-brand-primary sm:text-4xl">
-              <span className="marker-highlight px-2">{t("home.title")}</span>
+            <h2 className="mb-3 text-3xl font-bold tracking-tight text-brand-primary sm:text-4xl">
+              {t("home.title")}
             </h2>
-            <p className="text-sm text-gray-600">{t("common.tagline")}</p>
+            <p className="text-sm text-gray-500">{t("common.tagline")}</p>
           </div>
 
           <FilterForm values={values} />
@@ -80,11 +80,11 @@ export default async function JobsPage({
           </p>
 
           {items.length === 0 ? (
-            <div className="rounded-2xl bg-white p-8 text-center shadow-md">
+            <div className="rounded-lg border border-gray-200 bg-brand-bg p-8 text-center">
               <p className="mb-4 text-sm text-gray-600">{t("search.empty")}</p>
               <Link
                 href="/post"
-                className="inline-block rounded-full border-2 border-brand-primary bg-white px-8 py-2.5 font-bold text-brand-primary transition hover:bg-brand-tab"
+                className="inline-block rounded-md border border-brand-primary bg-white px-8 py-2.5 font-bold text-brand-primary transition hover:bg-brand-tab"
               >
                 {t("lp.hero.ctaPost")}
               </Link>
@@ -105,7 +105,7 @@ export default async function JobsPage({
                   pathname: "/jobs",
                   query: { ...query, page: String(page - 1) },
                 }}
-                className="rounded-full bg-white px-4 py-1.5 font-medium shadow-sm transition hover:bg-brand-tab"
+                className="rounded-md border border-gray-200 bg-white px-4 py-1.5 font-medium transition hover:bg-brand-tab"
               >
                 {t("search.prev")}
               </Link>
@@ -117,7 +117,7 @@ export default async function JobsPage({
                   pathname: "/jobs",
                   query: { ...query, page: String(page + 1) },
                 }}
-                className="rounded-full bg-white px-4 py-1.5 font-medium shadow-sm transition hover:bg-brand-tab"
+                className="rounded-md border border-gray-200 bg-white px-4 py-1.5 font-medium transition hover:bg-brand-tab"
               >
                 {t("search.next")}
               </Link>

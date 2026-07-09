@@ -20,8 +20,7 @@ export default function JobSitesPreview() {
     <div className="space-y-8">
       {JOB_SITE_CATEGORIES.map((category) => (
         <div key={category.key}>
-          <h3 className="mb-3 flex items-center gap-2 text-sm font-bold text-brand-primary">
-            <span className="inline-block h-3 w-3 rounded-full bg-brand-card" />
+          <h3 className="mb-3 border-l-2 border-brand-primary pl-3 text-sm font-bold text-brand-primary">
             {t(`links.categories.${category.key}`)}
           </h3>
           <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -31,7 +30,7 @@ export default function JobSitesPreview() {
                   href={site.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex h-full items-start gap-3 rounded-2xl bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+                  className="group flex h-full items-start gap-3 rounded-lg border border-gray-200 bg-white p-4 transition hover:border-brand-primary/40 hover:shadow-sm"
                 >
                   <img
                     src={faviconUrl(site.url)}

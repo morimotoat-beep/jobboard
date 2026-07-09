@@ -25,10 +25,10 @@ export default function ListingCard({ listing }: { listing: PublicListing }) {
     <li>
       <Link
         href={`/jobs/${listing.id}`}
-        className="block rounded-lg bg-brand-card p-4 shadow-sm transition hover:brightness-105"
+        className="block rounded-lg border border-gray-200 bg-white p-5 transition hover:border-brand-primary/40 hover:shadow-sm"
       >
         <div className="mb-2 flex flex-wrap items-center gap-2 text-xs">
-          <span className="rounded bg-white px-2 py-0.5 font-medium">
+          <span className="rounded border border-gray-300 bg-white px-2 py-0.5 font-medium text-gray-600">
             {t(`languageNames.${listing.post_language}`)}
           </span>
           <span className="rounded bg-brand-tab px-2 py-0.5">
@@ -46,7 +46,7 @@ export default function ListingCard({ listing }: { listing: PublicListing }) {
             </span>
           )}
         </div>
-        <h3 className="mb-1 font-bold">{localizedTitle(listing, locale)}</h3>
+        <h3 className="mb-1 font-bold text-brand-primary">{localizedTitle(listing, locale)}</h3>
         <p className="text-sm text-gray-700">
           {formatLocation(locale, listing)}
           {" ・ "}
