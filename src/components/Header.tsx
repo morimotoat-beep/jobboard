@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
@@ -9,32 +9,40 @@ import { routing } from "@/i18n/routing";
 export default function Header() {
   const locale = useLocale();
   const t = useTranslations();
-  const [open, setOpen] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
+  const langRef = useRef<HTMLDivElement>(null);
+
+  // プルダウンの外側クリックで閉じる
+  useEffect(() => {
+    if (!langOpen) return;
+    const onDown = (e: MouseEvent) => {
+      if (langRef.current && !langRef.current.contains(e.target as Node)) {
+        setLangOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", onDown);
+    return () => document.removeEventListener("mousedown", onDown);
+  }, [langOpen]);
 
   return (
-    <header className="border-b border-white/10 bg-brand-primary px-4 py-3">
-      <div className="mx-auto flex max-w-5xl items-center justify-between gap-2">
-        {/* ロゴ：白い角丸下地に載せる */}
-        <Link
-          href="/"
-          onClick={() => setOpen(false)}
-          className="flex items-center rounded-lg bg-white px-3 py-1.5 shadow-sm"
-        >
+    <header className="border-b border-gray-200 bg-white px-4 py-3">
+      <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-x-3 gap-y-2">
+        {/* ロゴ：囲みなしで白地に直接置く */}
+        <Link href="/" className="flex items-center">
           <Image
             src="/logo.png"
             alt={t("common.siteTitle")}
             width={600}
             height={135}
             priority
-            className="h-7 w-auto sm:h-8"
+            className="h-8 w-auto"
           />
         </Link>
 
-        {/* デスクトップ：フルナビ */}
-        <nav className="hidden items-center gap-2 sm:flex">
+        <nav className="flex items-center gap-2">
           <Link
             href="/jobs"
-            className="rounded-md bg-white px-4 py-1.5 text-sm font-bold text-brand-primary shadow-sm transition hover:bg-brand-tab"
+            className="rounded-md border border-gray-300 bg-white px-4 py-1.5 text-sm font-bold text-brand-primary shadow-sm transition hover:bg-brand-tab"
           >
             {t("nav.findJobs")}
           </Link>
@@ -44,97 +52,70 @@ export default function Header() {
           >
             {t("nav.postJob")}
           </Link>
-          <span aria-hidden="true" className="mx-1 h-6 w-px bg-white/20" />
-          <div className="flex items-center rounded-full border border-white/20 bg-white/10 p-0.5">
-            {routing.locales.map((l) => (
-              <Link
-                key={l}
-                href="/"
-                locale={l}
-                aria-current={l === locale ? "true" : undefined}
-                className={`rounded-full px-2.5 py-1 text-xs transition ${
-                  l === locale
-                    ? "bg-white font-bold text-brand-primary shadow-sm"
-                    : "text-white/70 hover:text-white"
-                }`}
+
+          {/* 言語切り替え：右上の「Language」プルダウン */}
+          <div className="relative" ref={langRef}>
+            <button
+              type="button"
+              onClick={() => setLangOpen((v) => !v)}
+              aria-haspopup="true"
+              aria-expanded={langOpen}
+              className="flex items-center gap-1.5 rounded-md border border-gray-300 px-3 py-1.5 text-sm font-medium text-brand-primary transition hover:bg-brand-tab"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
               >
-                {t(`languageNames.${l}`)}
-              </Link>
-            ))}
+                <circle cx="12" cy="12" r="9" />
+                <path d="M3 12h18" />
+                <ellipse cx="12" cy="12" rx="4" ry="9" />
+              </svg>
+              Language
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+                className={`transition-transform ${langOpen ? "rotate-180" : ""}`}
+              >
+                <path d="M6 9l6 6 6-6" />
+              </svg>
+            </button>
+            {langOpen && (
+              <div className="absolute right-0 z-20 mt-1.5 w-36 overflow-hidden rounded-md border border-gray-200 bg-white py-1 shadow-lg">
+                {routing.locales.map((l) => (
+                  <Link
+                    key={l}
+                    href="/"
+                    locale={l}
+                    onClick={() => setLangOpen(false)}
+                    aria-current={l === locale ? "true" : undefined}
+                    className={`block px-4 py-2 text-sm transition ${
+                      l === locale
+                        ? "bg-brand-tab font-bold text-brand-primary"
+                        : "text-gray-600 hover:bg-gray-50"
+                    }`}
+                  >
+                    {t(`languageNames.${l}`)}
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
         </nav>
-
-        {/* モバイル：掲載ボタン＋ハンバーガー */}
-        <div className="flex items-center gap-2 sm:hidden">
-          <Link
-            href="/post"
-            className="rounded-md bg-brand-green px-3.5 py-1.5 text-sm font-bold text-white shadow-sm transition hover:brightness-95"
-          >
-            {t("nav.postJob")}
-          </Link>
-          <button
-            type="button"
-            onClick={() => setOpen((v) => !v)}
-            aria-label="menu"
-            aria-expanded={open}
-            className="flex h-9 w-9 items-center justify-center rounded-md border border-white/25 text-white transition hover:bg-white/10"
-          >
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-            >
-              {open ? (
-                <>
-                  <line x1="5" y1="5" x2="19" y2="19" />
-                  <line x1="19" y1="5" x2="5" y2="19" />
-                </>
-              ) : (
-                <>
-                  <line x1="3" y1="6" x2="21" y2="6" />
-                  <line x1="3" y1="12" x2="21" y2="12" />
-                  <line x1="3" y1="18" x2="21" y2="18" />
-                </>
-              )}
-            </svg>
-          </button>
-        </div>
       </div>
-
-      {/* モバイル：展開メニュー（求人を探す＋言語切り替え） */}
-      {open && (
-        <div className="mx-auto mt-3 max-w-5xl sm:hidden">
-          <Link
-            href="/jobs"
-            onClick={() => setOpen(false)}
-            className="mb-3 block rounded-md bg-white px-4 py-2.5 text-center text-sm font-bold text-brand-primary shadow-sm"
-          >
-            {t("nav.findJobs")}
-          </Link>
-          <div className="grid grid-cols-4 gap-1 rounded-lg border border-white/20 bg-white/10 p-1">
-            {routing.locales.map((l) => (
-              <Link
-                key={l}
-                href="/"
-                locale={l}
-                onClick={() => setOpen(false)}
-                aria-current={l === locale ? "true" : undefined}
-                className={`rounded-md py-1.5 text-center text-xs transition ${
-                  l === locale
-                    ? "bg-white font-bold text-brand-primary"
-                    : "text-white/80 hover:text-white"
-                }`}
-              >
-                {t(`languageNames.${l}`)}
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
     </header>
   );
 }
