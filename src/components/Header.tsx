@@ -42,13 +42,13 @@ export default function Header() {
         <nav className="flex items-center gap-2">
           <Link
             href="/jobs"
-            className="rounded-md border border-gray-300 bg-white px-4 py-1.5 text-sm font-bold text-brand-primary shadow-sm transition hover:bg-brand-tab"
+            className="rounded-md border border-gray-300 bg-white px-3.5 py-1.5 text-sm font-bold whitespace-nowrap text-brand-primary shadow-sm transition hover:bg-brand-tab"
           >
             {t("nav.findJobs")}
           </Link>
           <Link
             href="/post"
-            className="rounded-md bg-brand-green px-4 py-1.5 text-sm font-bold text-white shadow-sm transition hover:brightness-95"
+            className="rounded-md bg-brand-green px-3.5 py-1.5 text-sm font-bold whitespace-nowrap text-white shadow-sm transition hover:brightness-95"
           >
             {t("nav.postJob")}
           </Link>
@@ -60,7 +60,7 @@ export default function Header() {
               onClick={() => setLangOpen((v) => !v)}
               aria-haspopup="true"
               aria-expanded={langOpen}
-              className="flex items-center gap-1.5 rounded-md border border-gray-300 px-3 py-1.5 text-sm font-medium text-brand-primary transition hover:bg-brand-tab"
+              className="flex items-center gap-1.5 rounded-md border border-gray-300 px-3 py-1.5 text-sm font-medium whitespace-nowrap text-brand-primary transition hover:bg-brand-tab"
             >
               <svg
                 width="16"
@@ -77,7 +77,7 @@ export default function Header() {
                 <path d="M3 12h18" />
                 <ellipse cx="12" cy="12" rx="4" ry="9" />
               </svg>
-              Language
+              <span className="hidden sm:inline">Language</span>
               <svg
                 width="12"
                 height="12"
