@@ -82,7 +82,7 @@ export default function WorldMap({ counts }: { counts: Record<string, number> })
           <path
             key={land.id}
             d={land.d}
-            fill={highlighted.has(land.id) ? "#1e3a5f" : "#ffffff"}
+            fill={highlighted.has(land.id) ? "#7dc436" : "#ffffff"}
             stroke={highlighted.has(land.id) ? "#ffffff" : "#c3ccd9"}
             strokeWidth="0.6"
           />
@@ -97,7 +97,7 @@ export default function WorldMap({ counts }: { counts: Record<string, number> })
           <Link
             key={code}
             href={{ pathname: "/jobs", query: { country: code } }}
-            className="absolute -translate-x-1/2 -translate-y-[160%] rounded-full bg-brand-point px-2 py-0.5 text-[10px] font-bold whitespace-nowrap text-brand-primary shadow-sm transition hover:brightness-95 hover:shadow sm:text-xs"
+            className="absolute -translate-x-1/2 -translate-y-[160%] rounded-full border border-gray-200 bg-white px-2 py-0.5 text-[10px] font-bold whitespace-nowrap text-brand-primary shadow-sm transition hover:bg-brand-tab hover:shadow sm:text-xs"
             style={{ left: `${pos.x}%`, top: `${pos.y}%` }}
           >
             {t("lp.map.badge", {

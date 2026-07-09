@@ -83,7 +83,7 @@ export default async function HomePage({
       <Header />
       <main className="flex-1">
         {/* 1. ヒーロー（白） */}
-        <section className="relative overflow-hidden bg-white px-4 pt-20 pb-24">
+        <section className="bg-waves relative overflow-hidden px-4 pt-20 pb-24">
           <div
             aria-hidden="true"
             className="text-outline-ghost pointer-events-none absolute -top-3 -left-[3vw] text-[17vw] leading-none font-black tracking-tight whitespace-nowrap select-none sm:text-[12vw]"
@@ -145,7 +145,7 @@ export default async function HomePage({
 
         {/* 3. 特徴（白） */}
         <PatternSection
-          bgClass="bg-white"
+          bgClass="bg-waves"
           align="right"
           word="FEATURES"
           title={t("lp.features.heading")}
@@ -257,7 +257,7 @@ export default async function HomePage({
 
         {/* 6. 外部求人サイト一覧（白） */}
         <PatternSection
-          bgClass="bg-white"
+          bgClass="bg-waves"
           align="left"
           word="LINKS"
           title={t("lp.links.heading")}

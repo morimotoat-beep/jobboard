@@ -7,7 +7,7 @@
   --color-brand-accent: #ad3a2d;
   --color-brand-bg: #f6f7f9;
   --color-brand-tab: #eef1f5;
-  --color-brand-point: #ffd43b;
+  --color-brand-point: #c9e265;
 }
 
 :root {
@@ -36,9 +36,17 @@ body {
   color: rgba(255, 255, 255, 0.08);
 }
 
-/* 見出し用の蛍光マーカー（下半分にビビッドイエローの帯） */
+/* 見出し用の蛍光マーカー（下半分に黄緑の帯） */
 .marker-highlight {
-  background: linear-gradient(transparent 62%, rgba(255, 212, 59, 0.55) 62%);
+  background: linear-gradient(transparent 62%, rgba(201, 226, 101, 0.65) 62%);
+}
+
+/* 白セクション用：白い波模様の背景（画像は public/bg-waves.png） */
+.bg-waves {
+  background-color: #fafafa;
+  background-image: url("/bg-waves.png");
+  background-size: cover;
+  background-position: center;
 }
 
 /* ヒーロー背景用：輪郭だけのゴースト文字（薄いネイビーのアウトライン） */
