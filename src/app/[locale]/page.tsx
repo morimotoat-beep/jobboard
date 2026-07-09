@@ -2,6 +2,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import Header from "@/components/Header";
 import JobSitesPreview from "@/components/JobSitesPreview";
 import JobsCarousel from "@/components/JobsCarousel";
+import RegionMap from "@/components/RegionMap";
 import Reveal from "@/components/Reveal";
 import WorldMap from "@/components/WorldMap";
 import { Link } from "@/i18n/navigation";
@@ -242,7 +243,20 @@ export default async function HomePage({
             </Reveal>
           ) : (
             <Reveal delay={150}>
-              <JobsCarousel listings={latest} />
+              <JobsCarousel
+                listings={latest}
+                maps={Object.fromEntries(
+                  latest.map((l) => [
+                    l.id,
+                    <RegionMap
+                      key={l.id}
+                      country={l.country}
+                      prefecture={l.prefecture}
+                      className="absolute inset-0 h-full w-full"
+                    />,
+                  ])
+                )}
+              />
             </Reveal>
           )}
           <Reveal className="mt-10 text-center">

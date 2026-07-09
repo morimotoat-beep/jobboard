@@ -1,6 +1,7 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import Header from "@/components/Header";
+import RegionMap from "@/components/RegionMap";
 import ReportButton from "@/components/ReportButton";
 import { formatLocation } from "@/components/ListingCard";
 import { Link } from "@/i18n/navigation";
@@ -88,6 +89,14 @@ export default async function JobDetailPage({
               <dd>{dateFormat.format(new Date(listing.created_at))}</dd>
             </div>
           </dl>
+
+          <div className="mb-6 max-w-md overflow-hidden rounded-lg border border-gray-200">
+            <RegionMap
+              country={listing.country}
+              prefecture={listing.prefecture}
+              className="block h-auto w-full"
+            />
+          </div>
 
           <p className="mb-8 text-sm leading-relaxed whitespace-pre-wrap">
             {localizedSummary(listing, loc)}

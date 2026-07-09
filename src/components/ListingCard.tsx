@@ -1,5 +1,6 @@
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import RegionMap from "@/components/RegionMap";
 import { getCountryName } from "@/lib/countries";
 import { localizedTitle } from "@/lib/localize";
 import { getPrefectureLabel } from "@/lib/prefectures";
@@ -25,8 +26,9 @@ export default function ListingCard({ listing }: { listing: PublicListing }) {
     <li>
       <Link
         href={`/jobs/${listing.id}`}
-        className="block rounded-lg border border-gray-200 bg-white p-5 transition hover:border-brand-primary/40 hover:shadow-sm"
+        className="flex items-stretch gap-4 rounded-lg border border-gray-200 bg-white p-5 transition hover:border-brand-primary/40 hover:shadow-sm"
       >
+        <div className="min-w-0 flex-1">
         <div className="mb-2 flex flex-wrap items-center gap-2 text-xs">
           <span className="rounded border border-gray-300 bg-white px-2 py-0.5 font-medium text-gray-600">
             {t(`languageNames.${listing.post_language}`)}
@@ -53,6 +55,14 @@ export default function ListingCard({ listing }: { listing: PublicListing }) {
           {t("listing.deadlineLabel")}:{" "}
           {new Intl.DateTimeFormat(locale, { dateStyle: "medium" }).format(deadline)}
         </p>
+        </div>
+        <div className="hidden w-28 shrink-0 self-center overflow-hidden rounded-md border border-gray-200 sm:block">
+          <RegionMap
+            country={listing.country}
+            prefecture={listing.prefecture}
+            className="block h-auto w-full"
+          />
+        </div>
       </Link>
     </li>
   );

@@ -26,7 +26,13 @@ const FIELD_BG: Record<FieldCode, string> = {
 
 const SOON_MS = 7 * 24 * 60 * 60 * 1000;
 
-function JobCard({ listing }: { listing: PublicListing }) {
+function JobCard({
+  listing,
+  map,
+}: {
+  listing: PublicListing;
+  map?: React.ReactNode;
+}) {
   const locale = useLocale() as Locale;
   const t = useTranslations();
   const bg = FIELD_BG[listing.field];
@@ -44,10 +50,11 @@ function JobCard({ listing }: { listing: PublicListing }) {
         className="block h-full overflow-hidden rounded-lg border border-gray-200 bg-white transition hover:shadow-md"
       >
         <div
-          className="relative flex h-20 flex-col items-center justify-center"
+          className="relative flex h-28 flex-col items-center justify-center overflow-hidden"
           style={{ backgroundColor: bg }}
         >
-          <span className="text-sm font-bold text-brand-primary">
+          {map}
+          <span className="absolute bottom-1.5 left-1.5 rounded bg-white/90 px-1.5 py-0.5 text-[10px] font-bold text-brand-primary">
             {t(`filters.field.${listing.field}`)}
           </span>
           {isSoon && (
@@ -86,7 +93,13 @@ function JobCard({ listing }: { listing: PublicListing }) {
   );
 }
 
-export default function JobsCarousel({ listings }: { listings: PublicListing[] }) {
+export default function JobsCarousel({
+  listings,
+  maps,
+}: {
+  listings: PublicListing[];
+  maps?: Record<string, React.ReactNode>;
+}) {
   const trackRef = useRef<HTMLUListElement>(null);
   const scrollByCards = (dir: number) => {
     trackRef.current?.scrollBy({ left: dir * 280, behavior: "smooth" });
@@ -100,7 +113,7 @@ export default function JobsCarousel({ listings }: { listings: PublicListing[] }
         style={{ scrollbarWidth: "thin" }}
       >
         {listings.map((listing) => (
-          <JobCard key={listing.id} listing={listing} />
+          <JobCard key={listing.id} listing={listing} map={maps?.[listing.id]} />
         ))}
       </ul>
       {listings.length > 1 && (
