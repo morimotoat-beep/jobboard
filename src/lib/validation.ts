@@ -1,6 +1,5 @@
 import {
   EMPLOYMENT_TYPE_CODES,
-  FIELD_CODES,
   JOB_TYPE_CODES,
   LOCALES,
   ORGANIZATION_TYPE_CODES,
@@ -11,7 +10,6 @@ import { PREFECTURE_CODES } from "./prefectures";
 export type ListingInput = {
   title: string;
   summary: string;
-  field: string;
   // 研究分野マスター（細目）の選択。listings 列ではなく listing_research_fields に保存する。
   field_ids: string[];
   job_type: string;
@@ -40,7 +38,6 @@ export function parseListingForm(formData: FormData): {
   const data: ListingInput = {
     title: get("title"),
     summary: get("summary"),
-    field: get("field"),
     field_ids: formData
       .getAll("rf")
       .map((v) => String(v).trim())
@@ -63,10 +60,6 @@ export function parseListingForm(formData: FormData): {
 
   if (!data.summary) errors.summary = "required";
   else if (data.summary.length > 4000) errors.summary = "summaryTooLong";
-
-  if (!(FIELD_CODES as readonly string[]).includes(data.field)) {
-    errors.field = "invalidChoice";
-  }
 
   // 研究分野（細目）は新規掲載から必須。有効な id かどうかは呼び出し側（DBの
   // マスター照合）で最終確認する。ここでは必須と上限だけをチェックする。

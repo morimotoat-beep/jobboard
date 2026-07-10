@@ -35,9 +35,6 @@ export default function ListingCard({ listing }: { listing: PublicListing }) {
             {t(`filters.organizationType.${listing.organization_type}`)}
           </span>
           <span className="rounded bg-brand-tab px-2 py-0.5">
-            {t(`filters.field.${listing.field}`)}
-          </span>
-          <span className="rounded bg-brand-tab px-2 py-0.5">
             {t(`filters.jobType.${listing.job_type}`)}
           </span>
           <span className="rounded bg-brand-tab px-2 py-0.5">

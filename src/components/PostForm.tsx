@@ -4,7 +4,6 @@ import { useActionState, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import {
   EMPLOYMENT_TYPE_CODES,
-  FIELD_CODES,
   JOB_TYPE_CODES,
   LOCALES,
   ORGANIZATION_TYPE_CODES,
@@ -25,7 +24,6 @@ type FieldTree = (Named & {
 type InitialValues = {
   title?: string;
   summary?: string;
-  field?: string;
   field_ids?: string[];
   job_type?: string;
   employment_type?: string;
@@ -162,28 +160,6 @@ export default function PostForm({
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <div>
-          <label className={labelClass} htmlFor="field">
-            {t("filters.field.label")}
-          </label>
-          <select
-            id="field"
-            name="field"
-            defaultValue={current.field ?? ""}
-            className={inputClass}
-          >
-            <option value="" disabled>
-              --
-            </option>
-            {FIELD_CODES.map((c) => (
-              <option key={c} value={c}>
-                {t(`filters.field.${c}`)}
-              </option>
-            ))}
-          </select>
-          {fieldError("field")}
-        </div>
-
         <div>
           <label className={labelClass} htmlFor="job_type">
             {t("filters.jobType.label")}

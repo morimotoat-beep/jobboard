@@ -175,21 +175,6 @@
     "linkFlaggedBody": "게시 중인 공고 \"{title}\"의 지원·상세 URL에 3일 연속 접속할 수 없어(404 등) 공고를 일시적으로 숨김 처리했습니다.\n\nURL을 확인한 후 아래 관리 페이지에서 수정·저장하면 다시 게시됩니다. 링크가 복구되면 자동으로 다시 게시됩니다.\n\n{url}"
   },
   "filters": {
-    "field": {
-      "label": "연구 분야",
-      "field_math": "수학·통계학",
-      "field_physics": "물리학",
-      "field_chemistry": "화학",
-      "field_biology": "생물학·생명과학",
-      "field_earth": "지구과학·우주과학",
-      "field_medicine": "의학·치의학·보건과학",
-      "field_pharmacy": "약학",
-      "field_agriculture": "농학·수의학·수산학",
-      "field_engineering": "공학",
-      "field_informatics": "정보과학·데이터사이언스",
-      "field_environment": "환경과학",
-      "field_interdisciplinary": "학제간·기타"
-    },
     "jobType": {
       "label": "직종",
       "job_professor": "교수",

@@ -20,8 +20,10 @@ create table if not exists public.listings (
   summary_zh text,
   summary_ko text,
 
-  -- フィルター用コード（§9。ラベルはアプリ側の messages/*.json が持つ）
-  field text not null check (field in (
+  -- 旧・粗い大分類コード（JREC-IN 導入前）。研究分野の入力は
+  -- research_fields（細目306）へ一本化したため任意化。新規投稿は送らない。
+  -- 列は当面残す（main が参照しなくなった後の別マイグレーションで drop 予定）。
+  field text check (field in (
     'field_math', 'field_physics', 'field_chemistry', 'field_biology',
     'field_earth', 'field_medicine', 'field_pharmacy', 'field_agriculture',
     'field_engineering', 'field_informatics', 'field_environment',

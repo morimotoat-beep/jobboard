@@ -1,7 +1,6 @@
 import { createServiceClient } from "./supabase/server";
 import {
   EMPLOYMENT_TYPE_CODES,
-  FIELD_CODES,
   JOB_TYPE_CODES,
   ORGANIZATION_TYPE_CODES,
 } from "./filters";
@@ -32,7 +31,6 @@ function sanitizeForOr(term: string): string {
 }
 
 export type SearchFilters = {
-  field?: string;
   jobType?: string;
   employmentType?: string;
   organizationType?: string;
@@ -77,9 +75,6 @@ export async function searchListings(
   if (fieldAllowlist) query = query.in("id", fieldAllowlist);
 
   // 不正なコードはエラーにせず無視する（URLを直接書き換えられた場合など）
-  if (filters.field && (FIELD_CODES as readonly string[]).includes(filters.field)) {
-    query = query.eq("field", filters.field);
-  }
   if (filters.jobType && (JOB_TYPE_CODES as readonly string[]).includes(filters.jobType)) {
     query = query.eq("job_type", filters.jobType);
   }

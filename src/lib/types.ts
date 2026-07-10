@@ -1,6 +1,5 @@
 import type {
   EmploymentTypeCode,
-  FieldCode,
   JobTypeCode,
   ListingStatus,
   Locale,
@@ -21,7 +20,6 @@ export type Listing = {
   summary_en: string | null;
   summary_zh: string | null;
   summary_ko: string | null;
-  field: FieldCode;
   job_type: JobTypeCode;
   employment_type: EmploymentTypeCode;
   organization_type: OrganizationTypeCode;
@@ -51,4 +49,4 @@ export type PublicListing = Omit<
 >;
 
 export const PUBLIC_LISTING_COLUMNS =
-  "id, title, summary, title_ja, title_en, title_zh, title_ko, summary_ja, summary_en, summary_zh, summary_ko, field, job_type, employment_type, organization_type, country, prefecture, deadline, external_url, post_language, status, created_at, updated_at";
+  "id, title, summary, title_ja, title_en, title_zh, title_ko, summary_ja, summary_en, summary_zh, summary_ko, job_type, employment_type, organization_type, country, prefecture, deadline, external_url, post_language, status, created_at, updated_at";

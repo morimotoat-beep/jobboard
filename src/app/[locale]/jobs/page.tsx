@@ -32,7 +32,6 @@ export default async function JobsPage({
   const fieldTree = await getResearchFieldTree();
 
   const values: FilterValues = {
-    field: first(sp.field),
     jobType: first(sp.job),
     employmentType: first(sp.emp),
     organizationType: first(sp.org),
@@ -45,7 +44,6 @@ export default async function JobsPage({
   const page = Math.max(1, parseInt(first(sp.page), 10) || 1);
 
   const { items, total } = await searchListings({
-    field: values.field,
     jobType: values.jobType,
     employmentType: values.employmentType,
     organizationType: values.organizationType,
@@ -61,7 +59,6 @@ export default async function JobsPage({
   // ページ送りリンク用に現在のフィルターを引き継ぐ
   const query: Record<string, string | string[]> = {};
   const entries: Record<string, string> = {
-    field: values.field,
     job: values.jobType,
     emp: values.employmentType,
     org: values.organizationType,

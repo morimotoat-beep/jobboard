@@ -88,7 +88,6 @@ export default async function ManagePage({
             initial={{
               title: listing.title,
               summary: listing.summary,
-              field: listing.field,
               field_ids: fieldIds,
               job_type: listing.job_type,
               employment_type: listing.employment_type,
