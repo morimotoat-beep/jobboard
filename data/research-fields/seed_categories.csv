@@ -1,0 +1,12 @@
+id,sort_order,name_ja,name_en,name_zh,name_ko
+life-science,1,ライフサイエンス,Life Science,生命科学,생명과학
+informatics,2,情報通信,Informatics,信息通信,정보통신
+environmental,3,環境,Environmental science,环境,환경
+nanotech-materials,4,ナノテク・材料,Nanotechnology/Materials,纳米技术·材料,나노기술·재료
+energy,5,エネルギー,Energy Engineering,能源,에너지
+manufacturing,6,ものづくり技術,Manufacturing Technology,制造技术,모노즈쿠리기술
+social-infrastructure,7,社会基盤,Social Infrastructure,社会基础,사회기반
+frontier,8,フロンティア,Frontier Technology,前沿技术,프런티어
+humanities-social,9,人文・社会,Humanities & Social Sciences,人文·社会,인문·사회
+natural-science,10,自然科学一般,Natural Science,自然科学一般,자연과학 일반
+others,11,その他,Others,其他,기타
