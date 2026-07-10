@@ -2,6 +2,7 @@ import "server-only";
 import { cache } from "react";
 import { createServiceClient } from "./supabase/server";
 import type { Locale } from "./filters";
+import type { ListingCategory } from "./types";
 
 // JREC-IN 準拠の研究分野マスター（大分類11 / 細目306、日英中韓）
 // 求人は細目(field_id)の配列だけを listing_research_fields に持つ。
@@ -107,6 +108,69 @@ export async function replaceListingFields(
   if (insError) {
     throw new Error(`研究分野の登録に失敗しました: ${insError.message}`);
   }
+}
+
+// カード表示用：複数求人について、紐づく細目から大分類を引き、
+// 求人ごとに大分類（重複排除・sort_order 昇順、最大11）へ畳み込む。
+// listing_research_fields → research_fields(category_id) を1クエリで取得し、
+// 大分類のラベルはマスター（getResearchFieldTree）から補う。
+export async function getCategoriesForListings(
+  listingIds: string[]
+): Promise<Map<string, ListingCategory[]>> {
+  const unique = [...new Set(listingIds)];
+  if (unique.length === 0) return new Map();
+
+  const supabase = createServiceClient();
+  const { data, error } = await supabase
+    .from("listing_research_fields")
+    .select("listing_id, research_fields(category_id)")
+    .in("listing_id", unique);
+  if (error) {
+    throw new Error(`求人の大分類の取得に失敗しました: ${error.message}`);
+  }
+
+  // 大分類マスター（id → {ラベル, 表示順}）
+  const tree = await getResearchFieldTree();
+  const catInfo = new Map(
+    tree.map((c, idx) => [
+      c.id,
+      {
+        order: c.sort_order ?? idx,
+        cat: {
+          id: c.id,
+          name_ja: c.name_ja,
+          name_en: c.name_en,
+          name_zh: c.name_zh,
+          name_ko: c.name_ko,
+        } as ListingCategory,
+      },
+    ])
+  );
+
+  type Row = { listing_id: string; research_fields: { category_id: string } | null };
+  const seen = new Map<string, Set<string>>();
+  const result = new Map<string, ListingCategory[]>();
+  for (const row of (data ?? []) as unknown as Row[]) {
+    const catId = row.research_fields?.category_id;
+    if (!catId) continue;
+    const info = catInfo.get(catId);
+    if (!info) continue;
+    const set = seen.get(row.listing_id) ?? new Set<string>();
+    if (set.has(catId)) continue;
+    set.add(catId);
+    seen.set(row.listing_id, set);
+    const arr = result.get(row.listing_id) ?? [];
+    arr.push(info.cat);
+    result.set(row.listing_id, arr);
+  }
+  // 各求人の大分類を sort_order 昇順に整列
+  for (const [lid, arr] of result) {
+    arr.sort(
+      (a, b) => (catInfo.get(a.id)?.order ?? 0) - (catInfo.get(b.id)?.order ?? 0)
+    );
+    result.set(lid, arr);
+  }
+  return result;
 }
 
 // 検索用：指定した細目 id のいずれかを持つ求人の id 集合。

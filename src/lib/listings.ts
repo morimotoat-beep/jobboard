@@ -7,8 +7,16 @@ import {
 import { PREFECTURE_CODES } from "./prefectures";
 import { expandSynonyms } from "./searchSynonyms";
 import { translateQuery } from "./translate";
-import { getListingIdsForFields } from "./researchFields";
-import { PUBLIC_LISTING_COLUMNS, type Listing, type PublicListing } from "./types";
+import {
+  getCategoriesForListings,
+  getListingIdsForFields,
+} from "./researchFields";
+import {
+  PUBLIC_LISTING_COLUMNS,
+  type Listing,
+  type PublicListing,
+  type PublicListingWithCategories,
+} from "./types";
 
 export const PAGE_SIZE = 20;
 
@@ -51,7 +59,7 @@ function todayUtc(): string {
 // 公開ルール（§6）：status=published かつ締切前のみ
 export async function searchListings(
   filters: SearchFilters
-): Promise<{ items: PublicListing[]; total: number }> {
+): Promise<{ items: PublicListingWithCategories[]; total: number }> {
   const supabase = createServiceClient();
 
   // 研究分野（細目）フィルタ：該当する求人 id の許可リストに解決する。
@@ -173,7 +181,15 @@ export async function searchListings(
   if (error) {
     throw new Error(`求人の検索に失敗しました: ${error.message}`);
   }
-  return { items: (data ?? []) as unknown as PublicListing[], total: count ?? 0 };
+
+  // カード用に、この1ページ分の求人が属する大分類だけをまとめて引く
+  const items = (data ?? []) as unknown as PublicListing[];
+  const catMap = await getCategoriesForListings(items.map((i) => i.id));
+  const withCategories: PublicListingWithCategories[] = items.map((i) => ({
+    ...i,
+    categories: catMap.get(i.id) ?? [],
+  }));
+  return { items: withCategories, total: count ?? 0 };
 }
 
 // LP「新着求人」用
