@@ -12,6 +12,8 @@ export type ListingInput = {
   title: string;
   summary: string;
   field: string;
+  // 研究分野マスター（細目）の選択。listings 列ではなく listing_research_fields に保存する。
+  field_ids: string[];
   job_type: string;
   employment_type: string;
   organization_type: string;
@@ -22,6 +24,9 @@ export type ListingInput = {
   post_language: string;
   poster_email: string;
 };
+
+// 1求人あたりの細目選択の上限（暴走防止）
+export const MAX_RESEARCH_FIELDS = 50;
 
 // 値はエラーコード（messages の post.errors.* キーに対応）
 export type FieldErrors = Partial<Record<keyof ListingInput | "_form", string>>;
@@ -36,6 +41,10 @@ export function parseListingForm(formData: FormData): {
     title: get("title"),
     summary: get("summary"),
     field: get("field"),
+    field_ids: formData
+      .getAll("rf")
+      .map((v) => String(v).trim())
+      .filter(Boolean),
     job_type: get("job_type"),
     employment_type: get("employment_type"),
     organization_type: get("organization_type"),
@@ -57,6 +66,14 @@ export function parseListingForm(formData: FormData): {
 
   if (!(FIELD_CODES as readonly string[]).includes(data.field)) {
     errors.field = "invalidChoice";
+  }
+
+  // 研究分野（細目）は新規掲載から必須。有効な id かどうかは呼び出し側（DBの
+  // マスター照合）で最終確認する。ここでは必須と上限だけをチェックする。
+  if (data.field_ids.length === 0) {
+    errors.field_ids = "required";
+  } else if (data.field_ids.length > MAX_RESEARCH_FIELDS) {
+    errors.field_ids = "tooManyFields";
   }
   if (!(JOB_TYPE_CODES as readonly string[]).includes(data.job_type)) {
     errors.job_type = "invalidChoice";

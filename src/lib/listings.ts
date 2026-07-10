@@ -8,6 +8,7 @@ import {
 import { PREFECTURE_CODES } from "./prefectures";
 import { expandSynonyms } from "./searchSynonyms";
 import { translateQuery } from "./translate";
+import { getListingIdsForFields } from "./researchFields";
 import { PUBLIC_LISTING_COLUMNS, type Listing, type PublicListing } from "./types";
 
 export const PAGE_SIZE = 20;
@@ -39,6 +40,9 @@ export type SearchFilters = {
   prefecture?: string;
   deadlineWithinDays?: number;
   keyword?: string;
+  // 研究分野マスターの細目 id。フィルタ内は OR（いずれかの細目に一致）、
+  // 他ファセットとは AND。大分類での絞り込みは UI 側で配下細目に展開して渡す。
+  researchFieldIds?: string[];
   page?: number;
 };
 
@@ -52,11 +56,25 @@ export async function searchListings(
 ): Promise<{ items: PublicListing[]; total: number }> {
   const supabase = createServiceClient();
 
+  // 研究分野（細目）フィルタ：該当する求人 id の許可リストに解決する。
+  // フィルタ内は OR（いずれかの細目に一致）、他ファセットとは AND。
+  // getListingIdsForFields は id を重複排除（distinct）して返すため、
+  // 複数細目に一致した求人が重複行になることはない。
+  const rfIds = filters.researchFieldIds ?? [];
+  let fieldAllowlist: string[] | null = null;
+  if (rfIds.length > 0) {
+    fieldAllowlist = await getListingIdsForFields(rfIds);
+    if (fieldAllowlist.length === 0) return { items: [], total: 0 };
+  }
+
   let query = supabase
     .from("listings")
     .select(PUBLIC_LISTING_COLUMNS, { count: "exact" })
     .eq("status", "published")
     .gte("deadline", todayUtc());
+
+  // 研究分野フィルタ：該当求人 id に限定（他ファセットとは AND）
+  if (fieldAllowlist) query = query.in("id", fieldAllowlist);
 
   // 不正なコードはエラーにせず無視する（URLを直接書き換えられた場合など）
   if (filters.field && (FIELD_CODES as readonly string[]).includes(filters.field)) {

@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import PostForm from "@/components/PostForm";
 import { Link } from "@/i18n/navigation";
 import { getListingByToken } from "@/lib/listings";
+import { getListingFieldIds, getResearchFieldTree } from "@/lib/researchFields";
 import {
   deleteListingAction,
   publishListingAction,
@@ -28,6 +29,10 @@ export default async function ManagePage({
 
   const t = await getTranslations();
   const updateWithToken = updateListingAction.bind(null, token);
+  const [fieldTree, fieldIds] = await Promise.all([
+    getResearchFieldTree(),
+    getListingFieldIds(listing.id),
+  ]);
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -79,10 +84,12 @@ export default async function ManagePage({
           <PostForm
             mode="edit"
             action={updateWithToken}
+            fieldTree={fieldTree}
             initial={{
               title: listing.title,
               summary: listing.summary,
               field: listing.field,
+              field_ids: fieldIds,
               job_type: listing.job_type,
               employment_type: listing.employment_type,
               organization_type: listing.organization_type,

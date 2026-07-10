@@ -142,7 +142,8 @@
       "invalidDeadline": "Deadline must be today or later (within 2 years).",
       "invalidChoice": "Invalid selection.",
       "rateLimited": "Too many submissions from this email address. Please try again tomorrow.",
-      "sendFailed": "Something went wrong. Please try again later."
+      "sendFailed": "Something went wrong. Please try again later.",
+      "tooManyFields": "Too many research fields (max 50)"
     }
   },
   "manage": {
@@ -217,5 +218,15 @@
     "en": "English",
     "zh": "中文",
     "ko": "한국어"
+  },
+  "researchFields": {
+    "label": "Research fields (detailed, multi-select)",
+    "help": "Select all applicable detailed fields (based on JREC-IN).",
+    "searchPlaceholder": "Filter by field name…",
+    "selectCategory": "Select all in this category",
+    "deselectCategory": "Clear this category",
+    "clearAll": "Clear all",
+    "remove": "Remove",
+    "noResults": "No matching fields"
   }
 }

@@ -142,7 +142,8 @@
       "invalidDeadline": "마감일은 오늘 이후(2년 이내)여야 합니다.",
       "invalidChoice": "잘못된 선택입니다.",
       "rateLimited": "해당 이메일로 너무 많이 제출했습니다. 내일 다시 시도해 주세요.",
-      "sendFailed": "처리에 실패했습니다. 잠시 후 다시 시도해 주세요."
+      "sendFailed": "처리에 실패했습니다. 잠시 후 다시 시도해 주세요.",
+      "tooManyFields": "연구 분야가 너무 많습니다(최대 50개)"
     }
   },
   "manage": {
@@ -217,5 +218,15 @@
     "en": "English",
     "zh": "中文",
     "ko": "한국어"
+  },
+  "researchFields": {
+    "label": "연구 분야(세부·복수 선택)",
+    "help": "JREC-IN 기준 세부 분야에서 해당되는 항목을 선택하세요(복수 가능).",
+    "searchPlaceholder": "분야명으로 검색…",
+    "selectCategory": "이 대분류 전체 선택",
+    "deselectCategory": "대분류 선택 해제",
+    "clearAll": "전체 해제",
+    "remove": "삭제",
+    "noResults": "해당하는 분야가 없습니다"
   }
 }

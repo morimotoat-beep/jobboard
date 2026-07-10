@@ -142,7 +142,8 @@
       "invalidDeadline": "截止日期须为今天以后（两年以内）。",
       "invalidChoice": "选择无效。",
       "rateLimited": "该邮箱提交过于频繁，请明天再试。",
-      "sendFailed": "处理失败，请稍后重试。"
+      "sendFailed": "处理失败，请稍后重试。",
+      "tooManyFields": "研究领域过多（最多50个）"
     }
   },
   "manage": {
@@ -217,5 +218,15 @@
     "en": "English",
     "zh": "中文",
     "ko": "한국어"
+  },
+  "researchFields": {
+    "label": "研究领域（细目·可多选）",
+    "help": "请从JREC-IN细目中选择适用项（可多选）。",
+    "searchPlaceholder": "按领域名称筛选…",
+    "selectCategory": "选择该大类全部",
+    "deselectCategory": "取消该大类",
+    "clearAll": "全部清除",
+    "remove": "移除",
+    "noResults": "没有匹配的领域"
   }
 }

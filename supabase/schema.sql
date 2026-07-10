@@ -104,3 +104,69 @@ alter table public.listings enable row level security;
 -- ※プロジェクトによっては新規テーブルへのデフォルト権限が無いため必須
 grant usage on schema public to service_role;
 grant select, insert, update, delete on public.listings to service_role;
+
+-- =============================================================
+-- 研究分野マスター（JREC-IN 準拠：大分類11 / 細目306、日英中韓）
+-- 詳細な差分は supabase/migrations/20260711000000_research_fields.sql を参照。
+-- listings と違い、マスター2表は分野名ラベルを公開表示するため anon SELECT を許可する。
+-- =============================================================
+create table if not exists public.research_categories (
+  id         text primary key,
+  sort_order int  not null,
+  name_ja text not null,
+  name_en text not null,
+  name_zh text not null,
+  name_ko text not null
+);
+
+create table if not exists public.research_fields (
+  id          text primary key,
+  category_id text not null references public.research_categories(id) on delete cascade,
+  sort_order  int  not null,
+  name_ja text not null,
+  name_en text not null,
+  name_zh text not null,
+  name_ko text not null
+);
+create index if not exists idx_research_fields_category
+  on public.research_fields(category_id);
+
+create table if not exists public.listing_research_fields (
+  listing_id uuid not null references public.listings(id) on delete cascade,
+  field_id   text not null references public.research_fields(id) on delete restrict,
+  primary key (listing_id, field_id)
+);
+create index if not exists idx_listing_research_fields_field
+  on public.listing_research_fields(field_id);
+
+alter table public.research_categories     enable row level security;
+alter table public.research_fields         enable row level security;
+alter table public.listing_research_fields enable row level security;
+
+grant select on public.research_categories     to anon, authenticated;
+grant select on public.research_fields         to anon, authenticated;
+grant select on public.listing_research_fields to anon, authenticated;
+
+drop policy if exists research_categories_public_read on public.research_categories;
+create policy research_categories_public_read
+  on public.research_categories for select to anon, authenticated using (true);
+
+drop policy if exists research_fields_public_read on public.research_fields;
+create policy research_fields_public_read
+  on public.research_fields for select to anon, authenticated using (true);
+
+drop policy if exists listing_research_fields_public_read on public.listing_research_fields;
+create policy listing_research_fields_public_read
+  on public.listing_research_fields for select to anon, authenticated
+  using (
+    exists (
+      select 1 from public.listings l
+      where l.id = listing_research_fields.listing_id
+        and l.status = 'published'
+        and l.deadline >= (now() at time zone 'utc')::date
+    )
+  );
+
+grant select, insert, update, delete on public.research_categories     to service_role;
+grant select, insert, update, delete on public.research_fields         to service_role;
+grant select, insert, update, delete on public.listing_research_fields to service_role;

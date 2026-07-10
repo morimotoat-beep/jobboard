@@ -8,6 +8,13 @@ import {
 } from "@/lib/filters";
 import { COUNTRY_CODES, getCountryName } from "@/lib/countries";
 import { PREFECTURES } from "@/lib/prefectures";
+import ResearchFieldSelect from "@/components/ResearchFieldSelect";
+
+type Named = { name_ja: string; name_en: string; name_zh: string; name_ko: string };
+type FieldTree = (Named & {
+  id: string;
+  fields: (Named & { id: string; category_id: string })[];
+})[];
 
 export type FilterValues = {
   field: string;
@@ -18,12 +25,19 @@ export type FilterValues = {
   prefecture: string;
   within: string;
   q: string;
+  researchFieldIds: string[];
 };
 
 const selectClass =
   "w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm focus:border-brand-primary focus:outline-none";
 
-export default function FilterForm({ values }: { values: FilterValues }) {
+export default function FilterForm({
+  values,
+  fieldTree,
+}: {
+  values: FilterValues;
+  fieldTree: FieldTree;
+}) {
   const locale = useLocale() as Locale;
   const t = useTranslations();
 
@@ -115,6 +129,17 @@ export default function FilterForm({ values }: { values: FilterValues }) {
             <option value="90">{t("search.within90")}</option>
           </select>
         </label>
+      </div>
+
+      <div className="mt-3">
+        <span className="mb-1 block text-sm font-medium">
+          {t("researchFields.label")}
+        </span>
+        <ResearchFieldSelect
+          tree={fieldTree}
+          name="rf"
+          initialSelected={values.researchFieldIds}
+        />
       </div>
 
       <div className="mt-3 flex flex-col gap-3 sm:flex-row">

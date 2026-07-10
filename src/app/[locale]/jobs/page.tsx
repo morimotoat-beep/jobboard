@@ -4,11 +4,18 @@ import FilterForm, { type FilterValues } from "@/components/FilterForm";
 import ListingCard from "@/components/ListingCard";
 import { Link } from "@/i18n/navigation";
 import { PAGE_SIZE, searchListings } from "@/lib/listings";
+import { getResearchFieldTree } from "@/lib/researchFields";
 
 type SearchParams = Record<string, string | string[] | undefined>;
 
 function first(v: string | string[] | undefined): string {
   return Array.isArray(v) ? (v[0] ?? "") : (v ?? "");
+}
+
+// repeated クエリ（?rf=a&rf=b）を配列で受ける
+function many(v: string | string[] | undefined): string[] {
+  if (Array.isArray(v)) return v.filter(Boolean);
+  return v ? [v] : [];
 }
 
 export default async function JobsPage({
@@ -22,6 +29,7 @@ export default async function JobsPage({
   setRequestLocale(locale);
   const sp = await searchParams;
   const t = await getTranslations();
+  const fieldTree = await getResearchFieldTree();
 
   const values: FilterValues = {
     field: first(sp.field),
@@ -32,6 +40,7 @@ export default async function JobsPage({
     prefecture: first(sp.pref),
     within: first(sp.within),
     q: first(sp.q),
+    researchFieldIds: many(sp.rf),
   };
   const page = Math.max(1, parseInt(first(sp.page), 10) || 1);
 
@@ -44,12 +53,13 @@ export default async function JobsPage({
     prefecture: values.prefecture,
     deadlineWithinDays: values.within ? parseInt(values.within, 10) : undefined,
     keyword: values.q,
+    researchFieldIds: values.researchFieldIds,
     page,
   });
   const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
 
   // ページ送りリンク用に現在のフィルターを引き継ぐ
-  const query: Record<string, string> = {};
+  const query: Record<string, string | string[]> = {};
   const entries: Record<string, string> = {
     field: values.field,
     job: values.jobType,
@@ -63,6 +73,7 @@ export default async function JobsPage({
   for (const [k, v] of Object.entries(entries)) {
     if (v) query[k] = v;
   }
+  if (values.researchFieldIds.length > 0) query.rf = values.researchFieldIds;
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -76,7 +87,7 @@ export default async function JobsPage({
             <p className="text-sm text-gray-500">{t("common.tagline")}</p>
           </div>
 
-          <FilterForm values={values} />
+          <FilterForm values={values} fieldTree={fieldTree} />
 
           <p className="mt-8 mb-3 text-sm font-medium text-gray-600">
             {t("search.results", { count: total })}
