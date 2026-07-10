@@ -1,0 +1,418 @@
+-- =============================================================
+-- 本番セットアップ：研究分野マスター（テーブル＋RLS＋データ）
+-- 本番 Supabase の SQL Editor に貼って Run するだけ。冪等（再実行可）。
+-- =============================================================
+
+-- =============================================================
+-- JREC-IN 準拠の研究分野マスター（大分類11 / 細目306、日英中韓）
+-- 求人(listings)と細目の多対多。すべて冪等（再実行可能）。
+--
+-- RLS 方針:
+--   research_categories / research_fields … anon に SELECT を許可
+--     （公開サイトのフォーム・求人カードで分野名ラベルを表示するため）。
+--     書き込みは service_role のみ。
+--   listing_research_fields … 求人の公開範囲に合わせて anon が読める
+--     （公開中かつ締切前の求人に紐づく行のみ）。書き込みは service_role のみ。
+-- =============================================================
+
+-- 大分類
+create table if not exists public.research_categories (
+  id         text primary key,          -- 例: 'life-science'
+  sort_order int  not null,
+  name_ja text not null,
+  name_en text not null,
+  name_zh text not null,
+  name_ko text not null
+);
+
+-- 細目
+create table if not exists public.research_fields (
+  id          text primary key,         -- 例: 'life-science-001'
+  category_id text not null references public.research_categories(id) on delete cascade,
+  sort_order  int  not null,
+  name_ja text not null,
+  name_en text not null,
+  name_zh text not null,
+  name_ko text not null
+);
+create index if not exists idx_research_fields_category
+  on public.research_fields(category_id);
+
+-- 求人と細目の多対多（求人側は field_id の配列だけ持つ）
+-- ※このプロジェクトの求人テーブルは `listings`（指示の jobs に相当）
+create table if not exists public.listing_research_fields (
+  listing_id uuid not null references public.listings(id) on delete cascade,
+  field_id   text not null references public.research_fields(id) on delete restrict,
+  primary key (listing_id, field_id)
+);
+create index if not exists idx_listing_research_fields_field
+  on public.listing_research_fields(field_id);
+
+-- =============================================================
+-- RLS
+-- =============================================================
+alter table public.research_categories     enable row level security;
+alter table public.research_fields         enable row level security;
+alter table public.listing_research_fields enable row level security;
+
+-- マスター2表：anon / authenticated に公開読み取りを許可
+grant select on public.research_categories to anon, authenticated;
+grant select on public.research_fields     to anon, authenticated;
+
+drop policy if exists research_categories_public_read on public.research_categories;
+create policy research_categories_public_read
+  on public.research_categories for select
+  to anon, authenticated
+  using (true);
+
+drop policy if exists research_fields_public_read on public.research_fields;
+create policy research_fields_public_read
+  on public.research_fields for select
+  to anon, authenticated
+  using (true);
+
+-- 中間表：公開中かつ締切前の求人に紐づく行のみ anon / authenticated が読める
+grant select on public.listing_research_fields to anon, authenticated;
+
+drop policy if exists listing_research_fields_public_read on public.listing_research_fields;
+create policy listing_research_fields_public_read
+  on public.listing_research_fields for select
+  to anon, authenticated
+  using (
+    exists (
+      select 1 from public.listings l
+      where l.id = listing_research_fields.listing_id
+        and l.status = 'published'
+        and l.deadline >= (now() at time zone 'utc')::date
+    )
+  );
+
+-- 書き込みは service role（Next.js サーバー）からのみ
+grant select, insert, update, delete on public.research_categories     to service_role;
+grant select, insert, update, delete on public.research_fields         to service_role;
+grant select, insert, update, delete on public.listing_research_fields to service_role;
+
+-- ============ seed: 大分類11 ============
+insert into public.research_categories (id, sort_order, name_ja, name_en, name_zh, name_ko) values
+  ('life-science', 1, 'ライフサイエンス', 'Life Science', '生命科学', '생명과학'),
+  ('informatics', 2, '情報通信', 'Informatics', '信息通信', '정보통신'),
+  ('environmental', 3, '環境', 'Environmental science', '环境', '환경'),
+  ('nanotech-materials', 4, 'ナノテク・材料', 'Nanotechnology/Materials', '纳米技术·材料', '나노기술·재료'),
+  ('energy', 5, 'エネルギー', 'Energy Engineering', '能源', '에너지'),
+  ('manufacturing', 6, 'ものづくり技術', 'Manufacturing Technology', '制造技术', '모노즈쿠리기술'),
+  ('social-infrastructure', 7, '社会基盤', 'Social Infrastructure', '社会基础', '사회기반'),
+  ('frontier', 8, 'フロンティア', 'Frontier Technology', '前沿技术', '프런티어'),
+  ('humanities-social', 9, '人文・社会', 'Humanities & Social Sciences', '人文·社会', '인문·사회'),
+  ('natural-science', 10, '自然科学一般', 'Natural Science', '自然科学一般', '자연과학 일반'),
+  ('others', 11, 'その他', 'Others', '其他', '기타')
+on conflict (id) do update set sort_order=excluded.sort_order, name_ja=excluded.name_ja, name_en=excluded.name_en, name_zh=excluded.name_zh, name_ko=excluded.name_ko;
+
+-- ============ seed: 細目306 ============
+insert into public.research_fields (id, category_id, sort_order, name_ja, name_en, name_zh, name_ko) values
+  ('life-science-001', 'life-science', 1, '植物栄養学、土壌学', 'Plant nutrition and soil science', '植物营养学、土壤学', '식물영양학·토양학'),
+  ('life-science-002', 'life-science', 2, '応用微生物学', 'Applied microbiology', '应用微生物学', '응용미생물학'),
+  ('life-science-003', 'life-science', 3, '応用生物化学', 'Applied biochemistry', '应用生物化学', '응용생물화학'),
+  ('life-science-004', 'life-science', 4, '生物有機化学', 'Bioorganic chemistry', '生物有机化学', '생물유기화학'),
+  ('life-science-005', 'life-science', 5, '食品科学', 'Food sciences', '食品科学', '식품과학'),
+  ('life-science-006', 'life-science', 6, '応用分子細胞生物学', 'Applied molecular and cellular biology', '应用分子细胞生物学', '응용분자세포생물학'),
+  ('life-science-007', 'life-science', 7, '森林科学', 'Forest science', '森林科学', '산림과학'),
+  ('life-science-008', 'life-science', 8, '木質科学', 'Wood science', '木材科学', '목질과학'),
+  ('life-science-009', 'life-science', 9, '水圏生産科学', 'Aquatic bioproduction science', '水圈生产科学', '수권생산과학'),
+  ('life-science-010', 'life-science', 10, '水圏生命科学', 'Aquatic life science', '水圈生命科学', '수권생명과학'),
+  ('life-science-011', 'life-science', 11, '動物生産科学', 'Animal production science', '动物生产科学', '동물생산과학'),
+  ('life-science-012', 'life-science', 12, '獣医学', 'Veterinary medical science', '兽医学', '수의학'),
+  ('life-science-013', 'life-science', 13, '動物生命科学', 'Animal life science', '动物生命科学', '동물생명과학'),
+  ('life-science-014', 'life-science', 14, '実験動物学', 'Laboratory animal science', '实验动物学', '실험동물학'),
+  ('life-science-015', 'life-science', 15, '分子生物学', 'Molecular biology', '分子生物学', '분자생물학'),
+  ('life-science-016', 'life-science', 16, '構造生物化学', 'Structural biochemistry', '结构生物化学', '구조생물화학'),
+  ('life-science-017', 'life-science', 17, '機能生物化学', 'Functional biochemistry', '功能生物化学', '기능생물화학'),
+  ('life-science-018', 'life-science', 18, '生物物理学', 'Biophysics', '生物物理学', '생물물리학'),
+  ('life-science-019', 'life-science', 19, 'ゲノム生物学', 'Genome biology', '基因组生物学', '유전체생물학'),
+  ('life-science-020', 'life-science', 20, 'システムゲノム科学', 'System genome science', '系统基因组科学', '시스템유전체과학'),
+  ('life-science-021', 'life-science', 21, '細胞生物学', 'Cell biology', '细胞生物学', '세포생물학'),
+  ('life-science-022', 'life-science', 22, '発生生物学', 'Developmental biology', '发育生物学', '발생생물학'),
+  ('life-science-023', 'life-science', 23, '植物分子、生理科学', 'Plant molecular biology and physiology', '植物分子、生理科学', '식물분자·생리과학'),
+  ('life-science-024', 'life-science', 24, '形態、構造', 'Morphology and anatomical structure', '形态、结构', '형태·구조'),
+  ('life-science-025', 'life-science', 25, '動物生理化学、生理学、行動学', 'Animal physiological chemistry, physiology and behavioral biology', '动物生理化学、生理学、行为学', '동물생리화학·생리학·행동학'),
+  ('life-science-026', 'life-science', 26, '遺伝学', 'Genetics', '遗传学', '유전학'),
+  ('life-science-027', 'life-science', 27, '進化生物学', 'Evolutionary biology', '进化生物学', '진화생물학'),
+  ('life-science-028', 'life-science', 28, '多様性生物学、分類学', 'Biodiversity and systematics', '多样性生物学、分类学', '다양성생물학·분류학'),
+  ('life-science-029', 'life-science', 29, '生態学、環境学', 'Ecology and environment', '生态学、环境学', '생태학·환경학'),
+  ('life-science-030', 'life-science', 30, '自然人類学', 'Physical anthropology', '自然人类学', '자연인류학'),
+  ('life-science-031', 'life-science', 31, '応用人類学', 'Applied anthropology', '应用人类学', '응용인류학'),
+  ('life-science-032', 'life-science', 32, '神経科学一般', 'Neuroscience-general', '神经科学一般', '신경과학 일반'),
+  ('life-science-033', 'life-science', 33, '神経形態学', 'Anatomy and histopathology of nervous system', '神经形态学', '신경형태학'),
+  ('life-science-034', 'life-science', 34, '神経機能学', 'Function of nervous system', '神经功能学', '신경기능학'),
+  ('life-science-035', 'life-science', 35, '薬系化学、創薬科学', 'Pharmaceutical chemistry and drug development sciences', '药物化学、创药科学', '약학화학·신약과학'),
+  ('life-science-036', 'life-science', 36, '薬系分析、物理化学', 'Pharmaceutical analytical chemistry and physicochemistry', '药物分析、物理化学', '약학분석·물리화학'),
+  ('life-science-037', 'life-science', 37, '薬系衛生、生物化学', 'Pharmaceutical hygiene and biochemistry', '药物卫生、生物化学', '약학위생·생물화학'),
+  ('life-science-038', 'life-science', 38, '薬理学', 'Pharmacology', '药理学', '약리학'),
+  ('life-science-039', 'life-science', 39, '環境、天然医薬資源学', 'Environmental and natural pharmaceutical resources', '环境、天然医药资源学', '환경·천연의약자원학'),
+  ('life-science-040', 'life-science', 40, '医療薬学', 'Clinical pharmacy', '医疗药学', '의료약학'),
+  ('life-science-041', 'life-science', 41, '解剖学', 'Anatomy', '解剖学', '해부학'),
+  ('life-science-042', 'life-science', 42, '生理学', 'Physiology', '生理学', '생리학'),
+  ('life-science-043', 'life-science', 43, '医化学', 'Medical biochemistry', '医化学', '의화학'),
+  ('life-science-044', 'life-science', 44, '病態医化学', 'Pathological biochemistry', '病态医化学', '병태의화학'),
+  ('life-science-045', 'life-science', 45, '人体病理学', 'Human pathology', '人体病理学', '인체병리학'),
+  ('life-science-046', 'life-science', 46, '実験病理学', 'Experimental pathology', '实验病理学', '실험병리학'),
+  ('life-science-047', 'life-science', 47, '寄生虫学', 'Parasitology', '寄生虫学', '기생충학'),
+  ('life-science-048', 'life-science', 48, '細菌学', 'Bacteriology', '细菌学', '세균학'),
+  ('life-science-049', 'life-science', 49, 'ウイルス学', 'Virology', '病毒学', '바이러스학'),
+  ('life-science-050', 'life-science', 50, '免疫学', 'Immunology', '免疫学', '면역학'),
+  ('life-science-051', 'life-science', 51, '腫瘍生物学', 'Tumor biology', '肿瘤生物学', '종양생물학'),
+  ('life-science-052', 'life-science', 52, '腫瘍診断、治療学', 'Tumor diagnostics and therapeutics', '肿瘤诊断、治疗学', '종양진단·치료학'),
+  ('life-science-053', 'life-science', 53, '基盤脳科学', 'Basic brain sciences', '基础脑科学', '기반뇌과학'),
+  ('life-science-054', 'life-science', 54, '認知脳科学', 'Cognitive and brain science', '认知脑科学', '인지뇌과학'),
+  ('life-science-055', 'life-science', 55, '病態神経科学', 'Pathophysiologic neuroscience', '病态神经科学', '병태신경과학'),
+  ('life-science-056', 'life-science', 56, '内科学一般', 'General internal medicine', '内科学一般', '내과학 일반'),
+  ('life-science-057', 'life-science', 57, '神経内科学', 'Neurology', '神经内科学', '신경내과학'),
+  ('life-science-058', 'life-science', 58, '精神神経科学', 'Psychiatry', '精神神经科学', '정신신경과학'),
+  ('life-science-059', 'life-science', 59, '放射線科学', 'Radiological sciences', '放射线科学', '방사선과학'),
+  ('life-science-060', 'life-science', 60, '胎児医学、小児成育学', 'Embryonic medicine and pediatrics', '胎儿医学、小儿成育学', '태아의학·소아성육학'),
+  ('life-science-061', 'life-science', 61, '消化器内科学', 'Gastroenterology', '消化内科学', '소화기내과학'),
+  ('life-science-062', 'life-science', 62, '循環器内科学', 'Cardiology', '循环内科学', '순환기내과학'),
+  ('life-science-063', 'life-science', 63, '呼吸器内科学', 'Respiratory medicine', '呼吸内科学', '호흡기내과학'),
+  ('life-science-064', 'life-science', 64, '腎臓内科学', 'Nephrology', '肾脏内科学', '신장내과학'),
+  ('life-science-065', 'life-science', 65, '皮膚科学', 'Dermatology', '皮肤科学', '피부과학'),
+  ('life-science-066', 'life-science', 66, '血液、腫瘍内科学', 'Hematology and medical oncology', '血液、肿瘤内科学', '혈액·종양내과학'),
+  ('life-science-067', 'life-science', 67, '膠原病、アレルギー内科学', 'Connective tissue disease and allergy', '胶原病、过敏内科学', '교원병·알레르기내과학'),
+  ('life-science-068', 'life-science', 68, '感染症内科学', 'Infectious disease medicine', '感染症内科学', '감염증내과학'),
+  ('life-science-069', 'life-science', 69, '代謝、内分泌学', 'Metabolism and endocrinology', '代谢、内分泌学', '대사·내분비학'),
+  ('life-science-070', 'life-science', 70, '外科学一般、小児外科学', 'General surgery and pediatric surgery', '外科学一般、小儿外科学', '외과학 일반·소아외과학'),
+  ('life-science-071', 'life-science', 71, '消化器外科学', 'Digestive surgery', '消化外科学', '소화기외과학'),
+  ('life-science-072', 'life-science', 72, '心臓血管外科学', 'Cardiovascular surgery', '心血管外科学', '심장혈관외과학'),
+  ('life-science-073', 'life-science', 73, '呼吸器外科学', 'Respiratory surgery', '呼吸外科学', '호흡기외과학'),
+  ('life-science-074', 'life-science', 74, '麻酔科学', 'Anesthesiology', '麻醉科学', '마취과학'),
+  ('life-science-075', 'life-science', 75, '救急医学', 'Emergency medicine', '急救医学', '응급의학'),
+  ('life-science-076', 'life-science', 76, '脳神経外科学', 'Neurosurgery', '脑神经外科学', '뇌신경외과학'),
+  ('life-science-077', 'life-science', 77, '整形外科学', 'Orthopedics', '骨科学（矫形外科）', '정형외과학'),
+  ('life-science-078', 'life-science', 78, '泌尿器科学', 'Urology', '泌尿科学', '비뇨기과학'),
+  ('life-science-079', 'life-science', 79, '産婦人科学', 'Obstetrics and gynecology', '妇产科学', '산부인과학'),
+  ('life-science-080', 'life-science', 80, '耳鼻咽喉科学', 'Otorhinolaryngology', '耳鼻咽喉科学', '이비인후과학'),
+  ('life-science-081', 'life-science', 81, '眼科学', 'Ophthalmology', '眼科学', '안과학'),
+  ('life-science-082', 'life-science', 82, '形成外科学', 'Plastic and reconstructive surgery', '整形外科学（成形）', '성형외과학'),
+  ('life-science-083', 'life-science', 83, '常態系口腔科学', 'Oral biological science', '口腔生物科学', '구강생물과학'),
+  ('life-science-084', 'life-science', 84, '病態系口腔科学', 'Oral pathobiological science', '口腔病态科学', '구강병태과학'),
+  ('life-science-085', 'life-science', 85, '保存治療系歯学', 'Conservative dentistry', '牙体保存治疗学', '보존치료계 치의학'),
+  ('life-science-086', 'life-science', 86, '口腔再生医学、歯科医用工学', 'Regenerative dentistry and dental engineering', '口腔再生医学、牙科医用工学', '구강재생의학·치과의용공학'),
+  ('life-science-087', 'life-science', 87, '補綴系歯学', 'Prosthodontics', '口腔修复学', '보철계 치의학'),
+  ('life-science-088', 'life-science', 88, '外科系歯学', 'Surgical dentistry', '口腔外科学', '외과계 치의학'),
+  ('life-science-089', 'life-science', 89, '成長、発育系歯学', 'Developmental dentistry', '生长、发育系牙科学', '성장·발육계 치의학'),
+  ('life-science-090', 'life-science', 90, '社会系歯学', 'Social dentistry', '社会牙科学', '사회계 치의학'),
+  ('life-science-091', 'life-science', 91, '医療管理学、医療系社会学', 'Medical management and medical sociology', '医疗管理学、医疗社会学', '의료관리학·의료사회학'),
+  ('life-science-092', 'life-science', 92, '衛生学、公衆衛生学分野：実験系を含む', 'Hygiene and public health: including laboratory approach', '卫生学、公共卫生学：含实验系', '위생학·공중보건학: 실험계 포함'),
+  ('life-science-093', 'life-science', 93, '衛生学、公衆衛生学分野：実験系を含まない', 'Hygiene and public health: excluding laboratory approach', '卫生学、公共卫生学：不含实验系', '위생학·공중보건학: 실험계 제외'),
+  ('life-science-094', 'life-science', 94, '法医学', 'Forensics medicine', '法医学', '법의학'),
+  ('life-science-095', 'life-science', 95, '基礎看護学', 'Fundamental of nursing', '基础护理学', '기초간호학'),
+  ('life-science-096', 'life-science', 96, '臨床看護学', 'Clinical nursing', '临床护理学', '임상간호학'),
+  ('life-science-097', 'life-science', 97, '生涯発達看護学', 'Lifelong developmental nursing', '生涯发展护理学', '생애발달간호학'),
+  ('life-science-098', 'life-science', 98, '高齢者看護学、地域看護学', 'Gerontological nursing and community health nursing', '老年护理学、社区护理学', '노인간호학·지역간호학'),
+  ('life-science-099', 'life-science', 99, 'リハビリテーション科学', 'Rehabilitation science', '康复科学', '재활과학'),
+  ('life-science-100', 'life-science', 100, 'スポーツ科学', 'Sports sciences', '体育运动科学', '스포츠과학'),
+  ('life-science-101', 'life-science', 101, '体育、身体教育学', 'Physical education, and physical and health education', '体育、身体教育学', '체육·신체교육학'),
+  ('life-science-102', 'life-science', 102, '栄養学、健康科学', 'Nutrition science and health science', '营养学、健康科学', '영양학·건강과학'),
+  ('life-science-103', 'life-science', 103, '生体医工学', 'Biomedical engineering', '生物医学工程', '생체의공학'),
+  ('life-science-104', 'life-science', 104, '生体材料学', 'Biomaterials', '生物材料学', '생체재료학'),
+  ('life-science-105', 'life-science', 105, '医用システム', 'Medical systems', '医用系统', '의용시스템'),
+  ('life-science-106', 'life-science', 106, '医療技術評価学', 'Medical technology assessment', '医疗技术评估学', '의료기술평가학'),
+  ('life-science-107', 'life-science', 107, '医療福祉工学', 'Medical assistive technology', '医疗福祉工学', '의료복지공학'),
+  ('informatics-001', 'informatics', 1, '機械力学、メカトロニクス', 'Mechanics and mechatronics', '机械力学、机电一体化', '기계역학·메카트로닉스'),
+  ('informatics-002', 'informatics', 2, 'ロボティクス、知能機械システム', 'Robotics and intelligent system', '机器人学、智能机械系统', '로보틱스·지능기계시스템'),
+  ('informatics-003', 'informatics', 3, '情報学基礎論', 'Theory of informatics', '信息学基础论', '정보학 기초론'),
+  ('informatics-004', 'informatics', 4, '数理情報学', 'Mathematical informatics', '数理信息学', '수리정보학'),
+  ('informatics-005', 'informatics', 5, '統計科学', 'Statistical science', '统计科学', '통계과학'),
+  ('informatics-006', 'informatics', 6, '計算機システム', 'Computer system', '计算机系统', '컴퓨터시스템'),
+  ('informatics-007', 'informatics', 7, 'ソフトウェア', 'Software', '软件', '소프트웨어'),
+  ('informatics-008', 'informatics', 8, '情報ネットワーク', 'Information network', '信息网络', '정보네트워크'),
+  ('informatics-009', 'informatics', 9, '情報セキュリティ', 'Information security', '信息安全', '정보보안'),
+  ('informatics-010', 'informatics', 10, 'データベース', 'Database', '数据库', '데이터베이스'),
+  ('informatics-011', 'informatics', 11, '高性能計算', 'High performance computing', '高性能计算', '고성능컴퓨팅'),
+  ('informatics-012', 'informatics', 12, '計算科学', 'Computational science', '计算科学', '계산과학'),
+  ('informatics-013', 'informatics', 13, '知覚情報処理', 'Perceptual information processing', '感知信息处理', '지각정보처리'),
+  ('informatics-014', 'informatics', 14, 'ヒューマンインタフェース、インタラクション', 'Human interface and interaction', '人机界面、交互', '휴먼인터페이스·인터랙션'),
+  ('informatics-015', 'informatics', 15, '知能情報学', 'Intelligent informatics', '智能信息学', '지능정보학'),
+  ('informatics-016', 'informatics', 16, 'ソフトコンピューティング', 'Soft computing', '软计算', '소프트컴퓨팅'),
+  ('informatics-017', 'informatics', 17, '知能ロボティクス', 'Intelligent robotics', '智能机器人学', '지능로보틱스'),
+  ('informatics-018', 'informatics', 18, '感性情報学', 'Kansei informatics', '感性信息学', '감성정보학'),
+  ('informatics-019', 'informatics', 19, '生命、健康、医療情報学', 'Life, health and medical informatics', '生命、健康、医疗信息学', '생명·건강·의료정보학'),
+  ('informatics-020', 'informatics', 20, 'ウェブ情報学、サービス情報学', 'Web informatics and service informatics', '网络信息学、服务信息学', '웹정보학·서비스정보학'),
+  ('informatics-021', 'informatics', 21, '学習支援システム', 'Learning support system', '学习支持系统', '학습지원시스템'),
+  ('informatics-022', 'informatics', 22, 'エンタテインメント、ゲーム情報学', 'Entertainment and game informatics', '娱乐、游戏信息学', '엔터테인먼트·게임정보학'),
+  ('environmental-001', 'environmental', 1, '遺伝育種科学', 'Science in plant genetics and breeding', '遗传育种科学', '유전육종과학'),
+  ('environmental-002', 'environmental', 2, '作物生産科学', 'Crop production science', '作物生产科学', '작물생산과학'),
+  ('environmental-003', 'environmental', 3, '園芸科学', 'Horticultural science', '园艺科学', '원예과학'),
+  ('environmental-004', 'environmental', 4, '植物保護科学', 'Plant protection science', '植物保护科学', '식물보호과학'),
+  ('environmental-005', 'environmental', 5, '昆虫科学', 'Insect science', '昆虫科学', '곤충과학'),
+  ('environmental-006', 'environmental', 6, '生物資源保全学', 'Conservation of biological resources', '生物资源保全学', '생물자원보전학'),
+  ('environmental-007', 'environmental', 7, 'ランドスケープ科学', 'Landscape science', '景观科学', '랜드스케이프과학'),
+  ('environmental-008', 'environmental', 8, '農業社会構造', 'Rural sociology and agricultural structure', '农业社会结构', '농업사회구조'),
+  ('environmental-009', 'environmental', 9, '地域環境工学、農村計画学', 'Rural environmental engineering and planning', '地区环境工程、农村规划学', '지역환경공학·농촌계획학'),
+  ('environmental-010', 'environmental', 10, '農業環境工学、農業情報工学', 'Agricultural environmental engineering and agricultural information engineering', '农业环境工程、农业信息工程', '농업환경공학·농업정보공학'),
+  ('environmental-011', 'environmental', 11, '環境農学', 'Environmental agriculture', '环境农学', '환경농학'),
+  ('environmental-012', 'environmental', 12, '環境動態解析', 'Environmental dynamic analysis', '环境动态解析', '환경동태해석'),
+  ('environmental-013', 'environmental', 13, '放射線影響', 'Radiation influence', '辐射影响', '방사선영향'),
+  ('environmental-014', 'environmental', 14, '化学物質影響', 'Chemical substance influence on environment', '化学物质影响', '화학물질영향'),
+  ('environmental-015', 'environmental', 15, '環境影響評価', 'Environmental impact assessment', '环境影响评价', '환경영향평가'),
+  ('environmental-016', 'environmental', 16, '環境負荷、リスク評価管理', 'Environmental load and risk assessment', '环境负荷、风险评价管理', '환경부하·리스크평가관리'),
+  ('environmental-017', 'environmental', 17, '環境負荷低減技術、保全修復技術', 'Environmental load reduction and remediation', '环境负荷降低技术、保全修复技术', '환경부하저감기술·보전복원기술'),
+  ('environmental-018', 'environmental', 18, '環境材料、リサイクル技術', 'Environmental materials and recycle technology', '环境材料、回收技术', '환경재료·재활용기술'),
+  ('environmental-019', 'environmental', 19, '自然共生システム', 'Social-ecological systems', '自然共生系统', '자연공생시스템'),
+  ('environmental-020', 'environmental', 20, '循環型社会システム', 'Sound material-cycle social systems', '循环型社会系统', '순환형사회시스템'),
+  ('environmental-021', 'environmental', 21, '環境政策、環境配慮型社会', 'Environmental policy and social systems', '环境政策、环境友好型社会', '환경정책·환경배려형사회'),
+  ('nanotech-materials-001', 'nanotech-materials', 1, '金属材料物性', 'Metallic material properties', '金属材料物性', '금속재료물성'),
+  ('nanotech-materials-002', 'nanotech-materials', 2, '無機材料、物性', 'Inorganic materials and properties', '无机材料、物性', '무기재료·물성'),
+  ('nanotech-materials-003', 'nanotech-materials', 3, '複合材料、界面', 'Composite materials and interfaces', '复合材料、界面', '복합재료·계면'),
+  ('nanotech-materials-004', 'nanotech-materials', 4, '構造材料、機能材料', 'Structural materials and functional materials', '结构材料、功能材料', '구조재료·기능재료'),
+  ('nanotech-materials-005', 'nanotech-materials', 5, '材料加工、組織制御', 'Material processing and microstructure control', '材料加工、组织控制', '재료가공·조직제어'),
+  ('nanotech-materials-006', 'nanotech-materials', 6, '金属生産、資源生産', 'Metals production and resources production', '金属生产、资源生产', '금속생산·자원생산'),
+  ('nanotech-materials-007', 'nanotech-materials', 7, 'ナノ構造化学', 'Nanometer-scale chemistry', '纳米结构化学', '나노구조화학'),
+  ('nanotech-materials-008', 'nanotech-materials', 8, 'ナノ構造物理', 'Nanostructural physics', '纳米结构物理', '나노구조물리'),
+  ('nanotech-materials-009', 'nanotech-materials', 9, 'ナノ材料科学', 'Nanomaterials', '纳米材料科学', '나노재료과학'),
+  ('nanotech-materials-010', 'nanotech-materials', 10, 'ナノバイオサイエンス', 'Nanobioscience', '纳米生物科学', '나노바이오사이언스'),
+  ('nanotech-materials-011', 'nanotech-materials', 11, 'ナノマイクロシステム', 'Nano/micro-systems', '纳米微系统', '나노마이크로시스템'),
+  ('nanotech-materials-012', 'nanotech-materials', 12, '応用物性', 'Applied physical properties', '应用物性', '응용물성'),
+  ('nanotech-materials-013', 'nanotech-materials', 13, '薄膜、表面界面物性', 'Thin film/surface and interfacial physical properties', '薄膜、表面界面物性', '박막·표면계면물성'),
+  ('nanotech-materials-014', 'nanotech-materials', 14, '応用物理一般', 'Applied condensed matter physics', '应用物理一般', '응용물리 일반'),
+  ('nanotech-materials-015', 'nanotech-materials', 15, '結晶工学', 'Crystal engineering', '晶体工程', '결정공학'),
+  ('nanotech-materials-016', 'nanotech-materials', 16, '光工学、光量子科学', 'Optical engineering and photon science', '光学工程、光量子科学', '광공학·광양자과학'),
+  ('nanotech-materials-017', 'nanotech-materials', 17, '基礎物理化学', 'Fundamental physical chemistry', '基础物理化学', '기초물리화학'),
+  ('nanotech-materials-018', 'nanotech-materials', 18, '機能物性化学', 'Functional solid state chemistry', '功能物性化学', '기능물성화학'),
+  ('nanotech-materials-019', 'nanotech-materials', 19, '構造有機化学、物理有機化学', 'Structural organic chemistry and physical organic chemistry', '结构有机化学、物理有机化学', '구조유기화학·물리유기화학'),
+  ('nanotech-materials-020', 'nanotech-materials', 20, '有機合成化学', 'Synthetic organic chemistry', '有机合成化学', '유기합성화학'),
+  ('nanotech-materials-021', 'nanotech-materials', 21, '無機・錯体化学', 'Inorganic/coordination chemistry', '无机、配位化学', '무기·착체화학'),
+  ('nanotech-materials-022', 'nanotech-materials', 22, '分析化学', 'Analytical chemistry', '分析化学', '분석화학'),
+  ('nanotech-materials-023', 'nanotech-materials', 23, 'グリーンサステイナブルケミストリー、環境化学', 'Green sustainable chemistry and environmental chemistry', '绿色可持续化学、环境化学', '그린 지속가능화학·환경화학'),
+  ('nanotech-materials-024', 'nanotech-materials', 24, '高分子化学', 'Polymer chemistry', '高分子化学', '고분자화학'),
+  ('nanotech-materials-025', 'nanotech-materials', 25, '高分子材料', 'Polymer materials', '高分子材料', '고분자재료'),
+  ('nanotech-materials-026', 'nanotech-materials', 26, '有機機能材料', 'Organic functional materials', '有机功能材料', '유기기능재료'),
+  ('nanotech-materials-027', 'nanotech-materials', 27, '無機物質、無機材料化学', 'Inorganic compounds and inorganic materials chemistry', '无机物质、无机材料化学', '무기물질·무기재료화학'),
+  ('nanotech-materials-028', 'nanotech-materials', 28, 'エネルギー化学', 'Energy chemistry', '能源化学', '에너지화학'),
+  ('nanotech-materials-029', 'nanotech-materials', 29, '生体化学', 'Bio chemistry', '生物化学', '생체화학'),
+  ('nanotech-materials-030', 'nanotech-materials', 30, '生物分子化学', 'Chemistry and chemical methodology of biomolecules', '生物分子化学', '생물분자화학'),
+  ('nanotech-materials-031', 'nanotech-materials', 31, 'ケミカルバイオロジー', 'Chemical biology', '化学生物学', '케미컬바이올로지'),
+  ('energy-001', 'energy', 1, 'プラズマ科学', 'Fundamental plasma', '等离子体科学', '플라즈마과학'),
+  ('energy-002', 'energy', 2, '核融合学', 'Nuclear fusion', '核聚变学', '핵융합학'),
+  ('energy-003', 'energy', 3, 'プラズマ応用科学', 'Applied plasma science', '等离子体应用科学', '플라즈마응용과학'),
+  ('energy-004', 'energy', 4, '原子力工学', 'Nuclear engineering', '原子能工程', '원자력공학'),
+  ('energy-005', 'energy', 5, '地球資源工学、エネルギー学', 'Earth resource engineering, Energy sciences', '地球资源工程、能源学', '지구자원공학·에너지학'),
+  ('energy-006', 'energy', 6, '量子ビーム科学', 'Quantum beam science', '量子束科学', '양자빔과학'),
+  ('manufacturing-001', 'manufacturing', 1, '材料力学、機械材料', 'Mechanics of materials and materials', '材料力学、机械材料', '재료역학·기계재료'),
+  ('manufacturing-002', 'manufacturing', 2, '加工学、生産工学', 'Manufacturing and production engineering', '加工学、生产工学', '가공학·생산공학'),
+  ('manufacturing-003', 'manufacturing', 3, '設計工学', 'Design engineering', '设计工学', '설계공학'),
+  ('manufacturing-004', 'manufacturing', 4, '機械要素、トライボロジー', 'Machine elements and tribology', '机械要素、摩擦学', '기계요소·트라이볼로지'),
+  ('manufacturing-005', 'manufacturing', 5, '流体工学', 'Fluid engineering', '流体工学', '유체공학'),
+  ('manufacturing-006', 'manufacturing', 6, '熱工学', 'Thermal engineering', '热工学', '열공학'),
+  ('manufacturing-007', 'manufacturing', 7, '電力工学', 'Power engineering', '电力工学', '전력공학'),
+  ('manufacturing-008', 'manufacturing', 8, '通信工学', 'Communication and network engineering', '通信工学', '통신공학'),
+  ('manufacturing-009', 'manufacturing', 9, '計測工学', 'Measurement engineering', '计测工学', '계측공학'),
+  ('manufacturing-010', 'manufacturing', 10, '制御、システム工学', 'Control and system engineering', '控制、系统工学', '제어·시스템공학'),
+  ('manufacturing-011', 'manufacturing', 11, '電気電子材料工学', 'Electric and electronic materials', '电气电子材料工学', '전기전자재료공학'),
+  ('manufacturing-012', 'manufacturing', 12, '電子デバイス、電子機器', 'Electron device and electronic equipment', '电子器件、电子设备', '전자디바이스·전자기기'),
+  ('manufacturing-013', 'manufacturing', 13, '移動現象、単位操作', 'Transport phenomena and unit operations', '传递现象、单元操作', '이동현상·단위조작'),
+  ('manufacturing-014', 'manufacturing', 14, '反応工学、プロセスシステム工学', 'Chemical reaction and process system engineering', '反应工学、过程系统工学', '반응공학·프로세스시스템공학'),
+  ('manufacturing-015', 'manufacturing', 15, '触媒プロセス、資源化学プロセス', 'Catalyst and resource chemical process', '催化过程、资源化学过程', '촉매프로세스·자원화학프로세스'),
+  ('manufacturing-016', 'manufacturing', 16, 'バイオ機能応用、バイオプロセス工学', 'Biofunction and bioprocess engineering', '生物功能应用、生物过程工学', '바이오기능응용·바이오프로세스공학'),
+  ('social-infrastructure-001', 'social-infrastructure', 1, '土木材料、施工、建設マネジメント', 'Civil engineering material, execution and construction management', '土木材料、施工、建设管理', '토목재료·시공·건설매니지먼트'),
+  ('social-infrastructure-002', 'social-infrastructure', 2, '構造工学、地震工学', 'Structure engineering and earthquake engineering', '结构工程、地震工程', '구조공학·지진공학'),
+  ('social-infrastructure-003', 'social-infrastructure', 3, '地盤工学', 'Geotechnical engineering', '岩土工程', '지반공학'),
+  ('social-infrastructure-004', 'social-infrastructure', 4, '水工学', 'Hydroengineering', '水工学', '수공학'),
+  ('social-infrastructure-005', 'social-infrastructure', 5, '土木計画学、交通工学', 'Civil engineering plan and transportation engineering', '土木规划学、交通工程', '토목계획학·교통공학'),
+  ('social-infrastructure-006', 'social-infrastructure', 6, '土木環境システム', 'Environmental systems for civil engineering', '土木环境系统', '토목환경시스템'),
+  ('social-infrastructure-007', 'social-infrastructure', 7, '建築構造、材料', 'Building structures and materials', '建筑结构、材料', '건축구조·재료'),
+  ('social-infrastructure-008', 'social-infrastructure', 8, '建築環境、建築設備', 'Architectural environment and building equipment', '建筑环境、建筑设备', '건축환경·건축설비'),
+  ('social-infrastructure-009', 'social-infrastructure', 9, '建築計画、都市計画', 'Architectural planning and city planning', '建筑规划、城市规划', '건축계획·도시계획'),
+  ('social-infrastructure-010', 'social-infrastructure', 10, '建築史、意匠', 'Architectural history and design', '建筑史、意匠（设计）', '건축사·의장'),
+  ('social-infrastructure-011', 'social-infrastructure', 11, '社会システム工学', 'Social systems engineering', '社会系统工程', '사회시스템공학'),
+  ('social-infrastructure-012', 'social-infrastructure', 12, '安全工学', 'Safety engineering', '安全工程', '안전공학'),
+  ('social-infrastructure-013', 'social-infrastructure', 13, '防災工学', 'Disaster prevention engineering', '防灾工程', '방재공학'),
+  ('frontier-001', 'frontier', 1, '航空宇宙工学', 'Aerospace engineering', '航空航天工程', '항공우주공학'),
+  ('frontier-002', 'frontier', 2, '船舶海洋工学', 'Marine engineering', '船舶海洋工程', '선박해양공학'),
+  ('humanities-social-001', 'humanities-social', 1, '哲学、倫理学', 'Philosophy and ethics', '哲学、伦理学', '철학·윤리학'),
+  ('humanities-social-002', 'humanities-social', 2, '中国哲学、印度哲学、仏教学', 'Chinese philosophy, Indian philosophy and Buddhist philosophy', '中国哲学、印度哲学、佛教学', '중국철학·인도철학·불교학'),
+  ('humanities-social-003', 'humanities-social', 3, '宗教学', 'Religious studies', '宗教学', '종교학'),
+  ('humanities-social-004', 'humanities-social', 4, '思想史', 'History of thought', '思想史', '사상사'),
+  ('humanities-social-005', 'humanities-social', 5, '美学、芸術論', 'Aesthetics and art studies', '美学、艺术论', '미학·예술론'),
+  ('humanities-social-006', 'humanities-social', 6, '美術史', 'History of arts', '美术史', '미술사'),
+  ('humanities-social-007', 'humanities-social', 7, '芸術実践論', 'Theory of art practice', '艺术实践论', '예술실천론'),
+  ('humanities-social-008', 'humanities-social', 8, '科学社会学、科学技術史', 'Sociology of science, history of science and technology', '科学社会学、科学技术史', '과학사회학·과학기술사'),
+  ('humanities-social-009', 'humanities-social', 9, '日本文学', 'Japanese literature', '日本文学', '일본문학'),
+  ('humanities-social-010', 'humanities-social', 10, '中国文学', 'Chinese literature', '中国文学', '중국문학'),
+  ('humanities-social-011', 'humanities-social', 11, '英文学、英語圏文学', 'English literature and literature in the English language', '英国文学、英语圈文学', '영문학·영어권문학'),
+  ('humanities-social-012', 'humanities-social', 12, 'ヨーロッパ文学', 'European literature', '欧洲文学', '유럽문학'),
+  ('humanities-social-013', 'humanities-social', 13, '文学一般', 'Literature in general', '文学一般', '문학 일반'),
+  ('humanities-social-014', 'humanities-social', 14, '言語学', 'Linguistics', '语言学', '언어학'),
+  ('humanities-social-015', 'humanities-social', 15, '日本語学', 'Japanese linguistics', '日语学', '일본어학'),
+  ('humanities-social-016', 'humanities-social', 16, '英語学', 'English linguistics', '英语学', '영어학'),
+  ('humanities-social-017', 'humanities-social', 17, '日本語教育', 'Japanese language education', '日语教育', '일본어교육'),
+  ('humanities-social-018', 'humanities-social', 18, '外国語教育', 'Foreign language education', '外语教育', '외국어교육'),
+  ('humanities-social-019', 'humanities-social', 19, '史学一般', 'Historical studies in general', '史学一般', '사학 일반'),
+  ('humanities-social-020', 'humanities-social', 20, '日本史', 'Japanese history', '日本史', '일본사'),
+  ('humanities-social-021', 'humanities-social', 21, 'アジア史、アフリカ史', 'History of Asia and Africa', '亚洲史、非洲史', '아시아사·아프리카사'),
+  ('humanities-social-022', 'humanities-social', 22, 'ヨーロッパ史、アメリカ史', 'History of Europe and America', '欧洲史、美洲史', '유럽사·아메리카사'),
+  ('humanities-social-023', 'humanities-social', 23, '考古学', 'Archaeology', '考古学', '고고학'),
+  ('humanities-social-024', 'humanities-social', 24, '文化財科学', 'Cultural assets study', '文化遗产科学', '문화재과학'),
+  ('humanities-social-025', 'humanities-social', 25, '博物館学', 'Museology', '博物馆学', '박물관학'),
+  ('humanities-social-026', 'humanities-social', 26, '地理学', 'Geography', '地理学', '지리학'),
+  ('humanities-social-027', 'humanities-social', 27, '人文地理学', 'Human geography', '人文地理学', '인문지리학'),
+  ('humanities-social-028', 'humanities-social', 28, '文化人類学、民俗学', 'Cultural anthropology and folklore', '文化人类学、民俗学', '문화인류학·민속학'),
+  ('humanities-social-029', 'humanities-social', 29, '基礎法学', 'Legal theory and history', '基础法学', '기초법학'),
+  ('humanities-social-030', 'humanities-social', 30, '公法学', 'Public law', '公法学', '공법학'),
+  ('humanities-social-031', 'humanities-social', 31, '国際法学', 'International law', '国际法学', '국제법학'),
+  ('humanities-social-032', 'humanities-social', 32, '社会法学', 'Social law', '社会法学', '사회법학'),
+  ('humanities-social-033', 'humanities-social', 33, '刑事法学', 'Criminal law', '刑事法学', '형사법학'),
+  ('humanities-social-034', 'humanities-social', 34, '民事法学', 'Civil law', '民事法学', '민사법학'),
+  ('humanities-social-035', 'humanities-social', 35, '新領域法学', 'New fields of law', '新领域法学', '신영역법학'),
+  ('humanities-social-036', 'humanities-social', 36, '政治学', 'Politics', '政治学', '정치학'),
+  ('humanities-social-037', 'humanities-social', 37, '国際関係論', 'International relations', '国际关系论', '국제관계론'),
+  ('humanities-social-038', 'humanities-social', 38, '理論経済学', 'Economic theory', '理论经济学', '이론경제학'),
+  ('humanities-social-039', 'humanities-social', 39, '経済学説、経済思想', 'Economic doctrines and economic thought', '经济学说、经济思想', '경제학설·경제사상'),
+  ('humanities-social-040', 'humanities-social', 40, '経済統計', 'Economic statistics', '经济统计', '경제통계'),
+  ('humanities-social-041', 'humanities-social', 41, '経済政策', 'Economic policy', '经济政策', '경제정책'),
+  ('humanities-social-042', 'humanities-social', 42, '公共経済、労働経済', 'Public economics and labor economics', '公共经济、劳动经济', '공공경제·노동경제'),
+  ('humanities-social-043', 'humanities-social', 43, '金融、ファイナンス', 'Money and finance', '金融、财务', '금융·파이낸스'),
+  ('humanities-social-044', 'humanities-social', 44, '経済史', 'Economic history', '经济史', '경제사'),
+  ('humanities-social-045', 'humanities-social', 45, '経営学', 'Business administration', '经营学', '경영학'),
+  ('humanities-social-046', 'humanities-social', 46, '商学', 'Commerce', '商学', '상학'),
+  ('humanities-social-047', 'humanities-social', 47, '会計学', 'Accounting', '会计学', '회계학'),
+  ('humanities-social-048', 'humanities-social', 48, '社会学', 'Sociology', '社会学', '사회학'),
+  ('humanities-social-049', 'humanities-social', 49, '社会福祉学', 'Social welfare', '社会福祉学', '사회복지학'),
+  ('humanities-social-050', 'humanities-social', 50, '家政学、生活科学', 'Family and consumer sciences, and culture and living', '家政学、生活科学', '가정학·생활과학'),
+  ('humanities-social-051', 'humanities-social', 51, '教育学', 'Education', '教育学', '교육학'),
+  ('humanities-social-052', 'humanities-social', 52, '教育社会学', 'Sociology of education', '教育社会学', '교육사회학'),
+  ('humanities-social-053', 'humanities-social', 53, '子ども学、保育学', 'Childhood and nursery/pre-school education', '儿童学、保育学', '아동학·보육학'),
+  ('humanities-social-054', 'humanities-social', 54, '教科教育学、初等中等教育学', 'Education on school subjects and primary/secondary education', '学科教育学、初等中等教育学', '교과교육학·초등중등교육학'),
+  ('humanities-social-055', 'humanities-social', 55, '高等教育学', 'Tertiary education', '高等教育学', '고등교육학'),
+  ('humanities-social-056', 'humanities-social', 56, '特別支援教育', 'Special needs education', '特殊支援教育', '특수교육'),
+  ('humanities-social-057', 'humanities-social', 57, '教育工学', 'Educational technology', '教育工学', '교육공학'),
+  ('humanities-social-058', 'humanities-social', 58, '科学教育', 'Science education', '科学教育', '과학교육'),
+  ('humanities-social-059', 'humanities-social', 59, '社会心理学', 'Social psychology', '社会心理学', '사회심리학'),
+  ('humanities-social-060', 'humanities-social', 60, '教育心理学', 'Educational psychology', '教育心理学', '교육심리학'),
+  ('humanities-social-061', 'humanities-social', 61, '臨床心理学', 'Clinical psychology', '临床心理学', '임상심리학'),
+  ('humanities-social-062', 'humanities-social', 62, '実験心理学', 'Experimental psychology', '实验心理学', '실험심리학'),
+  ('humanities-social-063', 'humanities-social', 63, '食料農業経済', 'Agricultural and food economics', '食品农业经济', '식료농업경제'),
+  ('humanities-social-064', 'humanities-social', 64, '地域研究', 'Area studies', '区域研究', '지역연구'),
+  ('humanities-social-065', 'humanities-social', 65, '観光学', 'Tourism studies', '旅游学', '관광학'),
+  ('humanities-social-066', 'humanities-social', 66, 'ジェンダー', 'Gender studies', '性别研究', '젠더'),
+  ('humanities-social-067', 'humanities-social', 67, 'デザイン学', 'Design', '设计学', '디자인학'),
+  ('humanities-social-068', 'humanities-social', 68, '図書館情報学、人文社会情報学', 'Library and information science, humanistic and social informatics', '图书馆情报学、人文社会信息学', '도서관정보학·인문사회정보학'),
+  ('humanities-social-069', 'humanities-social', 69, '認知科学', 'Cognitive science', '认知科学', '인지과학'),
+  ('natural-science-001', 'natural-science', 1, '代数学', 'Algebra', '代数学', '대수학'),
+  ('natural-science-002', 'natural-science', 2, '幾何学', 'Geometry', '几何学', '기하학'),
+  ('natural-science-003', 'natural-science', 3, '基礎解析学', 'Basic analysis', '基础解析学', '기초해석학'),
+  ('natural-science-004', 'natural-science', 4, '数理解析学', 'Mathematical analysis', '数理解析学', '수리해석학'),
+  ('natural-science-005', 'natural-science', 5, '数学基礎', 'Basic mathematics', '数学基础', '수학기초'),
+  ('natural-science-006', 'natural-science', 6, '応用数学、統計数学', 'Applied mathematics and statistics', '应用数学、统计数学', '응용수학·통계수학'),
+  ('natural-science-007', 'natural-science', 7, '数理物理、物性基礎', 'Mathematical physics and fundamental theory of condensed matter physics', '数理物理、物性基础', '수리물리·물성기초'),
+  ('natural-science-008', 'natural-science', 8, '半導体、光物性、原子物理', 'Semiconductors, optical properties of condensed matter and atomic physics', '半导体、光物性、原子物理', '반도체·광물성·원자물리'),
+  ('natural-science-009', 'natural-science', 9, '磁性、超伝導、強相関系', 'Magnetism, superconductivity and strongly correlated systems', '磁性、超导、强关联系', '자성·초전도·강상관계'),
+  ('natural-science-010', 'natural-science', 10, '生物物理、化学物理、ソフトマターの物理', 'Biophysics, chemical physics and soft matter physics', '生物物理、化学物理、软物质物理', '생물물리·화학물리·소프트매터물리'),
+  ('natural-science-011', 'natural-science', 11, '素粒子、原子核、宇宙線、宇宙物理にする理論', 'Theoretical studies related to particle-, nuclear-, cosmic ray and astro-physics', '粒子、原子核、宇宙线、宇宙物理相关理论', '소립자·원자핵·우주선·우주물리 관련 이론'),
+  ('natural-science-012', 'natural-science', 12, '素粒子、原子核、宇宙線、宇宙物理にする実験', 'Experimental studies related to particle-, nuclear-, cosmic ray and astro-physics', '粒子、原子核、宇宙线、宇宙物理相关实验', '소립자·원자핵·우주선·우주물리 관련 실험'),
+  ('natural-science-013', 'natural-science', 13, '天文学', 'Astronomy', '天文学', '천문학'),
+  ('natural-science-014', 'natural-science', 14, '宇宙惑星科学', 'Space and planetary sciences', '宇宙行星科学', '우주행성과학'),
+  ('natural-science-015', 'natural-science', 15, '大気水圏科学', 'Atmospheric and hydrospheric sciences', '大气水圈科学', '대기수권과학'),
+  ('natural-science-016', 'natural-science', 16, '地球人間圏科学', 'Human geosciences', '地球人类圈科学', '지구인간권과학'),
+  ('natural-science-017', 'natural-science', 17, '固体地球科学', 'Solid earth sciences', '固体地球科学', '고체지구과학'),
+  ('natural-science-018', 'natural-science', 18, '地球生命科学', 'Biogeosciences', '地球生命科学', '지구생명과학'),
+  ('others-001', 'others', 1, 'その他', 'Others', '其他', '기타')
+on conflict (id) do update set category_id=excluded.category_id, sort_order=excluded.sort_order, name_ja=excluded.name_ja, name_en=excluded.name_en, name_zh=excluded.name_zh, name_ko=excluded.name_ko;

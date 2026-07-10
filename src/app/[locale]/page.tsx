@@ -6,7 +6,7 @@ import JobSitesPreview from "@/components/JobSitesPreview";
 import JobsCarousel from "@/components/JobsCarousel";
 import RegionMap from "@/components/RegionMap";
 import Reveal from "@/components/Reveal";
-import WorldMap from "@/components/WorldMap";
+import WorldGlobe from "@/components/WorldGlobe";
 import { Link } from "@/i18n/navigation";
 import { getCountryCounts, getLatestListings } from "@/lib/listings";
 
@@ -188,7 +188,7 @@ export default async function HomePage({
           }
         >
           <Reveal delay={150}>
-            <WorldMap counts={counts} />
+            <WorldGlobe counts={counts} />
           </Reveal>
           {Object.keys(counts).length === 0 && (
             <p className="mx-auto mt-6 max-w-xl text-center text-sm text-gray-500">

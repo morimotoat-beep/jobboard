@@ -21,7 +21,8 @@
       "heading": "Positions from around the world",
       "desc": "Countries with open positions are highlighted in green. Start exploring from wherever you want to go.",
       "badge": "{name}: {count}",
-      "empty": "No openings yet. Once jobs are posted, you'll see per-country counts on this map."
+      "empty": "No openings yet. Once jobs are posted, you'll see per-country counts on this map.",
+      "dragHint": "Drag or swipe to spin the globe"
     },
     "features": {
       "heading": "Why use this site",
