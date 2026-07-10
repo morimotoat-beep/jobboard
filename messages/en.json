@@ -14,10 +14,11 @@
       "sub": "Posting and searching are completely free. From universities and research institutes to companies — a job board connecting research careers worldwide.",
       "trust": "We simply connect researchers with openings. Every application step happens on the hiring organization's official page — we never hold your personal information.",
       "ctaFind": "Find positions",
-      "ctaPost": "Post a job"
+      "ctaPost": "Post a job",
+      "ctaNote": "No sign-up required — done in 3 minutes"
     },
     "map": {
-      "heading": "Research positions from around the world",
+      "heading": "Positions from around the world",
       "desc": "Countries with open positions are highlighted in green. Start exploring from wherever you want to go.",
       "badge": "{name}: {count}",
       "empty": "No openings yet. Once jobs are posted, you'll see per-country counts on this map."

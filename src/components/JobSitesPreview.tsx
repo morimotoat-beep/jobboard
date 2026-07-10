@@ -3,9 +3,11 @@ import { JOB_SITE_CATEGORIES } from "@/lib/jobSites";
 import type { Locale } from "@/lib/filters";
 
 // 各サイトのファビコンをロゴとして使う（外部画像・キー不要）
-function faviconUrl(url: string): string {
+// iconDomain が指定されていればそのドメインから取得する（例: トラッキングURLだが
+// 実サービスのファビコンを出したいケース）。
+function faviconUrl(url: string, iconDomain?: string): string {
   try {
-    const host = new URL(url).hostname;
+    const host = iconDomain ?? new URL(url).hostname;
     return `https://www.google.com/s2/favicons?domain=${host}&sz=128`;
   } catch {
     return "";
@@ -29,11 +31,15 @@ export default function JobSitesPreview() {
                 <a
                   href={site.url}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel={
+                    site.sponsored
+                      ? "nofollow noopener noreferrer"
+                      : "noopener noreferrer"
+                  }
                   className="group flex h-full items-start gap-3 rounded-lg border border-gray-200 bg-white p-4 transition hover:border-brand-primary/40 hover:shadow-sm"
                 >
                   <img
-                    src={faviconUrl(site.url)}
+                    src={faviconUrl(site.url, site.iconDomain)}
                     alt=""
                     width={32}
                     height={32}

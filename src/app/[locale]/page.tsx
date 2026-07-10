@@ -34,6 +34,19 @@ function PatternSection({
 }) {
   return (
     <section className={`relative overflow-hidden px-4 pt-11 pb-20 ${bgClass}`}>
+      {/* ネイビー地のときは白系の半透明円を左上・右下に置いて奥行きを出す */}
+      {dark && (
+        <>
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -top-16 -left-16 h-64 w-64 rounded-full bg-white/10"
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -right-16 -bottom-16 h-64 w-64 rounded-full bg-white/[0.08]"
+          />
+        </>
+      )}
       {/* ウォーターマーク英字：左右交互に置き、画面端で切って紙面的なリズムを作る */}
       <div
         aria-hidden="true"
@@ -115,15 +128,18 @@ export default async function HomePage({
                   href="/jobs"
                   className="rounded-md bg-brand-primary px-8 py-3 text-center font-bold text-white shadow-sm transition hover:brightness-90"
                 >
-                  {t("lp.hero.ctaFind")}
+                  {t("lp.hero.ctaFind")} →
                 </Link>
                 <Link
                   href="/post"
                   className="rounded-md bg-brand-green px-8 py-3 text-center font-bold text-white shadow-sm transition hover:brightness-95"
                 >
-                  {t("lp.hero.ctaPost")}
+                  {t("lp.hero.ctaPost")} →
                 </Link>
               </div>
+              <p className="mt-4 text-center text-xs text-gray-400">
+                {t("lp.hero.ctaNote")}
+              </p>
             </Reveal>
           </div>
         </section>

@@ -6,7 +6,17 @@ export default function Footer() {
   const t = useTranslations();
 
   return (
-    <footer className="bg-brand-primary px-4 py-10 text-center text-xs text-white/60">
+    <footer className="relative overflow-hidden bg-brand-primary px-4 py-10 text-center text-xs text-white/60">
+      {/* ネイビー地に白系の半透明円を左上・右下に置く（他のネイビーセクションと共通の装飾） */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-16 -left-16 h-64 w-64 rounded-full bg-white/10"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-16 -bottom-16 h-64 w-64 rounded-full bg-white/[0.08]"
+      />
+      <div className="relative z-10">
       {/* ネイビー地でも視認できるよう白の角丸チップにロゴを載せる */}
       <div className="mb-4 flex justify-center">
         <span className="inline-flex rounded-lg bg-white px-4 py-2">
@@ -42,6 +52,7 @@ export default function Footer() {
           アカデミアノート
         </a>
       </p>
+      </div>
     </footer>
   );
 }

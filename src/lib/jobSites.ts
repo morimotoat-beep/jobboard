@@ -6,6 +6,11 @@ export type JobSite = {
   name: string;
   url: string;
   desc: Record<Locale, string>;
+  // アフィリエイト/スポンサードリンクの場合 true。<a> の rel に nofollow を付与する。
+  sponsored?: boolean;
+  // faviconを取得するドメインを url とは別に指定したいとき（例: トラッキングURLだが
+  // 実サービスのアイコンを出したい場合）。未指定なら url のドメインを使う。
+  iconDomain?: string;
 };
 
 export type JobSiteCategory = {
@@ -25,6 +30,18 @@ export const JOB_SITE_CATEGORIES: JobSiteCategory[] = [
           en: "Japan's largest research job portal, run by JST. The first stop for positions in Japan.",
           zh: "日本最大的研究人员求职门户（JST运营）。",
           ko: "일본 최대 연구자 채용 포털(JST 운영).",
+        },
+      },
+      {
+        name: "アカリク就職エージェント",
+        url: "https://www.rentracks.jp/adx/r.html?idx=0.45908.308223.8639.12248&dna=144403",
+        sponsored: true,
+        iconDomain: "acaric.jp",
+        desc: {
+          ja: "国内企業の研究者求人",
+          en: "Research job openings at Japanese companies",
+          zh: "日本企业的研究人员招聘",
+          ko: "국내 기업 연구직 채용",
         },
       },
     ],
