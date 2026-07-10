@@ -6,7 +6,7 @@ import { getCountryName } from "@/lib/countries";
 import { localizedTitle } from "@/lib/localize";
 import { getPrefectureLabel } from "@/lib/prefectures";
 import type { Locale } from "@/lib/filters";
-import type { PublicListing } from "@/lib/types";
+import type { PublicListing, PublicListingWithCategories } from "@/lib/types";
 
 export function formatLocation(locale: Locale, listing: PublicListing): string {
   if (listing.country === "JP" && listing.prefecture) {
@@ -15,7 +15,11 @@ export function formatLocation(locale: Locale, listing: PublicListing): string {
   return getCountryName(locale, listing.country);
 }
 
-export default function ListingCard({ listing }: { listing: PublicListing }) {
+export default function ListingCard({
+  listing,
+}: {
+  listing: PublicListingWithCategories;
+}) {
   const locale = useLocale() as Locale;
   const t = useTranslations();
   const deadline = new Date(`${listing.deadline}T00:00:00`);
@@ -34,9 +38,14 @@ export default function ListingCard({ listing }: { listing: PublicListing }) {
           <span className="rounded border border-brand-primary/30 bg-white px-2 py-0.5 font-medium text-brand-primary">
             {t(`filters.organizationType.${listing.organization_type}`)}
           </span>
-          <span className="rounded bg-brand-tab px-2 py-0.5">
-            {t(`filters.field.${listing.field}`)}
-          </span>
+          {listing.categories.map((c) => (
+            <span
+              key={c.id}
+              className="rounded bg-brand-tab px-2 py-0.5 font-medium text-brand-primary"
+            >
+              {c[`name_${locale}` as const] || c.name_ja}
+            </span>
+          ))}
           <span className="rounded bg-brand-tab px-2 py-0.5">
             {t(`filters.jobType.${listing.job_type}`)}
           </span>

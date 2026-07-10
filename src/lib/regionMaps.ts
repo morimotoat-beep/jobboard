@@ -97,7 +97,7 @@ const landFeatures = allFeatures.filter((f) => String(f.id) !== "010");
 
 type RegionData = {
   // viewBox 内に見えるパスだけ（id は numeric 3桁）
-  paths: { id: string; d: string }[];
+  paths: { id: string; uid: string; d: string }[];
   projection: GeoProjection;
 };
 
@@ -121,7 +121,7 @@ function buildRegion(def: RegionDef): RegionData | null {
   ]);
   // 座標は整数で十分（SVGサイズ削減）
   const pathGen = geoPath(projection).digits(0);
-  const paths: { id: string; d: string }[] = [];
+  const paths: { id: string; uid: string; d: string }[] = [];
   for (const f of landFeatures) {
     const d = pathGen(f as any);
     // クリップの結果、viewBox 内に形状が残らない国はスキップ
@@ -131,7 +131,8 @@ function buildRegion(def: RegionDef): RegionData | null {
     const b = pathGen.bounds(f as any);
     const isTarget = def.fit.some((c) => NUMERIC_ID[c] === id);
     if (!isTarget && b[1][0] - b[0][0] < 3 && b[1][1] - b[0][1] < 3) continue;
-    paths.push({ id, d });
+    // f.id が未定義/重複でも一意になるキー（描画順の連番を付与）
+    paths.push({ id, uid: `${id}-${paths.length}`, d });
   }
   return { paths, projection };
 }
@@ -142,7 +143,7 @@ const REGION_DATA: Record<string, RegionData | null> = Object.fromEntries(
 /* eslint-enable @typescript-eslint/no-explicit-any */
 
 export type RegionMapData = {
-  paths: { id: string; d: string }[];
+  paths: { id: string; uid: string; d: string }[];
   targetId: string | null;
   marker: { x: number; y: number } | null;
 };

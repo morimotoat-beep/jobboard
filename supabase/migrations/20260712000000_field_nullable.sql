@@ -1,0 +1,12 @@
+-- =============================================================
+-- 旧 listings.field（JREC-IN 導入前の粗い大分類コード）を任意化する。
+--
+-- 研究分野の入力は research_fields（細目306）＋ listing_research_fields へ
+-- 一本化したため、新規投稿は field を送らなくなった。列自体は当面残すが
+-- NOT NULL を外し、field を省いた INSERT を許可する。
+--
+-- 既存行の値と CHECK 制約はそのまま残す（NULL は CHECK を通過するため、
+-- 制約を外す必要はない）。列の DROP は、本番の main が field を参照しなく
+-- なった後の別マイグレーションで行う想定。冪等（再実行可）。
+-- =============================================================
+alter table public.listings alter column field drop not null;

@@ -1,0 +1,3502 @@
+{
+  "categories": [
+    {
+      "id": "life-science",
+      "order": 1,
+      "name": {
+        "ja": "ライフサイエンス",
+        "en": "Life Science",
+        "zh": "生命科学",
+        "ko": "생명과학"
+      },
+      "fields": [
+        {
+          "id": "life-science-001",
+          "category_id": "life-science",
+          "order": 1,
+          "name": {
+            "ja": "植物栄養学、土壌学",
+            "en": "Plant nutrition and soil science",
+            "zh": "植物营养学、土壤学",
+            "ko": "식물영양학·토양학"
+          }
+        },
+        {
+          "id": "life-science-002",
+          "category_id": "life-science",
+          "order": 2,
+          "name": {
+            "ja": "応用微生物学",
+            "en": "Applied microbiology",
+            "zh": "应用微生物学",
+            "ko": "응용미생물학"
+          }
+        },
+        {
+          "id": "life-science-003",
+          "category_id": "life-science",
+          "order": 3,
+          "name": {
+            "ja": "応用生物化学",
+            "en": "Applied biochemistry",
+            "zh": "应用生物化学",
+            "ko": "응용생물화학"
+          }
+        },
+        {
+          "id": "life-science-004",
+          "category_id": "life-science",
+          "order": 4,
+          "name": {
+            "ja": "生物有機化学",
+            "en": "Bioorganic chemistry",
+            "zh": "生物有机化学",
+            "ko": "생물유기화학"
+          }
+        },
+        {
+          "id": "life-science-005",
+          "category_id": "life-science",
+          "order": 5,
+          "name": {
+            "ja": "食品科学",
+            "en": "Food sciences",
+            "zh": "食品科学",
+            "ko": "식품과학"
+          }
+        },
+        {
+          "id": "life-science-006",
+          "category_id": "life-science",
+          "order": 6,
+          "name": {
+            "ja": "応用分子細胞生物学",
+            "en": "Applied molecular and cellular biology",
+            "zh": "应用分子细胞生物学",
+            "ko": "응용분자세포생물학"
+          }
+        },
+        {
+          "id": "life-science-007",
+          "category_id": "life-science",
+          "order": 7,
+          "name": {
+            "ja": "森林科学",
+            "en": "Forest science",
+            "zh": "森林科学",
+            "ko": "산림과학"
+          }
+        },
+        {
+          "id": "life-science-008",
+          "category_id": "life-science",
+          "order": 8,
+          "name": {
+            "ja": "木質科学",
+            "en": "Wood science",
+            "zh": "木材科学",
+            "ko": "목질과학"
+          }
+        },
+        {
+          "id": "life-science-009",
+          "category_id": "life-science",
+          "order": 9,
+          "name": {
+            "ja": "水圏生産科学",
+            "en": "Aquatic bioproduction science",
+            "zh": "水圈生产科学",
+            "ko": "수권생산과학"
+          }
+        },
+        {
+          "id": "life-science-010",
+          "category_id": "life-science",
+          "order": 10,
+          "name": {
+            "ja": "水圏生命科学",
+            "en": "Aquatic life science",
+            "zh": "水圈生命科学",
+            "ko": "수권생명과학"
+          }
+        },
+        {
+          "id": "life-science-011",
+          "category_id": "life-science",
+          "order": 11,
+          "name": {
+            "ja": "動物生産科学",
+            "en": "Animal production science",
+            "zh": "动物生产科学",
+            "ko": "동물생산과학"
+          }
+        },
+        {
+          "id": "life-science-012",
+          "category_id": "life-science",
+          "order": 12,
+          "name": {
+            "ja": "獣医学",
+            "en": "Veterinary medical science",
+            "zh": "兽医学",
+            "ko": "수의학"
+          }
+        },
+        {
+          "id": "life-science-013",
+          "category_id": "life-science",
+          "order": 13,
+          "name": {
+            "ja": "動物生命科学",
+            "en": "Animal life science",
+            "zh": "动物生命科学",
+            "ko": "동물생명과학"
+          }
+        },
+        {
+          "id": "life-science-014",
+          "category_id": "life-science",
+          "order": 14,
+          "name": {
+            "ja": "実験動物学",
+            "en": "Laboratory animal science",
+            "zh": "实验动物学",
+            "ko": "실험동물학"
+          }
+        },
+        {
+          "id": "life-science-015",
+          "category_id": "life-science",
+          "order": 15,
+          "name": {
+            "ja": "分子生物学",
+            "en": "Molecular biology",
+            "zh": "分子生物学",
+            "ko": "분자생물학"
+          }
+        },
+        {
+          "id": "life-science-016",
+          "category_id": "life-science",
+          "order": 16,
+          "name": {
+            "ja": "構造生物化学",
+            "en": "Structural biochemistry",
+            "zh": "结构生物化学",
+            "ko": "구조생물화학"
+          }
+        },
+        {
+          "id": "life-science-017",
+          "category_id": "life-science",
+          "order": 17,
+          "name": {
+            "ja": "機能生物化学",
+            "en": "Functional biochemistry",
+            "zh": "功能生物化学",
+            "ko": "기능생물화학"
+          }
+        },
+        {
+          "id": "life-science-018",
+          "category_id": "life-science",
+          "order": 18,
+          "name": {
+            "ja": "生物物理学",
+            "en": "Biophysics",
+            "zh": "生物物理学",
+            "ko": "생물물리학"
+          }
+        },
+        {
+          "id": "life-science-019",
+          "category_id": "life-science",
+          "order": 19,
+          "name": {
+            "ja": "ゲノム生物学",
+            "en": "Genome biology",
+            "zh": "基因组生物学",
+            "ko": "유전체생물학"
+          }
+        },
+        {
+          "id": "life-science-020",
+          "category_id": "life-science",
+          "order": 20,
+          "name": {
+            "ja": "システムゲノム科学",
+            "en": "System genome science",
+            "zh": "系统基因组科学",
+            "ko": "시스템유전체과학"
+          }
+        },
+        {
+          "id": "life-science-021",
+          "category_id": "life-science",
+          "order": 21,
+          "name": {
+            "ja": "細胞生物学",
+            "en": "Cell biology",
+            "zh": "细胞生物学",
+            "ko": "세포생물학"
+          }
+        },
+        {
+          "id": "life-science-022",
+          "category_id": "life-science",
+          "order": 22,
+          "name": {
+            "ja": "発生生物学",
+            "en": "Developmental biology",
+            "zh": "发育生物学",
+            "ko": "발생생물학"
+          }
+        },
+        {
+          "id": "life-science-023",
+          "category_id": "life-science",
+          "order": 23,
+          "name": {
+            "ja": "植物分子、生理科学",
+            "en": "Plant molecular biology and physiology",
+            "zh": "植物分子、生理科学",
+            "ko": "식물분자·생리과학"
+          }
+        },
+        {
+          "id": "life-science-024",
+          "category_id": "life-science",
+          "order": 24,
+          "name": {
+            "ja": "形態、構造",
+            "en": "Morphology and anatomical structure",
+            "zh": "形态、结构",
+            "ko": "형태·구조"
+          }
+        },
+        {
+          "id": "life-science-025",
+          "category_id": "life-science",
+          "order": 25,
+          "name": {
+            "ja": "動物生理化学、生理学、行動学",
+            "en": "Animal physiological chemistry, physiology and behavioral biology",
+            "zh": "动物生理化学、生理学、行为学",
+            "ko": "동물생리화학·생리학·행동학"
+          }
+        },
+        {
+          "id": "life-science-026",
+          "category_id": "life-science",
+          "order": 26,
+          "name": {
+            "ja": "遺伝学",
+            "en": "Genetics",
+            "zh": "遗传学",
+            "ko": "유전학"
+          }
+        },
+        {
+          "id": "life-science-027",
+          "category_id": "life-science",
+          "order": 27,
+          "name": {
+            "ja": "進化生物学",
+            "en": "Evolutionary biology",
+            "zh": "进化生物学",
+            "ko": "진화생물학"
+          }
+        },
+        {
+          "id": "life-science-028",
+          "category_id": "life-science",
+          "order": 28,
+          "name": {
+            "ja": "多様性生物学、分類学",
+            "en": "Biodiversity and systematics",
+            "zh": "多样性生物学、分类学",
+            "ko": "다양성생물학·분류학"
+          }
+        },
+        {
+          "id": "life-science-029",
+          "category_id": "life-science",
+          "order": 29,
+          "name": {
+            "ja": "生態学、環境学",
+            "en": "Ecology and environment",
+            "zh": "生态学、环境学",
+            "ko": "생태학·환경학"
+          }
+        },
+        {
+          "id": "life-science-030",
+          "category_id": "life-science",
+          "order": 30,
+          "name": {
+            "ja": "自然人類学",
+            "en": "Physical anthropology",
+            "zh": "自然人类学",
+            "ko": "자연인류학"
+          }
+        },
+        {
+          "id": "life-science-031",
+          "category_id": "life-science",
+          "order": 31,
+          "name": {
+            "ja": "応用人類学",
+            "en": "Applied anthropology",
+            "zh": "应用人类学",
+            "ko": "응용인류학"
+          }
+        },
+        {
+          "id": "life-science-032",
+          "category_id": "life-science",
+          "order": 32,
+          "name": {
+            "ja": "神経科学一般",
+            "en": "Neuroscience-general",
+            "zh": "神经科学一般",
+            "ko": "신경과학 일반"
+          }
+        },
+        {
+          "id": "life-science-033",
+          "category_id": "life-science",
+          "order": 33,
+          "name": {
+            "ja": "神経形態学",
+            "en": "Anatomy and histopathology of nervous system",
+            "zh": "神经形态学",
+            "ko": "신경형태학"
+          }
+        },
+        {
+          "id": "life-science-034",
+          "category_id": "life-science",
+          "order": 34,
+          "name": {
+            "ja": "神経機能学",
+            "en": "Function of nervous system",
+            "zh": "神经功能学",
+            "ko": "신경기능학"
+          }
+        },
+        {
+          "id": "life-science-035",
+          "category_id": "life-science",
+          "order": 35,
+          "name": {
+            "ja": "薬系化学、創薬科学",
+            "en": "Pharmaceutical chemistry and drug development sciences",
+            "zh": "药物化学、创药科学",
+            "ko": "약학화학·신약과학"
+          }
+        },
+        {
+          "id": "life-science-036",
+          "category_id": "life-science",
+          "order": 36,
+          "name": {
+            "ja": "薬系分析、物理化学",
+            "en": "Pharmaceutical analytical chemistry and physicochemistry",
+            "zh": "药物分析、物理化学",
+            "ko": "약학분석·물리화학"
+          }
+        },
+        {
+          "id": "life-science-037",
+          "category_id": "life-science",
+          "order": 37,
+          "name": {
+            "ja": "薬系衛生、生物化学",
+            "en": "Pharmaceutical hygiene and biochemistry",
+            "zh": "药物卫生、生物化学",
+            "ko": "약학위생·생물화학"
+          }
+        },
+        {
+          "id": "life-science-038",
+          "category_id": "life-science",
+          "order": 38,
+          "name": {
+            "ja": "薬理学",
+            "en": "Pharmacology",
+            "zh": "药理学",
+            "ko": "약리학"
+          }
+        },
+        {
+          "id": "life-science-039",
+          "category_id": "life-science",
+          "order": 39,
+          "name": {
+            "ja": "環境、天然医薬資源学",
+            "en": "Environmental and natural pharmaceutical resources",
+            "zh": "环境、天然医药资源学",
+            "ko": "환경·천연의약자원학"
+          }
+        },
+        {
+          "id": "life-science-040",
+          "category_id": "life-science",
+          "order": 40,
+          "name": {
+            "ja": "医療薬学",
+            "en": "Clinical pharmacy",
+            "zh": "医疗药学",
+            "ko": "의료약학"
+          }
+        },
+        {
+          "id": "life-science-041",
+          "category_id": "life-science",
+          "order": 41,
+          "name": {
+            "ja": "解剖学",
+            "en": "Anatomy",
+            "zh": "解剖学",
+            "ko": "해부학"
+          }
+        },
+        {
+          "id": "life-science-042",
+          "category_id": "life-science",
+          "order": 42,
+          "name": {
+            "ja": "生理学",
+            "en": "Physiology",
+            "zh": "生理学",
+            "ko": "생리학"
+          }
+        },
+        {
+          "id": "life-science-043",
+          "category_id": "life-science",
+          "order": 43,
+          "name": {
+            "ja": "医化学",
+            "en": "Medical biochemistry",
+            "zh": "医化学",
+            "ko": "의화학"
+          }
+        },
+        {
+          "id": "life-science-044",
+          "category_id": "life-science",
+          "order": 44,
+          "name": {
+            "ja": "病態医化学",
+            "en": "Pathological biochemistry",
+            "zh": "病态医化学",
+            "ko": "병태의화학"
+          }
+        },
+        {
+          "id": "life-science-045",
+          "category_id": "life-science",
+          "order": 45,
+          "name": {
+            "ja": "人体病理学",
+            "en": "Human pathology",
+            "zh": "人体病理学",
+            "ko": "인체병리학"
+          }
+        },
+        {
+          "id": "life-science-046",
+          "category_id": "life-science",
+          "order": 46,
+          "name": {
+            "ja": "実験病理学",
+            "en": "Experimental pathology",
+            "zh": "实验病理学",
+            "ko": "실험병리학"
+          }
+        },
+        {
+          "id": "life-science-047",
+          "category_id": "life-science",
+          "order": 47,
+          "name": {
+            "ja": "寄生虫学",
+            "en": "Parasitology",
+            "zh": "寄生虫学",
+            "ko": "기생충학"
+          }
+        },
+        {
+          "id": "life-science-048",
+          "category_id": "life-science",
+          "order": 48,
+          "name": {
+            "ja": "細菌学",
+            "en": "Bacteriology",
+            "zh": "细菌学",
+            "ko": "세균학"
+          }
+        },
+        {
+          "id": "life-science-049",
+          "category_id": "life-science",
+          "order": 49,
+          "name": {
+            "ja": "ウイルス学",
+            "en": "Virology",
+            "zh": "病毒学",
+            "ko": "바이러스학"
+          }
+        },
+        {
+          "id": "life-science-050",
+          "category_id": "life-science",
+          "order": 50,
+          "name": {
+            "ja": "免疫学",
+            "en": "Immunology",
+            "zh": "免疫学",
+            "ko": "면역학"
+          }
+        },
+        {
+          "id": "life-science-051",
+          "category_id": "life-science",
+          "order": 51,
+          "name": {
+            "ja": "腫瘍生物学",
+            "en": "Tumor biology",
+            "zh": "肿瘤生物学",
+            "ko": "종양생물학"
+          }
+        },
+        {
+          "id": "life-science-052",
+          "category_id": "life-science",
+          "order": 52,
+          "name": {
+            "ja": "腫瘍診断、治療学",
+            "en": "Tumor diagnostics and therapeutics",
+            "zh": "肿瘤诊断、治疗学",
+            "ko": "종양진단·치료학"
+          }
+        },
+        {
+          "id": "life-science-053",
+          "category_id": "life-science",
+          "order": 53,
+          "name": {
+            "ja": "基盤脳科学",
+            "en": "Basic brain sciences",
+            "zh": "基础脑科学",
+            "ko": "기반뇌과학"
+          }
+        },
+        {
+          "id": "life-science-054",
+          "category_id": "life-science",
+          "order": 54,
+          "name": {
+            "ja": "認知脳科学",
+            "en": "Cognitive and brain science",
+            "zh": "认知脑科学",
+            "ko": "인지뇌과학"
+          }
+        },
+        {
+          "id": "life-science-055",
+          "category_id": "life-science",
+          "order": 55,
+          "name": {
+            "ja": "病態神経科学",
+            "en": "Pathophysiologic neuroscience",
+            "zh": "病态神经科学",
+            "ko": "병태신경과학"
+          }
+        },
+        {
+          "id": "life-science-056",
+          "category_id": "life-science",
+          "order": 56,
+          "name": {
+            "ja": "内科学一般",
+            "en": "General internal medicine",
+            "zh": "内科学一般",
+            "ko": "내과학 일반"
+          }
+        },
+        {
+          "id": "life-science-057",
+          "category_id": "life-science",
+          "order": 57,
+          "name": {
+            "ja": "神経内科学",
+            "en": "Neurology",
+            "zh": "神经内科学",
+            "ko": "신경내과학"
+          }
+        },
+        {
+          "id": "life-science-058",
+          "category_id": "life-science",
+          "order": 58,
+          "name": {
+            "ja": "精神神経科学",
+            "en": "Psychiatry",
+            "zh": "精神神经科学",
+            "ko": "정신신경과학"
+          }
+        },
+        {
+          "id": "life-science-059",
+          "category_id": "life-science",
+          "order": 59,
+          "name": {
+            "ja": "放射線科学",
+            "en": "Radiological sciences",
+            "zh": "放射线科学",
+            "ko": "방사선과학"
+          }
+        },
+        {
+          "id": "life-science-060",
+          "category_id": "life-science",
+          "order": 60,
+          "name": {
+            "ja": "胎児医学、小児成育学",
+            "en": "Embryonic medicine and pediatrics",
+            "zh": "胎儿医学、小儿成育学",
+            "ko": "태아의학·소아성육학"
+          }
+        },
+        {
+          "id": "life-science-061",
+          "category_id": "life-science",
+          "order": 61,
+          "name": {
+            "ja": "消化器内科学",
+            "en": "Gastroenterology",
+            "zh": "消化内科学",
+            "ko": "소화기내과학"
+          }
+        },
+        {
+          "id": "life-science-062",
+          "category_id": "life-science",
+          "order": 62,
+          "name": {
+            "ja": "循環器内科学",
+            "en": "Cardiology",
+            "zh": "循环内科学",
+            "ko": "순환기내과학"
+          }
+        },
+        {
+          "id": "life-science-063",
+          "category_id": "life-science",
+          "order": 63,
+          "name": {
+            "ja": "呼吸器内科学",
+            "en": "Respiratory medicine",
+            "zh": "呼吸内科学",
+            "ko": "호흡기내과학"
+          }
+        },
+        {
+          "id": "life-science-064",
+          "category_id": "life-science",
+          "order": 64,
+          "name": {
+            "ja": "腎臓内科学",
+            "en": "Nephrology",
+            "zh": "肾脏内科学",
+            "ko": "신장내과학"
+          }
+        },
+        {
+          "id": "life-science-065",
+          "category_id": "life-science",
+          "order": 65,
+          "name": {
+            "ja": "皮膚科学",
+            "en": "Dermatology",
+            "zh": "皮肤科学",
+            "ko": "피부과학"
+          }
+        },
+        {
+          "id": "life-science-066",
+          "category_id": "life-science",
+          "order": 66,
+          "name": {
+            "ja": "血液、腫瘍内科学",
+            "en": "Hematology and medical oncology",
+            "zh": "血液、肿瘤内科学",
+            "ko": "혈액·종양내과학"
+          }
+        },
+        {
+          "id": "life-science-067",
+          "category_id": "life-science",
+          "order": 67,
+          "name": {
+            "ja": "膠原病、アレルギー内科学",
+            "en": "Connective tissue disease and allergy",
+            "zh": "胶原病、过敏内科学",
+            "ko": "교원병·알레르기내과학"
+          }
+        },
+        {
+          "id": "life-science-068",
+          "category_id": "life-science",
+          "order": 68,
+          "name": {
+            "ja": "感染症内科学",
+            "en": "Infectious disease medicine",
+            "zh": "感染症内科学",
+            "ko": "감염증내과학"
+          }
+        },
+        {
+          "id": "life-science-069",
+          "category_id": "life-science",
+          "order": 69,
+          "name": {
+            "ja": "代謝、内分泌学",
+            "en": "Metabolism and endocrinology",
+            "zh": "代谢、内分泌学",
+            "ko": "대사·내분비학"
+          }
+        },
+        {
+          "id": "life-science-070",
+          "category_id": "life-science",
+          "order": 70,
+          "name": {
+            "ja": "外科学一般、小児外科学",
+            "en": "General surgery and pediatric surgery",
+            "zh": "外科学一般、小儿外科学",
+            "ko": "외과학 일반·소아외과학"
+          }
+        },
+        {
+          "id": "life-science-071",
+          "category_id": "life-science",
+          "order": 71,
+          "name": {
+            "ja": "消化器外科学",
+            "en": "Digestive surgery",
+            "zh": "消化外科学",
+            "ko": "소화기외과학"
+          }
+        },
+        {
+          "id": "life-science-072",
+          "category_id": "life-science",
+          "order": 72,
+          "name": {
+            "ja": "心臓血管外科学",
+            "en": "Cardiovascular surgery",
+            "zh": "心血管外科学",
+            "ko": "심장혈관외과학"
+          }
+        },
+        {
+          "id": "life-science-073",
+          "category_id": "life-science",
+          "order": 73,
+          "name": {
+            "ja": "呼吸器外科学",
+            "en": "Respiratory surgery",
+            "zh": "呼吸外科学",
+            "ko": "호흡기외과학"
+          }
+        },
+        {
+          "id": "life-science-074",
+          "category_id": "life-science",
+          "order": 74,
+          "name": {
+            "ja": "麻酔科学",
+            "en": "Anesthesiology",
+            "zh": "麻醉科学",
+            "ko": "마취과학"
+          }
+        },
+        {
+          "id": "life-science-075",
+          "category_id": "life-science",
+          "order": 75,
+          "name": {
+            "ja": "救急医学",
+            "en": "Emergency medicine",
+            "zh": "急救医学",
+            "ko": "응급의학"
+          }
+        },
+        {
+          "id": "life-science-076",
+          "category_id": "life-science",
+          "order": 76,
+          "name": {
+            "ja": "脳神経外科学",
+            "en": "Neurosurgery",
+            "zh": "脑神经外科学",
+            "ko": "뇌신경외과학"
+          }
+        },
+        {
+          "id": "life-science-077",
+          "category_id": "life-science",
+          "order": 77,
+          "name": {
+            "ja": "整形外科学",
+            "en": "Orthopedics",
+            "zh": "骨科学（矫形外科）",
+            "ko": "정형외과학"
+          }
+        },
+        {
+          "id": "life-science-078",
+          "category_id": "life-science",
+          "order": 78,
+          "name": {
+            "ja": "泌尿器科学",
+            "en": "Urology",
+            "zh": "泌尿科学",
+            "ko": "비뇨기과학"
+          }
+        },
+        {
+          "id": "life-science-079",
+          "category_id": "life-science",
+          "order": 79,
+          "name": {
+            "ja": "産婦人科学",
+            "en": "Obstetrics and gynecology",
+            "zh": "妇产科学",
+            "ko": "산부인과학"
+          }
+        },
+        {
+          "id": "life-science-080",
+          "category_id": "life-science",
+          "order": 80,
+          "name": {
+            "ja": "耳鼻咽喉科学",
+            "en": "Otorhinolaryngology",
+            "zh": "耳鼻咽喉科学",
+            "ko": "이비인후과학"
+          }
+        },
+        {
+          "id": "life-science-081",
+          "category_id": "life-science",
+          "order": 81,
+          "name": {
+            "ja": "眼科学",
+            "en": "Ophthalmology",
+            "zh": "眼科学",
+            "ko": "안과학"
+          }
+        },
+        {
+          "id": "life-science-082",
+          "category_id": "life-science",
+          "order": 82,
+          "name": {
+            "ja": "形成外科学",
+            "en": "Plastic and reconstructive surgery",
+            "zh": "整形外科学（成形）",
+            "ko": "성형외과학"
+          }
+        },
+        {
+          "id": "life-science-083",
+          "category_id": "life-science",
+          "order": 83,
+          "name": {
+            "ja": "常態系口腔科学",
+            "en": "Oral biological science",
+            "zh": "口腔生物科学",
+            "ko": "구강생물과학"
+          }
+        },
+        {
+          "id": "life-science-084",
+          "category_id": "life-science",
+          "order": 84,
+          "name": {
+            "ja": "病態系口腔科学",
+            "en": "Oral pathobiological science",
+            "zh": "口腔病态科学",
+            "ko": "구강병태과학"
+          }
+        },
+        {
+          "id": "life-science-085",
+          "category_id": "life-science",
+          "order": 85,
+          "name": {
+            "ja": "保存治療系歯学",
+            "en": "Conservative dentistry",
+            "zh": "牙体保存治疗学",
+            "ko": "보존치료계 치의학"
+          }
+        },
+        {
+          "id": "life-science-086",
+          "category_id": "life-science",
+          "order": 86,
+          "name": {
+            "ja": "口腔再生医学、歯科医用工学",
+            "en": "Regenerative dentistry and dental engineering",
+            "zh": "口腔再生医学、牙科医用工学",
+            "ko": "구강재생의학·치과의용공학"
+          }
+        },
+        {
+          "id": "life-science-087",
+          "category_id": "life-science",
+          "order": 87,
+          "name": {
+            "ja": "補綴系歯学",
+            "en": "Prosthodontics",
+            "zh": "口腔修复学",
+            "ko": "보철계 치의학"
+          }
+        },
+        {
+          "id": "life-science-088",
+          "category_id": "life-science",
+          "order": 88,
+          "name": {
+            "ja": "外科系歯学",
+            "en": "Surgical dentistry",
+            "zh": "口腔外科学",
+            "ko": "외과계 치의학"
+          }
+        },
+        {
+          "id": "life-science-089",
+          "category_id": "life-science",
+          "order": 89,
+          "name": {
+            "ja": "成長、発育系歯学",
+            "en": "Developmental dentistry",
+            "zh": "生长、发育系牙科学",
+            "ko": "성장·발육계 치의학"
+          }
+        },
+        {
+          "id": "life-science-090",
+          "category_id": "life-science",
+          "order": 90,
+          "name": {
+            "ja": "社会系歯学",
+            "en": "Social dentistry",
+            "zh": "社会牙科学",
+            "ko": "사회계 치의학"
+          }
+        },
+        {
+          "id": "life-science-091",
+          "category_id": "life-science",
+          "order": 91,
+          "name": {
+            "ja": "医療管理学、医療系社会学",
+            "en": "Medical management and medical sociology",
+            "zh": "医疗管理学、医疗社会学",
+            "ko": "의료관리학·의료사회학"
+          }
+        },
+        {
+          "id": "life-science-092",
+          "category_id": "life-science",
+          "order": 92,
+          "name": {
+            "ja": "衛生学、公衆衛生学分野：実験系を含む",
+            "en": "Hygiene and public health: including laboratory approach",
+            "zh": "卫生学、公共卫生学：含实验系",
+            "ko": "위생학·공중보건학: 실험계 포함"
+          }
+        },
+        {
+          "id": "life-science-093",
+          "category_id": "life-science",
+          "order": 93,
+          "name": {
+            "ja": "衛生学、公衆衛生学分野：実験系を含まない",
+            "en": "Hygiene and public health: excluding laboratory approach",
+            "zh": "卫生学、公共卫生学：不含实验系",
+            "ko": "위생학·공중보건학: 실험계 제외"
+          }
+        },
+        {
+          "id": "life-science-094",
+          "category_id": "life-science",
+          "order": 94,
+          "name": {
+            "ja": "法医学",
+            "en": "Forensics medicine",
+            "zh": "法医学",
+            "ko": "법의학"
+          }
+        },
+        {
+          "id": "life-science-095",
+          "category_id": "life-science",
+          "order": 95,
+          "name": {
+            "ja": "基礎看護学",
+            "en": "Fundamental of nursing",
+            "zh": "基础护理学",
+            "ko": "기초간호학"
+          }
+        },
+        {
+          "id": "life-science-096",
+          "category_id": "life-science",
+          "order": 96,
+          "name": {
+            "ja": "臨床看護学",
+            "en": "Clinical nursing",
+            "zh": "临床护理学",
+            "ko": "임상간호학"
+          }
+        },
+        {
+          "id": "life-science-097",
+          "category_id": "life-science",
+          "order": 97,
+          "name": {
+            "ja": "生涯発達看護学",
+            "en": "Lifelong developmental nursing",
+            "zh": "生涯发展护理学",
+            "ko": "생애발달간호학"
+          }
+        },
+        {
+          "id": "life-science-098",
+          "category_id": "life-science",
+          "order": 98,
+          "name": {
+            "ja": "高齢者看護学、地域看護学",
+            "en": "Gerontological nursing and community health nursing",
+            "zh": "老年护理学、社区护理学",
+            "ko": "노인간호학·지역간호학"
+          }
+        },
+        {
+          "id": "life-science-099",
+          "category_id": "life-science",
+          "order": 99,
+          "name": {
+            "ja": "リハビリテーション科学",
+            "en": "Rehabilitation science",
+            "zh": "康复科学",
+            "ko": "재활과학"
+          }
+        },
+        {
+          "id": "life-science-100",
+          "category_id": "life-science",
+          "order": 100,
+          "name": {
+            "ja": "スポーツ科学",
+            "en": "Sports sciences",
+            "zh": "体育运动科学",
+            "ko": "스포츠과학"
+          }
+        },
+        {
+          "id": "life-science-101",
+          "category_id": "life-science",
+          "order": 101,
+          "name": {
+            "ja": "体育、身体教育学",
+            "en": "Physical education, and physical and health education",
+            "zh": "体育、身体教育学",
+            "ko": "체육·신체교육학"
+          }
+        },
+        {
+          "id": "life-science-102",
+          "category_id": "life-science",
+          "order": 102,
+          "name": {
+            "ja": "栄養学、健康科学",
+            "en": "Nutrition science and health science",
+            "zh": "营养学、健康科学",
+            "ko": "영양학·건강과학"
+          }
+        },
+        {
+          "id": "life-science-103",
+          "category_id": "life-science",
+          "order": 103,
+          "name": {
+            "ja": "生体医工学",
+            "en": "Biomedical engineering",
+            "zh": "生物医学工程",
+            "ko": "생체의공학"
+          }
+        },
+        {
+          "id": "life-science-104",
+          "category_id": "life-science",
+          "order": 104,
+          "name": {
+            "ja": "生体材料学",
+            "en": "Biomaterials",
+            "zh": "生物材料学",
+            "ko": "생체재료학"
+          }
+        },
+        {
+          "id": "life-science-105",
+          "category_id": "life-science",
+          "order": 105,
+          "name": {
+            "ja": "医用システム",
+            "en": "Medical systems",
+            "zh": "医用系统",
+            "ko": "의용시스템"
+          }
+        },
+        {
+          "id": "life-science-106",
+          "category_id": "life-science",
+          "order": 106,
+          "name": {
+            "ja": "医療技術評価学",
+            "en": "Medical technology assessment",
+            "zh": "医疗技术评估学",
+            "ko": "의료기술평가학"
+          }
+        },
+        {
+          "id": "life-science-107",
+          "category_id": "life-science",
+          "order": 107,
+          "name": {
+            "ja": "医療福祉工学",
+            "en": "Medical assistive technology",
+            "zh": "医疗福祉工学",
+            "ko": "의료복지공학"
+          }
+        }
+      ]
+    },
+    {
+      "id": "informatics",
+      "order": 2,
+      "name": {
+        "ja": "情報通信",
+        "en": "Informatics",
+        "zh": "信息通信",
+        "ko": "정보통신"
+      },
+      "fields": [
+        {
+          "id": "informatics-001",
+          "category_id": "informatics",
+          "order": 1,
+          "name": {
+            "ja": "機械力学、メカトロニクス",
+            "en": "Mechanics and mechatronics",
+            "zh": "机械力学、机电一体化",
+            "ko": "기계역학·메카트로닉스"
+          }
+        },
+        {
+          "id": "informatics-002",
+          "category_id": "informatics",
+          "order": 2,
+          "name": {
+            "ja": "ロボティクス、知能機械システム",
+            "en": "Robotics and intelligent system",
+            "zh": "机器人学、智能机械系统",
+            "ko": "로보틱스·지능기계시스템"
+          }
+        },
+        {
+          "id": "informatics-003",
+          "category_id": "informatics",
+          "order": 3,
+          "name": {
+            "ja": "情報学基礎論",
+            "en": "Theory of informatics",
+            "zh": "信息学基础论",
+            "ko": "정보학 기초론"
+          }
+        },
+        {
+          "id": "informatics-004",
+          "category_id": "informatics",
+          "order": 4,
+          "name": {
+            "ja": "数理情報学",
+            "en": "Mathematical informatics",
+            "zh": "数理信息学",
+            "ko": "수리정보학"
+          }
+        },
+        {
+          "id": "informatics-005",
+          "category_id": "informatics",
+          "order": 5,
+          "name": {
+            "ja": "統計科学",
+            "en": "Statistical science",
+            "zh": "统计科学",
+            "ko": "통계과학"
+          }
+        },
+        {
+          "id": "informatics-006",
+          "category_id": "informatics",
+          "order": 6,
+          "name": {
+            "ja": "計算機システム",
+            "en": "Computer system",
+            "zh": "计算机系统",
+            "ko": "컴퓨터시스템"
+          }
+        },
+        {
+          "id": "informatics-007",
+          "category_id": "informatics",
+          "order": 7,
+          "name": {
+            "ja": "ソフトウェア",
+            "en": "Software",
+            "zh": "软件",
+            "ko": "소프트웨어"
+          }
+        },
+        {
+          "id": "informatics-008",
+          "category_id": "informatics",
+          "order": 8,
+          "name": {
+            "ja": "情報ネットワーク",
+            "en": "Information network",
+            "zh": "信息网络",
+            "ko": "정보네트워크"
+          }
+        },
+        {
+          "id": "informatics-009",
+          "category_id": "informatics",
+          "order": 9,
+          "name": {
+            "ja": "情報セキュリティ",
+            "en": "Information security",
+            "zh": "信息安全",
+            "ko": "정보보안"
+          }
+        },
+        {
+          "id": "informatics-010",
+          "category_id": "informatics",
+          "order": 10,
+          "name": {
+            "ja": "データベース",
+            "en": "Database",
+            "zh": "数据库",
+            "ko": "데이터베이스"
+          }
+        },
+        {
+          "id": "informatics-011",
+          "category_id": "informatics",
+          "order": 11,
+          "name": {
+            "ja": "高性能計算",
+            "en": "High performance computing",
+            "zh": "高性能计算",
+            "ko": "고성능컴퓨팅"
+          }
+        },
+        {
+          "id": "informatics-012",
+          "category_id": "informatics",
+          "order": 12,
+          "name": {
+            "ja": "計算科学",
+            "en": "Computational science",
+            "zh": "计算科学",
+            "ko": "계산과학"
+          }
+        },
+        {
+          "id": "informatics-013",
+          "category_id": "informatics",
+          "order": 13,
+          "name": {
+            "ja": "知覚情報処理",
+            "en": "Perceptual information processing",
+            "zh": "感知信息处理",
+            "ko": "지각정보처리"
+          }
+        },
+        {
+          "id": "informatics-014",
+          "category_id": "informatics",
+          "order": 14,
+          "name": {
+            "ja": "ヒューマンインタフェース、インタラクション",
+            "en": "Human interface and interaction",
+            "zh": "人机界面、交互",
+            "ko": "휴먼인터페이스·인터랙션"
+          }
+        },
+        {
+          "id": "informatics-015",
+          "category_id": "informatics",
+          "order": 15,
+          "name": {
+            "ja": "知能情報学",
+            "en": "Intelligent informatics",
+            "zh": "智能信息学",
+            "ko": "지능정보학"
+          }
+        },
+        {
+          "id": "informatics-016",
+          "category_id": "informatics",
+          "order": 16,
+          "name": {
+            "ja": "ソフトコンピューティング",
+            "en": "Soft computing",
+            "zh": "软计算",
+            "ko": "소프트컴퓨팅"
+          }
+        },
+        {
+          "id": "informatics-017",
+          "category_id": "informatics",
+          "order": 17,
+          "name": {
+            "ja": "知能ロボティクス",
+            "en": "Intelligent robotics",
+            "zh": "智能机器人学",
+            "ko": "지능로보틱스"
+          }
+        },
+        {
+          "id": "informatics-018",
+          "category_id": "informatics",
+          "order": 18,
+          "name": {
+            "ja": "感性情報学",
+            "en": "Kansei informatics",
+            "zh": "感性信息学",
+            "ko": "감성정보학"
+          }
+        },
+        {
+          "id": "informatics-019",
+          "category_id": "informatics",
+          "order": 19,
+          "name": {
+            "ja": "生命、健康、医療情報学",
+            "en": "Life, health and medical informatics",
+            "zh": "生命、健康、医疗信息学",
+            "ko": "생명·건강·의료정보학"
+          }
+        },
+        {
+          "id": "informatics-020",
+          "category_id": "informatics",
+          "order": 20,
+          "name": {
+            "ja": "ウェブ情報学、サービス情報学",
+            "en": "Web informatics and service informatics",
+            "zh": "网络信息学、服务信息学",
+            "ko": "웹정보학·서비스정보학"
+          }
+        },
+        {
+          "id": "informatics-021",
+          "category_id": "informatics",
+          "order": 21,
+          "name": {
+            "ja": "学習支援システム",
+            "en": "Learning support system",
+            "zh": "学习支持系统",
+            "ko": "학습지원시스템"
+          }
+        },
+        {
+          "id": "informatics-022",
+          "category_id": "informatics",
+          "order": 22,
+          "name": {
+            "ja": "エンタテインメント、ゲーム情報学",
+            "en": "Entertainment and game informatics",
+            "zh": "娱乐、游戏信息学",
+            "ko": "엔터테인먼트·게임정보학"
+          }
+        }
+      ]
+    },
+    {
+      "id": "environmental",
+      "order": 3,
+      "name": {
+        "ja": "環境",
+        "en": "Environmental science",
+        "zh": "环境",
+        "ko": "환경"
+      },
+      "fields": [
+        {
+          "id": "environmental-001",
+          "category_id": "environmental",
+          "order": 1,
+          "name": {
+            "ja": "遺伝育種科学",
+            "en": "Science in plant genetics and breeding",
+            "zh": "遗传育种科学",
+            "ko": "유전육종과학"
+          }
+        },
+        {
+          "id": "environmental-002",
+          "category_id": "environmental",
+          "order": 2,
+          "name": {
+            "ja": "作物生産科学",
+            "en": "Crop production science",
+            "zh": "作物生产科学",
+            "ko": "작물생산과학"
+          }
+        },
+        {
+          "id": "environmental-003",
+          "category_id": "environmental",
+          "order": 3,
+          "name": {
+            "ja": "園芸科学",
+            "en": "Horticultural science",
+            "zh": "园艺科学",
+            "ko": "원예과학"
+          }
+        },
+        {
+          "id": "environmental-004",
+          "category_id": "environmental",
+          "order": 4,
+          "name": {
+            "ja": "植物保護科学",
+            "en": "Plant protection science",
+            "zh": "植物保护科学",
+            "ko": "식물보호과학"
+          }
+        },
+        {
+          "id": "environmental-005",
+          "category_id": "environmental",
+          "order": 5,
+          "name": {
+            "ja": "昆虫科学",
+            "en": "Insect science",
+            "zh": "昆虫科学",
+            "ko": "곤충과학"
+          }
+        },
+        {
+          "id": "environmental-006",
+          "category_id": "environmental",
+          "order": 6,
+          "name": {
+            "ja": "生物資源保全学",
+            "en": "Conservation of biological resources",
+            "zh": "生物资源保全学",
+            "ko": "생물자원보전학"
+          }
+        },
+        {
+          "id": "environmental-007",
+          "category_id": "environmental",
+          "order": 7,
+          "name": {
+            "ja": "ランドスケープ科学",
+            "en": "Landscape science",
+            "zh": "景观科学",
+            "ko": "랜드스케이프과학"
+          }
+        },
+        {
+          "id": "environmental-008",
+          "category_id": "environmental",
+          "order": 8,
+          "name": {
+            "ja": "農業社会構造",
+            "en": "Rural sociology and agricultural structure",
+            "zh": "农业社会结构",
+            "ko": "농업사회구조"
+          }
+        },
+        {
+          "id": "environmental-009",
+          "category_id": "environmental",
+          "order": 9,
+          "name": {
+            "ja": "地域環境工学、農村計画学",
+            "en": "Rural environmental engineering and planning",
+            "zh": "地区环境工程、农村规划学",
+            "ko": "지역환경공학·농촌계획학"
+          }
+        },
+        {
+          "id": "environmental-010",
+          "category_id": "environmental",
+          "order": 10,
+          "name": {
+            "ja": "農業環境工学、農業情報工学",
+            "en": "Agricultural environmental engineering and agricultural information engineering",
+            "zh": "农业环境工程、农业信息工程",
+            "ko": "농업환경공학·농업정보공학"
+          }
+        },
+        {
+          "id": "environmental-011",
+          "category_id": "environmental",
+          "order": 11,
+          "name": {
+            "ja": "環境農学",
+            "en": "Environmental agriculture",
+            "zh": "环境农学",
+            "ko": "환경농학"
+          }
+        },
+        {
+          "id": "environmental-012",
+          "category_id": "environmental",
+          "order": 12,
+          "name": {
+            "ja": "環境動態解析",
+            "en": "Environmental dynamic analysis",
+            "zh": "环境动态解析",
+            "ko": "환경동태해석"
+          }
+        },
+        {
+          "id": "environmental-013",
+          "category_id": "environmental",
+          "order": 13,
+          "name": {
+            "ja": "放射線影響",
+            "en": "Radiation influence",
+            "zh": "辐射影响",
+            "ko": "방사선영향"
+          }
+        },
+        {
+          "id": "environmental-014",
+          "category_id": "environmental",
+          "order": 14,
+          "name": {
+            "ja": "化学物質影響",
+            "en": "Chemical substance influence on environment",
+            "zh": "化学物质影响",
+            "ko": "화학물질영향"
+          }
+        },
+        {
+          "id": "environmental-015",
+          "category_id": "environmental",
+          "order": 15,
+          "name": {
+            "ja": "環境影響評価",
+            "en": "Environmental impact assessment",
+            "zh": "环境影响评价",
+            "ko": "환경영향평가"
+          }
+        },
+        {
+          "id": "environmental-016",
+          "category_id": "environmental",
+          "order": 16,
+          "name": {
+            "ja": "環境負荷、リスク評価管理",
+            "en": "Environmental load and risk assessment",
+            "zh": "环境负荷、风险评价管理",
+            "ko": "환경부하·리스크평가관리"
+          }
+        },
+        {
+          "id": "environmental-017",
+          "category_id": "environmental",
+          "order": 17,
+          "name": {
+            "ja": "環境負荷低減技術、保全修復技術",
+            "en": "Environmental load reduction and remediation",
+            "zh": "环境负荷降低技术、保全修复技术",
+            "ko": "환경부하저감기술·보전복원기술"
+          }
+        },
+        {
+          "id": "environmental-018",
+          "category_id": "environmental",
+          "order": 18,
+          "name": {
+            "ja": "環境材料、リサイクル技術",
+            "en": "Environmental materials and recycle technology",
+            "zh": "环境材料、回收技术",
+            "ko": "환경재료·재활용기술"
+          }
+        },
+        {
+          "id": "environmental-019",
+          "category_id": "environmental",
+          "order": 19,
+          "name": {
+            "ja": "自然共生システム",
+            "en": "Social-ecological systems",
+            "zh": "自然共生系统",
+            "ko": "자연공생시스템"
+          }
+        },
+        {
+          "id": "environmental-020",
+          "category_id": "environmental",
+          "order": 20,
+          "name": {
+            "ja": "循環型社会システム",
+            "en": "Sound material-cycle social systems",
+            "zh": "循环型社会系统",
+            "ko": "순환형사회시스템"
+          }
+        },
+        {
+          "id": "environmental-021",
+          "category_id": "environmental",
+          "order": 21,
+          "name": {
+            "ja": "環境政策、環境配慮型社会",
+            "en": "Environmental policy and social systems",
+            "zh": "环境政策、环境友好型社会",
+            "ko": "환경정책·환경배려형사회"
+          }
+        }
+      ]
+    },
+    {
+      "id": "nanotech-materials",
+      "order": 4,
+      "name": {
+        "ja": "ナノテク・材料",
+        "en": "Nanotechnology/Materials",
+        "zh": "纳米技术·材料",
+        "ko": "나노기술·재료"
+      },
+      "fields": [
+        {
+          "id": "nanotech-materials-001",
+          "category_id": "nanotech-materials",
+          "order": 1,
+          "name": {
+            "ja": "金属材料物性",
+            "en": "Metallic material properties",
+            "zh": "金属材料物性",
+            "ko": "금속재료물성"
+          }
+        },
+        {
+          "id": "nanotech-materials-002",
+          "category_id": "nanotech-materials",
+          "order": 2,
+          "name": {
+            "ja": "無機材料、物性",
+            "en": "Inorganic materials and properties",
+            "zh": "无机材料、物性",
+            "ko": "무기재료·물성"
+          }
+        },
+        {
+          "id": "nanotech-materials-003",
+          "category_id": "nanotech-materials",
+          "order": 3,
+          "name": {
+            "ja": "複合材料、界面",
+            "en": "Composite materials and interfaces",
+            "zh": "复合材料、界面",
+            "ko": "복합재료·계면"
+          }
+        },
+        {
+          "id": "nanotech-materials-004",
+          "category_id": "nanotech-materials",
+          "order": 4,
+          "name": {
+            "ja": "構造材料、機能材料",
+            "en": "Structural materials and functional materials",
+            "zh": "结构材料、功能材料",
+            "ko": "구조재료·기능재료"
+          }
+        },
+        {
+          "id": "nanotech-materials-005",
+          "category_id": "nanotech-materials",
+          "order": 5,
+          "name": {
+            "ja": "材料加工、組織制御",
+            "en": "Material processing and microstructure control",
+            "zh": "材料加工、组织控制",
+            "ko": "재료가공·조직제어"
+          }
+        },
+        {
+          "id": "nanotech-materials-006",
+          "category_id": "nanotech-materials",
+          "order": 6,
+          "name": {
+            "ja": "金属生産、資源生産",
+            "en": "Metals production and resources production",
+            "zh": "金属生产、资源生产",
+            "ko": "금속생산·자원생산"
+          }
+        },
+        {
+          "id": "nanotech-materials-007",
+          "category_id": "nanotech-materials",
+          "order": 7,
+          "name": {
+            "ja": "ナノ構造化学",
+            "en": "Nanometer-scale chemistry",
+            "zh": "纳米结构化学",
+            "ko": "나노구조화학"
+          }
+        },
+        {
+          "id": "nanotech-materials-008",
+          "category_id": "nanotech-materials",
+          "order": 8,
+          "name": {
+            "ja": "ナノ構造物理",
+            "en": "Nanostructural physics",
+            "zh": "纳米结构物理",
+            "ko": "나노구조물리"
+          }
+        },
+        {
+          "id": "nanotech-materials-009",
+          "category_id": "nanotech-materials",
+          "order": 9,
+          "name": {
+            "ja": "ナノ材料科学",
+            "en": "Nanomaterials",
+            "zh": "纳米材料科学",
+            "ko": "나노재료과학"
+          }
+        },
+        {
+          "id": "nanotech-materials-010",
+          "category_id": "nanotech-materials",
+          "order": 10,
+          "name": {
+            "ja": "ナノバイオサイエンス",
+            "en": "Nanobioscience",
+            "zh": "纳米生物科学",
+            "ko": "나노바이오사이언스"
+          }
+        },
+        {
+          "id": "nanotech-materials-011",
+          "category_id": "nanotech-materials",
+          "order": 11,
+          "name": {
+            "ja": "ナノマイクロシステム",
+            "en": "Nano/micro-systems",
+            "zh": "纳米微系统",
+            "ko": "나노마이크로시스템"
+          }
+        },
+        {
+          "id": "nanotech-materials-012",
+          "category_id": "nanotech-materials",
+          "order": 12,
+          "name": {
+            "ja": "応用物性",
+            "en": "Applied physical properties",
+            "zh": "应用物性",
+            "ko": "응용물성"
+          }
+        },
+        {
+          "id": "nanotech-materials-013",
+          "category_id": "nanotech-materials",
+          "order": 13,
+          "name": {
+            "ja": "薄膜、表面界面物性",
+            "en": "Thin film/surface and interfacial physical properties",
+            "zh": "薄膜、表面界面物性",
+            "ko": "박막·표면계면물성"
+          }
+        },
+        {
+          "id": "nanotech-materials-014",
+          "category_id": "nanotech-materials",
+          "order": 14,
+          "name": {
+            "ja": "応用物理一般",
+            "en": "Applied condensed matter physics",
+            "zh": "应用物理一般",
+            "ko": "응용물리 일반"
+          }
+        },
+        {
+          "id": "nanotech-materials-015",
+          "category_id": "nanotech-materials",
+          "order": 15,
+          "name": {
+            "ja": "結晶工学",
+            "en": "Crystal engineering",
+            "zh": "晶体工程",
+            "ko": "결정공학"
+          }
+        },
+        {
+          "id": "nanotech-materials-016",
+          "category_id": "nanotech-materials",
+          "order": 16,
+          "name": {
+            "ja": "光工学、光量子科学",
+            "en": "Optical engineering and photon science",
+            "zh": "光学工程、光量子科学",
+            "ko": "광공학·광양자과학"
+          }
+        },
+        {
+          "id": "nanotech-materials-017",
+          "category_id": "nanotech-materials",
+          "order": 17,
+          "name": {
+            "ja": "基礎物理化学",
+            "en": "Fundamental physical chemistry",
+            "zh": "基础物理化学",
+            "ko": "기초물리화학"
+          }
+        },
+        {
+          "id": "nanotech-materials-018",
+          "category_id": "nanotech-materials",
+          "order": 18,
+          "name": {
+            "ja": "機能物性化学",
+            "en": "Functional solid state chemistry",
+            "zh": "功能物性化学",
+            "ko": "기능물성화학"
+          }
+        },
+        {
+          "id": "nanotech-materials-019",
+          "category_id": "nanotech-materials",
+          "order": 19,
+          "name": {
+            "ja": "構造有機化学、物理有機化学",
+            "en": "Structural organic chemistry and physical organic chemistry",
+            "zh": "结构有机化学、物理有机化学",
+            "ko": "구조유기화학·물리유기화학"
+          }
+        },
+        {
+          "id": "nanotech-materials-020",
+          "category_id": "nanotech-materials",
+          "order": 20,
+          "name": {
+            "ja": "有機合成化学",
+            "en": "Synthetic organic chemistry",
+            "zh": "有机合成化学",
+            "ko": "유기합성화학"
+          }
+        },
+        {
+          "id": "nanotech-materials-021",
+          "category_id": "nanotech-materials",
+          "order": 21,
+          "name": {
+            "ja": "無機・錯体化学",
+            "en": "Inorganic/coordination chemistry",
+            "zh": "无机、配位化学",
+            "ko": "무기·착체화학"
+          }
+        },
+        {
+          "id": "nanotech-materials-022",
+          "category_id": "nanotech-materials",
+          "order": 22,
+          "name": {
+            "ja": "分析化学",
+            "en": "Analytical chemistry",
+            "zh": "分析化学",
+            "ko": "분석화학"
+          }
+        },
+        {
+          "id": "nanotech-materials-023",
+          "category_id": "nanotech-materials",
+          "order": 23,
+          "name": {
+            "ja": "グリーンサステイナブルケミストリー、環境化学",
+            "en": "Green sustainable chemistry and environmental chemistry",
+            "zh": "绿色可持续化学、环境化学",
+            "ko": "그린 지속가능화학·환경화학"
+          }
+        },
+        {
+          "id": "nanotech-materials-024",
+          "category_id": "nanotech-materials",
+          "order": 24,
+          "name": {
+            "ja": "高分子化学",
+            "en": "Polymer chemistry",
+            "zh": "高分子化学",
+            "ko": "고분자화학"
+          }
+        },
+        {
+          "id": "nanotech-materials-025",
+          "category_id": "nanotech-materials",
+          "order": 25,
+          "name": {
+            "ja": "高分子材料",
+            "en": "Polymer materials",
+            "zh": "高分子材料",
+            "ko": "고분자재료"
+          }
+        },
+        {
+          "id": "nanotech-materials-026",
+          "category_id": "nanotech-materials",
+          "order": 26,
+          "name": {
+            "ja": "有機機能材料",
+            "en": "Organic functional materials",
+            "zh": "有机功能材料",
+            "ko": "유기기능재료"
+          }
+        },
+        {
+          "id": "nanotech-materials-027",
+          "category_id": "nanotech-materials",
+          "order": 27,
+          "name": {
+            "ja": "無機物質、無機材料化学",
+            "en": "Inorganic compounds and inorganic materials chemistry",
+            "zh": "无机物质、无机材料化学",
+            "ko": "무기물질·무기재료화학"
+          }
+        },
+        {
+          "id": "nanotech-materials-028",
+          "category_id": "nanotech-materials",
+          "order": 28,
+          "name": {
+            "ja": "エネルギー化学",
+            "en": "Energy chemistry",
+            "zh": "能源化学",
+            "ko": "에너지화학"
+          }
+        },
+        {
+          "id": "nanotech-materials-029",
+          "category_id": "nanotech-materials",
+          "order": 29,
+          "name": {
+            "ja": "生体化学",
+            "en": "Bio chemistry",
+            "zh": "生物化学",
+            "ko": "생체화학"
+          }
+        },
+        {
+          "id": "nanotech-materials-030",
+          "category_id": "nanotech-materials",
+          "order": 30,
+          "name": {
+            "ja": "生物分子化学",
+            "en": "Chemistry and chemical methodology of biomolecules",
+            "zh": "生物分子化学",
+            "ko": "생물분자화학"
+          }
+        },
+        {
+          "id": "nanotech-materials-031",
+          "category_id": "nanotech-materials",
+          "order": 31,
+          "name": {
+            "ja": "ケミカルバイオロジー",
+            "en": "Chemical biology",
+            "zh": "化学生物学",
+            "ko": "케미컬바이올로지"
+          }
+        }
+      ]
+    },
+    {
+      "id": "energy",
+      "order": 5,
+      "name": {
+        "ja": "エネルギー",
+        "en": "Energy Engineering",
+        "zh": "能源",
+        "ko": "에너지"
+      },
+      "fields": [
+        {
+          "id": "energy-001",
+          "category_id": "energy",
+          "order": 1,
+          "name": {
+            "ja": "プラズマ科学",
+            "en": "Fundamental plasma",
+            "zh": "等离子体科学",
+            "ko": "플라즈마과학"
+          }
+        },
+        {
+          "id": "energy-002",
+          "category_id": "energy",
+          "order": 2,
+          "name": {
+            "ja": "核融合学",
+            "en": "Nuclear fusion",
+            "zh": "核聚变学",
+            "ko": "핵융합학"
+          }
+        },
+        {
+          "id": "energy-003",
+          "category_id": "energy",
+          "order": 3,
+          "name": {
+            "ja": "プラズマ応用科学",
+            "en": "Applied plasma science",
+            "zh": "等离子体应用科学",
+            "ko": "플라즈마응용과학"
+          }
+        },
+        {
+          "id": "energy-004",
+          "category_id": "energy",
+          "order": 4,
+          "name": {
+            "ja": "原子力工学",
+            "en": "Nuclear engineering",
+            "zh": "原子能工程",
+            "ko": "원자력공학"
+          }
+        },
+        {
+          "id": "energy-005",
+          "category_id": "energy",
+          "order": 5,
+          "name": {
+            "ja": "地球資源工学、エネルギー学",
+            "en": "Earth resource engineering, Energy sciences",
+            "zh": "地球资源工程、能源学",
+            "ko": "지구자원공학·에너지학"
+          }
+        },
+        {
+          "id": "energy-006",
+          "category_id": "energy",
+          "order": 6,
+          "name": {
+            "ja": "量子ビーム科学",
+            "en": "Quantum beam science",
+            "zh": "量子束科学",
+            "ko": "양자빔과학"
+          }
+        }
+      ]
+    },
+    {
+      "id": "manufacturing",
+      "order": 6,
+      "name": {
+        "ja": "ものづくり技術",
+        "en": "Manufacturing Technology",
+        "zh": "制造技术",
+        "ko": "모노즈쿠리기술"
+      },
+      "fields": [
+        {
+          "id": "manufacturing-001",
+          "category_id": "manufacturing",
+          "order": 1,
+          "name": {
+            "ja": "材料力学、機械材料",
+            "en": "Mechanics of materials and materials",
+            "zh": "材料力学、机械材料",
+            "ko": "재료역학·기계재료"
+          }
+        },
+        {
+          "id": "manufacturing-002",
+          "category_id": "manufacturing",
+          "order": 2,
+          "name": {
+            "ja": "加工学、生産工学",
+            "en": "Manufacturing and production engineering",
+            "zh": "加工学、生产工学",
+            "ko": "가공학·생산공학"
+          }
+        },
+        {
+          "id": "manufacturing-003",
+          "category_id": "manufacturing",
+          "order": 3,
+          "name": {
+            "ja": "設計工学",
+            "en": "Design engineering",
+            "zh": "设计工学",
+            "ko": "설계공학"
+          }
+        },
+        {
+          "id": "manufacturing-004",
+          "category_id": "manufacturing",
+          "order": 4,
+          "name": {
+            "ja": "機械要素、トライボロジー",
+            "en": "Machine elements and tribology",
+            "zh": "机械要素、摩擦学",
+            "ko": "기계요소·트라이볼로지"
+          }
+        },
+        {
+          "id": "manufacturing-005",
+          "category_id": "manufacturing",
+          "order": 5,
+          "name": {
+            "ja": "流体工学",
+            "en": "Fluid engineering",
+            "zh": "流体工学",
+            "ko": "유체공학"
+          }
+        },
+        {
+          "id": "manufacturing-006",
+          "category_id": "manufacturing",
+          "order": 6,
+          "name": {
+            "ja": "熱工学",
+            "en": "Thermal engineering",
+            "zh": "热工学",
+            "ko": "열공학"
+          }
+        },
+        {
+          "id": "manufacturing-007",
+          "category_id": "manufacturing",
+          "order": 7,
+          "name": {
+            "ja": "電力工学",
+            "en": "Power engineering",
+            "zh": "电力工学",
+            "ko": "전력공학"
+          }
+        },
+        {
+          "id": "manufacturing-008",
+          "category_id": "manufacturing",
+          "order": 8,
+          "name": {
+            "ja": "通信工学",
+            "en": "Communication and network engineering",
+            "zh": "通信工学",
+            "ko": "통신공학"
+          }
+        },
+        {
+          "id": "manufacturing-009",
+          "category_id": "manufacturing",
+          "order": 9,
+          "name": {
+            "ja": "計測工学",
+            "en": "Measurement engineering",
+            "zh": "计测工学",
+            "ko": "계측공학"
+          }
+        },
+        {
+          "id": "manufacturing-010",
+          "category_id": "manufacturing",
+          "order": 10,
+          "name": {
+            "ja": "制御、システム工学",
+            "en": "Control and system engineering",
+            "zh": "控制、系统工学",
+            "ko": "제어·시스템공학"
+          }
+        },
+        {
+          "id": "manufacturing-011",
+          "category_id": "manufacturing",
+          "order": 11,
+          "name": {
+            "ja": "電気電子材料工学",
+            "en": "Electric and electronic materials",
+            "zh": "电气电子材料工学",
+            "ko": "전기전자재료공학"
+          }
+        },
+        {
+          "id": "manufacturing-012",
+          "category_id": "manufacturing",
+          "order": 12,
+          "name": {
+            "ja": "電子デバイス、電子機器",
+            "en": "Electron device and electronic equipment",
+            "zh": "电子器件、电子设备",
+            "ko": "전자디바이스·전자기기"
+          }
+        },
+        {
+          "id": "manufacturing-013",
+          "category_id": "manufacturing",
+          "order": 13,
+          "name": {
+            "ja": "移動現象、単位操作",
+            "en": "Transport phenomena and unit operations",
+            "zh": "传递现象、单元操作",
+            "ko": "이동현상·단위조작"
+          }
+        },
+        {
+          "id": "manufacturing-014",
+          "category_id": "manufacturing",
+          "order": 14,
+          "name": {
+            "ja": "反応工学、プロセスシステム工学",
+            "en": "Chemical reaction and process system engineering",
+            "zh": "反应工学、过程系统工学",
+            "ko": "반응공학·프로세스시스템공학"
+          }
+        },
+        {
+          "id": "manufacturing-015",
+          "category_id": "manufacturing",
+          "order": 15,
+          "name": {
+            "ja": "触媒プロセス、資源化学プロセス",
+            "en": "Catalyst and resource chemical process",
+            "zh": "催化过程、资源化学过程",
+            "ko": "촉매프로세스·자원화학프로세스"
+          }
+        },
+        {
+          "id": "manufacturing-016",
+          "category_id": "manufacturing",
+          "order": 16,
+          "name": {
+            "ja": "バイオ機能応用、バイオプロセス工学",
+            "en": "Biofunction and bioprocess engineering",
+            "zh": "生物功能应用、生物过程工学",
+            "ko": "바이오기능응용·바이오프로세스공학"
+          }
+        }
+      ]
+    },
+    {
+      "id": "social-infrastructure",
+      "order": 7,
+      "name": {
+        "ja": "社会基盤",
+        "en": "Social Infrastructure",
+        "zh": "社会基础",
+        "ko": "사회기반"
+      },
+      "fields": [
+        {
+          "id": "social-infrastructure-001",
+          "category_id": "social-infrastructure",
+          "order": 1,
+          "name": {
+            "ja": "土木材料、施工、建設マネジメント",
+            "en": "Civil engineering material, execution and construction management",
+            "zh": "土木材料、施工、建设管理",
+            "ko": "토목재료·시공·건설매니지먼트"
+          }
+        },
+        {
+          "id": "social-infrastructure-002",
+          "category_id": "social-infrastructure",
+          "order": 2,
+          "name": {
+            "ja": "構造工学、地震工学",
+            "en": "Structure engineering and earthquake engineering",
+            "zh": "结构工程、地震工程",
+            "ko": "구조공학·지진공학"
+          }
+        },
+        {
+          "id": "social-infrastructure-003",
+          "category_id": "social-infrastructure",
+          "order": 3,
+          "name": {
+            "ja": "地盤工学",
+            "en": "Geotechnical engineering",
+            "zh": "岩土工程",
+            "ko": "지반공학"
+          }
+        },
+        {
+          "id": "social-infrastructure-004",
+          "category_id": "social-infrastructure",
+          "order": 4,
+          "name": {
+            "ja": "水工学",
+            "en": "Hydroengineering",
+            "zh": "水工学",
+            "ko": "수공학"
+          }
+        },
+        {
+          "id": "social-infrastructure-005",
+          "category_id": "social-infrastructure",
+          "order": 5,
+          "name": {
+            "ja": "土木計画学、交通工学",
+            "en": "Civil engineering plan and transportation engineering",
+            "zh": "土木规划学、交通工程",
+            "ko": "토목계획학·교통공학"
+          }
+        },
+        {
+          "id": "social-infrastructure-006",
+          "category_id": "social-infrastructure",
+          "order": 6,
+          "name": {
+            "ja": "土木環境システム",
+            "en": "Environmental systems for civil engineering",
+            "zh": "土木环境系统",
+            "ko": "토목환경시스템"
+          }
+        },
+        {
+          "id": "social-infrastructure-007",
+          "category_id": "social-infrastructure",
+          "order": 7,
+          "name": {
+            "ja": "建築構造、材料",
+            "en": "Building structures and materials",
+            "zh": "建筑结构、材料",
+            "ko": "건축구조·재료"
+          }
+        },
+        {
+          "id": "social-infrastructure-008",
+          "category_id": "social-infrastructure",
+          "order": 8,
+          "name": {
+            "ja": "建築環境、建築設備",
+            "en": "Architectural environment and building equipment",
+            "zh": "建筑环境、建筑设备",
+            "ko": "건축환경·건축설비"
+          }
+        },
+        {
+          "id": "social-infrastructure-009",
+          "category_id": "social-infrastructure",
+          "order": 9,
+          "name": {
+            "ja": "建築計画、都市計画",
+            "en": "Architectural planning and city planning",
+            "zh": "建筑规划、城市规划",
+            "ko": "건축계획·도시계획"
+          }
+        },
+        {
+          "id": "social-infrastructure-010",
+          "category_id": "social-infrastructure",
+          "order": 10,
+          "name": {
+            "ja": "建築史、意匠",
+            "en": "Architectural history and design",
+            "zh": "建筑史、意匠（设计）",
+            "ko": "건축사·의장"
+          }
+        },
+        {
+          "id": "social-infrastructure-011",
+          "category_id": "social-infrastructure",
+          "order": 11,
+          "name": {
+            "ja": "社会システム工学",
+            "en": "Social systems engineering",
+            "zh": "社会系统工程",
+            "ko": "사회시스템공학"
+          }
+        },
+        {
+          "id": "social-infrastructure-012",
+          "category_id": "social-infrastructure",
+          "order": 12,
+          "name": {
+            "ja": "安全工学",
+            "en": "Safety engineering",
+            "zh": "安全工程",
+            "ko": "안전공학"
+          }
+        },
+        {
+          "id": "social-infrastructure-013",
+          "category_id": "social-infrastructure",
+          "order": 13,
+          "name": {
+            "ja": "防災工学",
+            "en": "Disaster prevention engineering",
+            "zh": "防灾工程",
+            "ko": "방재공학"
+          }
+        }
+      ]
+    },
+    {
+      "id": "frontier",
+      "order": 8,
+      "name": {
+        "ja": "フロンティア",
+        "en": "Frontier Technology",
+        "zh": "前沿技术",
+        "ko": "프런티어"
+      },
+      "fields": [
+        {
+          "id": "frontier-001",
+          "category_id": "frontier",
+          "order": 1,
+          "name": {
+            "ja": "航空宇宙工学",
+            "en": "Aerospace engineering",
+            "zh": "航空航天工程",
+            "ko": "항공우주공학"
+          }
+        },
+        {
+          "id": "frontier-002",
+          "category_id": "frontier",
+          "order": 2,
+          "name": {
+            "ja": "船舶海洋工学",
+            "en": "Marine engineering",
+            "zh": "船舶海洋工程",
+            "ko": "선박해양공학"
+          }
+        }
+      ]
+    },
+    {
+      "id": "humanities-social",
+      "order": 9,
+      "name": {
+        "ja": "人文・社会",
+        "en": "Humanities & Social Sciences",
+        "zh": "人文·社会",
+        "ko": "인문·사회"
+      },
+      "fields": [
+        {
+          "id": "humanities-social-001",
+          "category_id": "humanities-social",
+          "order": 1,
+          "name": {
+            "ja": "哲学、倫理学",
+            "en": "Philosophy and ethics",
+            "zh": "哲学、伦理学",
+            "ko": "철학·윤리학"
+          }
+        },
+        {
+          "id": "humanities-social-002",
+          "category_id": "humanities-social",
+          "order": 2,
+          "name": {
+            "ja": "中国哲学、印度哲学、仏教学",
+            "en": "Chinese philosophy, Indian philosophy and Buddhist philosophy",
+            "zh": "中国哲学、印度哲学、佛教学",
+            "ko": "중국철학·인도철학·불교학"
+          }
+        },
+        {
+          "id": "humanities-social-003",
+          "category_id": "humanities-social",
+          "order": 3,
+          "name": {
+            "ja": "宗教学",
+            "en": "Religious studies",
+            "zh": "宗教学",
+            "ko": "종교학"
+          }
+        },
+        {
+          "id": "humanities-social-004",
+          "category_id": "humanities-social",
+          "order": 4,
+          "name": {
+            "ja": "思想史",
+            "en": "History of thought",
+            "zh": "思想史",
+            "ko": "사상사"
+          }
+        },
+        {
+          "id": "humanities-social-005",
+          "category_id": "humanities-social",
+          "order": 5,
+          "name": {
+            "ja": "美学、芸術論",
+            "en": "Aesthetics and art studies",
+            "zh": "美学、艺术论",
+            "ko": "미학·예술론"
+          }
+        },
+        {
+          "id": "humanities-social-006",
+          "category_id": "humanities-social",
+          "order": 6,
+          "name": {
+            "ja": "美術史",
+            "en": "History of arts",
+            "zh": "美术史",
+            "ko": "미술사"
+          }
+        },
+        {
+          "id": "humanities-social-007",
+          "category_id": "humanities-social",
+          "order": 7,
+          "name": {
+            "ja": "芸術実践論",
+            "en": "Theory of art practice",
+            "zh": "艺术实践论",
+            "ko": "예술실천론"
+          }
+        },
+        {
+          "id": "humanities-social-008",
+          "category_id": "humanities-social",
+          "order": 8,
+          "name": {
+            "ja": "科学社会学、科学技術史",
+            "en": "Sociology of science, history of science and technology",
+            "zh": "科学社会学、科学技术史",
+            "ko": "과학사회학·과학기술사"
+          }
+        },
+        {
+          "id": "humanities-social-009",
+          "category_id": "humanities-social",
+          "order": 9,
+          "name": {
+            "ja": "日本文学",
+            "en": "Japanese literature",
+            "zh": "日本文学",
+            "ko": "일본문학"
+          }
+        },
+        {
+          "id": "humanities-social-010",
+          "category_id": "humanities-social",
+          "order": 10,
+          "name": {
+            "ja": "中国文学",
+            "en": "Chinese literature",
+            "zh": "中国文学",
+            "ko": "중국문학"
+          }
+        },
+        {
+          "id": "humanities-social-011",
+          "category_id": "humanities-social",
+          "order": 11,
+          "name": {
+            "ja": "英文学、英語圏文学",
+            "en": "English literature and literature in the English language",
+            "zh": "英国文学、英语圈文学",
+            "ko": "영문학·영어권문학"
+          }
+        },
+        {
+          "id": "humanities-social-012",
+          "category_id": "humanities-social",
+          "order": 12,
+          "name": {
+            "ja": "ヨーロッパ文学",
+            "en": "European literature",
+            "zh": "欧洲文学",
+            "ko": "유럽문학"
+          }
+        },
+        {
+          "id": "humanities-social-013",
+          "category_id": "humanities-social",
+          "order": 13,
+          "name": {
+            "ja": "文学一般",
+            "en": "Literature in general",
+            "zh": "文学一般",
+            "ko": "문학 일반"
+          }
+        },
+        {
+          "id": "humanities-social-014",
+          "category_id": "humanities-social",
+          "order": 14,
+          "name": {
+            "ja": "言語学",
+            "en": "Linguistics",
+            "zh": "语言学",
+            "ko": "언어학"
+          }
+        },
+        {
+          "id": "humanities-social-015",
+          "category_id": "humanities-social",
+          "order": 15,
+          "name": {
+            "ja": "日本語学",
+            "en": "Japanese linguistics",
+            "zh": "日语学",
+            "ko": "일본어학"
+          }
+        },
+        {
+          "id": "humanities-social-016",
+          "category_id": "humanities-social",
+          "order": 16,
+          "name": {
+            "ja": "英語学",
+            "en": "English linguistics",
+            "zh": "英语学",
+            "ko": "영어학"
+          }
+        },
+        {
+          "id": "humanities-social-017",
+          "category_id": "humanities-social",
+          "order": 17,
+          "name": {
+            "ja": "日本語教育",
+            "en": "Japanese language education",
+            "zh": "日语教育",
+            "ko": "일본어교육"
+          }
+        },
+        {
+          "id": "humanities-social-018",
+          "category_id": "humanities-social",
+          "order": 18,
+          "name": {
+            "ja": "外国語教育",
+            "en": "Foreign language education",
+            "zh": "外语教育",
+            "ko": "외국어교육"
+          }
+        },
+        {
+          "id": "humanities-social-019",
+          "category_id": "humanities-social",
+          "order": 19,
+          "name": {
+            "ja": "史学一般",
+            "en": "Historical studies in general",
+            "zh": "史学一般",
+            "ko": "사학 일반"
+          }
+        },
+        {
+          "id": "humanities-social-020",
+          "category_id": "humanities-social",
+          "order": 20,
+          "name": {
+            "ja": "日本史",
+            "en": "Japanese history",
+            "zh": "日本史",
+            "ko": "일본사"
+          }
+        },
+        {
+          "id": "humanities-social-021",
+          "category_id": "humanities-social",
+          "order": 21,
+          "name": {
+            "ja": "アジア史、アフリカ史",
+            "en": "History of Asia and Africa",
+            "zh": "亚洲史、非洲史",
+            "ko": "아시아사·아프리카사"
+          }
+        },
+        {
+          "id": "humanities-social-022",
+          "category_id": "humanities-social",
+          "order": 22,
+          "name": {
+            "ja": "ヨーロッパ史、アメリカ史",
+            "en": "History of Europe and America",
+            "zh": "欧洲史、美洲史",
+            "ko": "유럽사·아메리카사"
+          }
+        },
+        {
+          "id": "humanities-social-023",
+          "category_id": "humanities-social",
+          "order": 23,
+          "name": {
+            "ja": "考古学",
+            "en": "Archaeology",
+            "zh": "考古学",
+            "ko": "고고학"
+          }
+        },
+        {
+          "id": "humanities-social-024",
+          "category_id": "humanities-social",
+          "order": 24,
+          "name": {
+            "ja": "文化財科学",
+            "en": "Cultural assets study",
+            "zh": "文化遗产科学",
+            "ko": "문화재과학"
+          }
+        },
+        {
+          "id": "humanities-social-025",
+          "category_id": "humanities-social",
+          "order": 25,
+          "name": {
+            "ja": "博物館学",
+            "en": "Museology",
+            "zh": "博物馆学",
+            "ko": "박물관학"
+          }
+        },
+        {
+          "id": "humanities-social-026",
+          "category_id": "humanities-social",
+          "order": 26,
+          "name": {
+            "ja": "地理学",
+            "en": "Geography",
+            "zh": "地理学",
+            "ko": "지리학"
+          }
+        },
+        {
+          "id": "humanities-social-027",
+          "category_id": "humanities-social",
+          "order": 27,
+          "name": {
+            "ja": "人文地理学",
+            "en": "Human geography",
+            "zh": "人文地理学",
+            "ko": "인문지리학"
+          }
+        },
+        {
+          "id": "humanities-social-028",
+          "category_id": "humanities-social",
+          "order": 28,
+          "name": {
+            "ja": "文化人類学、民俗学",
+            "en": "Cultural anthropology and folklore",
+            "zh": "文化人类学、民俗学",
+            "ko": "문화인류학·민속학"
+          }
+        },
+        {
+          "id": "humanities-social-029",
+          "category_id": "humanities-social",
+          "order": 29,
+          "name": {
+            "ja": "基礎法学",
+            "en": "Legal theory and history",
+            "zh": "基础法学",
+            "ko": "기초법학"
+          }
+        },
+        {
+          "id": "humanities-social-030",
+          "category_id": "humanities-social",
+          "order": 30,
+          "name": {
+            "ja": "公法学",
+            "en": "Public law",
+            "zh": "公法学",
+            "ko": "공법학"
+          }
+        },
+        {
+          "id": "humanities-social-031",
+          "category_id": "humanities-social",
+          "order": 31,
+          "name": {
+            "ja": "国際法学",
+            "en": "International law",
+            "zh": "国际法学",
+            "ko": "국제법학"
+          }
+        },
+        {
+          "id": "humanities-social-032",
+          "category_id": "humanities-social",
+          "order": 32,
+          "name": {
+            "ja": "社会法学",
+            "en": "Social law",
+            "zh": "社会法学",
+            "ko": "사회법학"
+          }
+        },
+        {
+          "id": "humanities-social-033",
+          "category_id": "humanities-social",
+          "order": 33,
+          "name": {
+            "ja": "刑事法学",
+            "en": "Criminal law",
+            "zh": "刑事法学",
+            "ko": "형사법학"
+          }
+        },
+        {
+          "id": "humanities-social-034",
+          "category_id": "humanities-social",
+          "order": 34,
+          "name": {
+            "ja": "民事法学",
+            "en": "Civil law",
+            "zh": "民事法学",
+            "ko": "민사법학"
+          }
+        },
+        {
+          "id": "humanities-social-035",
+          "category_id": "humanities-social",
+          "order": 35,
+          "name": {
+            "ja": "新領域法学",
+            "en": "New fields of law",
+            "zh": "新领域法学",
+            "ko": "신영역법학"
+          }
+        },
+        {
+          "id": "humanities-social-036",
+          "category_id": "humanities-social",
+          "order": 36,
+          "name": {
+            "ja": "政治学",
+            "en": "Politics",
+            "zh": "政治学",
+            "ko": "정치학"
+          }
+        },
+        {
+          "id": "humanities-social-037",
+          "category_id": "humanities-social",
+          "order": 37,
+          "name": {
+            "ja": "国際関係論",
+            "en": "International relations",
+            "zh": "国际关系论",
+            "ko": "국제관계론"
+          }
+        },
+        {
+          "id": "humanities-social-038",
+          "category_id": "humanities-social",
+          "order": 38,
+          "name": {
+            "ja": "理論経済学",
+            "en": "Economic theory",
+            "zh": "理论经济学",
+            "ko": "이론경제학"
+          }
+        },
+        {
+          "id": "humanities-social-039",
+          "category_id": "humanities-social",
+          "order": 39,
+          "name": {
+            "ja": "経済学説、経済思想",
+            "en": "Economic doctrines and economic thought",
+            "zh": "经济学说、经济思想",
+            "ko": "경제학설·경제사상"
+          }
+        },
+        {
+          "id": "humanities-social-040",
+          "category_id": "humanities-social",
+          "order": 40,
+          "name": {
+            "ja": "経済統計",
+            "en": "Economic statistics",
+            "zh": "经济统计",
+            "ko": "경제통계"
+          }
+        },
+        {
+          "id": "humanities-social-041",
+          "category_id": "humanities-social",
+          "order": 41,
+          "name": {
+            "ja": "経済政策",
+            "en": "Economic policy",
+            "zh": "经济政策",
+            "ko": "경제정책"
+          }
+        },
+        {
+          "id": "humanities-social-042",
+          "category_id": "humanities-social",
+          "order": 42,
+          "name": {
+            "ja": "公共経済、労働経済",
+            "en": "Public economics and labor economics",
+            "zh": "公共经济、劳动经济",
+            "ko": "공공경제·노동경제"
+          }
+        },
+        {
+          "id": "humanities-social-043",
+          "category_id": "humanities-social",
+          "order": 43,
+          "name": {
+            "ja": "金融、ファイナンス",
+            "en": "Money and finance",
+            "zh": "金融、财务",
+            "ko": "금융·파이낸스"
+          }
+        },
+        {
+          "id": "humanities-social-044",
+          "category_id": "humanities-social",
+          "order": 44,
+          "name": {
+            "ja": "経済史",
+            "en": "Economic history",
+            "zh": "经济史",
+            "ko": "경제사"
+          }
+        },
+        {
+          "id": "humanities-social-045",
+          "category_id": "humanities-social",
+          "order": 45,
+          "name": {
+            "ja": "経営学",
+            "en": "Business administration",
+            "zh": "经营学",
+            "ko": "경영학"
+          }
+        },
+        {
+          "id": "humanities-social-046",
+          "category_id": "humanities-social",
+          "order": 46,
+          "name": {
+            "ja": "商学",
+            "en": "Commerce",
+            "zh": "商学",
+            "ko": "상학"
+          }
+        },
+        {
+          "id": "humanities-social-047",
+          "category_id": "humanities-social",
+          "order": 47,
+          "name": {
+            "ja": "会計学",
+            "en": "Accounting",
+            "zh": "会计学",
+            "ko": "회계학"
+          }
+        },
+        {
+          "id": "humanities-social-048",
+          "category_id": "humanities-social",
+          "order": 48,
+          "name": {
+            "ja": "社会学",
+            "en": "Sociology",
+            "zh": "社会学",
+            "ko": "사회학"
+          }
+        },
+        {
+          "id": "humanities-social-049",
+          "category_id": "humanities-social",
+          "order": 49,
+          "name": {
+            "ja": "社会福祉学",
+            "en": "Social welfare",
+            "zh": "社会福祉学",
+            "ko": "사회복지학"
+          }
+        },
+        {
+          "id": "humanities-social-050",
+          "category_id": "humanities-social",
+          "order": 50,
+          "name": {
+            "ja": "家政学、生活科学",
+            "en": "Family and consumer sciences, and culture and living",
+            "zh": "家政学、生活科学",
+            "ko": "가정학·생활과학"
+          }
+        },
+        {
+          "id": "humanities-social-051",
+          "category_id": "humanities-social",
+          "order": 51,
+          "name": {
+            "ja": "教育学",
+            "en": "Education",
+            "zh": "教育学",
+            "ko": "교육학"
+          }
+        },
+        {
+          "id": "humanities-social-052",
+          "category_id": "humanities-social",
+          "order": 52,
+          "name": {
+            "ja": "教育社会学",
+            "en": "Sociology of education",
+            "zh": "教育社会学",
+            "ko": "교육사회학"
+          }
+        },
+        {
+          "id": "humanities-social-053",
+          "category_id": "humanities-social",
+          "order": 53,
+          "name": {
+            "ja": "子ども学、保育学",
+            "en": "Childhood and nursery/pre-school education",
+            "zh": "儿童学、保育学",
+            "ko": "아동학·보육학"
+          }
+        },
+        {
+          "id": "humanities-social-054",
+          "category_id": "humanities-social",
+          "order": 54,
+          "name": {
+            "ja": "教科教育学、初等中等教育学",
+            "en": "Education on school subjects and primary/secondary education",
+            "zh": "学科教育学、初等中等教育学",
+            "ko": "교과교육학·초등중등교육학"
+          }
+        },
+        {
+          "id": "humanities-social-055",
+          "category_id": "humanities-social",
+          "order": 55,
+          "name": {
+            "ja": "高等教育学",
+            "en": "Tertiary education",
+            "zh": "高等教育学",
+            "ko": "고등교육학"
+          }
+        },
+        {
+          "id": "humanities-social-056",
+          "category_id": "humanities-social",
+          "order": 56,
+          "name": {
+            "ja": "特別支援教育",
+            "en": "Special needs education",
+            "zh": "特殊支援教育",
+            "ko": "특수교육"
+          }
+        },
+        {
+          "id": "humanities-social-057",
+          "category_id": "humanities-social",
+          "order": 57,
+          "name": {
+            "ja": "教育工学",
+            "en": "Educational technology",
+            "zh": "教育工学",
+            "ko": "교육공학"
+          }
+        },
+        {
+          "id": "humanities-social-058",
+          "category_id": "humanities-social",
+          "order": 58,
+          "name": {
+            "ja": "科学教育",
+            "en": "Science education",
+            "zh": "科学教育",
+            "ko": "과학교육"
+          }
+        },
+        {
+          "id": "humanities-social-059",
+          "category_id": "humanities-social",
+          "order": 59,
+          "name": {
+            "ja": "社会心理学",
+            "en": "Social psychology",
+            "zh": "社会心理学",
+            "ko": "사회심리학"
+          }
+        },
+        {
+          "id": "humanities-social-060",
+          "category_id": "humanities-social",
+          "order": 60,
+          "name": {
+            "ja": "教育心理学",
+            "en": "Educational psychology",
+            "zh": "教育心理学",
+            "ko": "교육심리학"
+          }
+        },
+        {
+          "id": "humanities-social-061",
+          "category_id": "humanities-social",
+          "order": 61,
+          "name": {
+            "ja": "臨床心理学",
+            "en": "Clinical psychology",
+            "zh": "临床心理学",
+            "ko": "임상심리학"
+          }
+        },
+        {
+          "id": "humanities-social-062",
+          "category_id": "humanities-social",
+          "order": 62,
+          "name": {
+            "ja": "実験心理学",
+            "en": "Experimental psychology",
+            "zh": "实验心理学",
+            "ko": "실험심리학"
+          }
+        },
+        {
+          "id": "humanities-social-063",
+          "category_id": "humanities-social",
+          "order": 63,
+          "name": {
+            "ja": "食料農業経済",
+            "en": "Agricultural and food economics",
+            "zh": "食品农业经济",
+            "ko": "식료농업경제"
+          }
+        },
+        {
+          "id": "humanities-social-064",
+          "category_id": "humanities-social",
+          "order": 64,
+          "name": {
+            "ja": "地域研究",
+            "en": "Area studies",
+            "zh": "区域研究",
+            "ko": "지역연구"
+          }
+        },
+        {
+          "id": "humanities-social-065",
+          "category_id": "humanities-social",
+          "order": 65,
+          "name": {
+            "ja": "観光学",
+            "en": "Tourism studies",
+            "zh": "旅游学",
+            "ko": "관광학"
+          }
+        },
+        {
+          "id": "humanities-social-066",
+          "category_id": "humanities-social",
+          "order": 66,
+          "name": {
+            "ja": "ジェンダー",
+            "en": "Gender studies",
+            "zh": "性别研究",
+            "ko": "젠더"
+          }
+        },
+        {
+          "id": "humanities-social-067",
+          "category_id": "humanities-social",
+          "order": 67,
+          "name": {
+            "ja": "デザイン学",
+            "en": "Design",
+            "zh": "设计学",
+            "ko": "디자인학"
+          }
+        },
+        {
+          "id": "humanities-social-068",
+          "category_id": "humanities-social",
+          "order": 68,
+          "name": {
+            "ja": "図書館情報学、人文社会情報学",
+            "en": "Library and information science, humanistic and social informatics",
+            "zh": "图书馆情报学、人文社会信息学",
+            "ko": "도서관정보학·인문사회정보학"
+          }
+        },
+        {
+          "id": "humanities-social-069",
+          "category_id": "humanities-social",
+          "order": 69,
+          "name": {
+            "ja": "認知科学",
+            "en": "Cognitive science",
+            "zh": "认知科学",
+            "ko": "인지과학"
+          }
+        }
+      ]
+    },
+    {
+      "id": "natural-science",
+      "order": 10,
+      "name": {
+        "ja": "自然科学一般",
+        "en": "Natural Science",
+        "zh": "自然科学一般",
+        "ko": "자연과학 일반"
+      },
+      "fields": [
+        {
+          "id": "natural-science-001",
+          "category_id": "natural-science",
+          "order": 1,
+          "name": {
+            "ja": "代数学",
+            "en": "Algebra",
+            "zh": "代数学",
+            "ko": "대수학"
+          }
+        },
+        {
+          "id": "natural-science-002",
+          "category_id": "natural-science",
+          "order": 2,
+          "name": {
+            "ja": "幾何学",
+            "en": "Geometry",
+            "zh": "几何学",
+            "ko": "기하학"
+          }
+        },
+        {
+          "id": "natural-science-003",
+          "category_id": "natural-science",
+          "order": 3,
+          "name": {
+            "ja": "基礎解析学",
+            "en": "Basic analysis",
+            "zh": "基础解析学",
+            "ko": "기초해석학"
+          }
+        },
+        {
+          "id": "natural-science-004",
+          "category_id": "natural-science",
+          "order": 4,
+          "name": {
+            "ja": "数理解析学",
+            "en": "Mathematical analysis",
+            "zh": "数理解析学",
+            "ko": "수리해석학"
+          }
+        },
+        {
+          "id": "natural-science-005",
+          "category_id": "natural-science",
+          "order": 5,
+          "name": {
+            "ja": "数学基礎",
+            "en": "Basic mathematics",
+            "zh": "数学基础",
+            "ko": "수학기초"
+          }
+        },
+        {
+          "id": "natural-science-006",
+          "category_id": "natural-science",
+          "order": 6,
+          "name": {
+            "ja": "応用数学、統計数学",
+            "en": "Applied mathematics and statistics",
+            "zh": "应用数学、统计数学",
+            "ko": "응용수학·통계수학"
+          }
+        },
+        {
+          "id": "natural-science-007",
+          "category_id": "natural-science",
+          "order": 7,
+          "name": {
+            "ja": "数理物理、物性基礎",
+            "en": "Mathematical physics and fundamental theory of condensed matter physics",
+            "zh": "数理物理、物性基础",
+            "ko": "수리물리·물성기초"
+          }
+        },
+        {
+          "id": "natural-science-008",
+          "category_id": "natural-science",
+          "order": 8,
+          "name": {
+            "ja": "半導体、光物性、原子物理",
+            "en": "Semiconductors, optical properties of condensed matter and atomic physics",
+            "zh": "半导体、光物性、原子物理",
+            "ko": "반도체·광물성·원자물리"
+          }
+        },
+        {
+          "id": "natural-science-009",
+          "category_id": "natural-science",
+          "order": 9,
+          "name": {
+            "ja": "磁性、超伝導、強相関系",
+            "en": "Magnetism, superconductivity and strongly correlated systems",
+            "zh": "磁性、超导、强关联系",
+            "ko": "자성·초전도·강상관계"
+          }
+        },
+        {
+          "id": "natural-science-010",
+          "category_id": "natural-science",
+          "order": 10,
+          "name": {
+            "ja": "生物物理、化学物理、ソフトマターの物理",
+            "en": "Biophysics, chemical physics and soft matter physics",
+            "zh": "生物物理、化学物理、软物质物理",
+            "ko": "생물물리·화학물리·소프트매터물리"
+          }
+        },
+        {
+          "id": "natural-science-011",
+          "category_id": "natural-science",
+          "order": 11,
+          "name": {
+            "ja": "素粒子、原子核、宇宙線、宇宙物理にする理論",
+            "en": "Theoretical studies related to particle-, nuclear-, cosmic ray and astro-physics",
+            "zh": "粒子、原子核、宇宙线、宇宙物理相关理论",
+            "ko": "소립자·원자핵·우주선·우주물리 관련 이론"
+          }
+        },
+        {
+          "id": "natural-science-012",
+          "category_id": "natural-science",
+          "order": 12,
+          "name": {
+            "ja": "素粒子、原子核、宇宙線、宇宙物理にする実験",
+            "en": "Experimental studies related to particle-, nuclear-, cosmic ray and astro-physics",
+            "zh": "粒子、原子核、宇宙线、宇宙物理相关实验",
+            "ko": "소립자·원자핵·우주선·우주물리 관련 실험"
+          }
+        },
+        {
+          "id": "natural-science-013",
+          "category_id": "natural-science",
+          "order": 13,
+          "name": {
+            "ja": "天文学",
+            "en": "Astronomy",
+            "zh": "天文学",
+            "ko": "천문학"
+          }
+        },
+        {
+          "id": "natural-science-014",
+          "category_id": "natural-science",
+          "order": 14,
+          "name": {
+            "ja": "宇宙惑星科学",
+            "en": "Space and planetary sciences",
+            "zh": "宇宙行星科学",
+            "ko": "우주행성과학"
+          }
+        },
+        {
+          "id": "natural-science-015",
+          "category_id": "natural-science",
+          "order": 15,
+          "name": {
+            "ja": "大気水圏科学",
+            "en": "Atmospheric and hydrospheric sciences",
+            "zh": "大气水圈科学",
+            "ko": "대기수권과학"
+          }
+        },
+        {
+          "id": "natural-science-016",
+          "category_id": "natural-science",
+          "order": 16,
+          "name": {
+            "ja": "地球人間圏科学",
+            "en": "Human geosciences",
+            "zh": "地球人类圈科学",
+            "ko": "지구인간권과학"
+          }
+        },
+        {
+          "id": "natural-science-017",
+          "category_id": "natural-science",
+          "order": 17,
+          "name": {
+            "ja": "固体地球科学",
+            "en": "Solid earth sciences",
+            "zh": "固体地球科学",
+            "ko": "고체지구과학"
+          }
+        },
+        {
+          "id": "natural-science-018",
+          "category_id": "natural-science",
+          "order": 18,
+          "name": {
+            "ja": "地球生命科学",
+            "en": "Biogeosciences",
+            "zh": "地球生命科学",
+            "ko": "지구생명과학"
+          }
+        }
+      ]
+    },
+    {
+      "id": "others",
+      "order": 11,
+      "name": {
+        "ja": "その他",
+        "en": "Others",
+        "zh": "其他",
+        "ko": "기타"
+      },
+      "fields": [
+        {
+          "id": "others-001",
+          "category_id": "others",
+          "order": 1,
+          "name": {
+            "ja": "その他",
+            "en": "Others",
+            "zh": "其他",
+            "ko": "기타"
+          }
+        }
+      ]
+    }
+  ]
+}

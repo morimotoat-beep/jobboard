@@ -149,7 +149,8 @@
       "invalidDeadline": "締切日は今日以降（2年以内）の日付を指定してください。",
       "invalidChoice": "選択内容が正しくありません。",
       "rateLimited": "このメールアドレスからの投稿が多すぎます。明日以降に再度お試しください。",
-      "sendFailed": "処理に失敗しました。時間をおいて再度お試しください。"
+      "sendFailed": "処理に失敗しました。時間をおいて再度お試しください。",
+      "tooManyFields": "研究分野が多すぎます（最大50件）"
     }
   },
   "manage": {
@@ -180,21 +181,6 @@
     "linkFlaggedBody": "掲載中の求人「{title}」の応募・詳細URLに3日連続でアクセスできない状態（404等）を確認したため、求人を一時非表示にしました。\n\nURLをご確認のうえ、以下の管理ページから修正・保存いただくと再公開されます。リンクが回復した場合は自動的に再公開されます。\n\n{url}"
   },
   "filters": {
-    "field": {
-      "label": "研究分野",
-      "field_math": "数学・統計学",
-      "field_physics": "物理学",
-      "field_chemistry": "化学",
-      "field_biology": "生物学・生命科学",
-      "field_earth": "地球科学・宇宙科学",
-      "field_medicine": "医学・歯学・健康科学",
-      "field_pharmacy": "薬学",
-      "field_agriculture": "農学・獣医学・水産学",
-      "field_engineering": "工学",
-      "field_informatics": "情報科学・データサイエンス",
-      "field_environment": "環境科学",
-      "field_interdisciplinary": "学際・その他"
-    },
     "jobType": {
       "label": "職種",
       "job_professor": "教授",
@@ -224,5 +210,16 @@
     "en": "English",
     "zh": "中文",
     "ko": "한국어"
+  },
+  "researchFields": {
+    "label": "研究分野（詳細・複数選択）",
+    "help": "JREC-IN準拠の細目から、当てはまるものを選んでください（複数可）。",
+    "categoryPlaceholder": "大分類を選択",
+    "searchPlaceholder": "分野名で絞り込み…",
+    "selectCategory": "この大分類をまとめて選択",
+    "deselectCategory": "まとめて解除",
+    "clearAll": "すべて解除",
+    "remove": "削除",
+    "noResults": "該当する分野がありません"
   }
 }

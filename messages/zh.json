@@ -143,7 +143,8 @@
       "invalidDeadline": "截止日期须为今天以后（两年以内）。",
       "invalidChoice": "选择无效。",
       "rateLimited": "该邮箱提交过于频繁，请明天再试。",
-      "sendFailed": "处理失败，请稍后重试。"
+      "sendFailed": "处理失败，请稍后重试。",
+      "tooManyFields": "研究领域过多（最多50个）"
     }
   },
   "manage": {
@@ -174,21 +175,6 @@
     "linkFlaggedBody": "您发布的招聘信息「{title}」的申请·详情URL已连续3天无法访问（404等），该信息已被暂时隐藏。\n\n请确认URL是否正确，并通过以下管理页面修改保存后即可重新发布。如链接恢复，也会自动重新发布。\n\n{url}"
   },
   "filters": {
-    "field": {
-      "label": "研究领域",
-      "field_math": "数学·统计学",
-      "field_physics": "物理学",
-      "field_chemistry": "化学",
-      "field_biology": "生物学·生命科学",
-      "field_earth": "地球科学·空间科学",
-      "field_medicine": "医学·口腔医学·健康科学",
-      "field_pharmacy": "药学",
-      "field_agriculture": "农学·兽医学·水产学",
-      "field_engineering": "工学",
-      "field_informatics": "信息科学·数据科学",
-      "field_environment": "环境科学",
-      "field_interdisciplinary": "跨学科·其他"
-    },
     "jobType": {
       "label": "职位类型",
       "job_professor": "教授",
@@ -218,5 +204,16 @@
     "en": "English",
     "zh": "中文",
     "ko": "한국어"
+  },
+  "researchFields": {
+    "label": "研究领域（细目·可多选）",
+    "help": "请从JREC-IN细目中选择适用项（可多选）。",
+    "categoryPlaceholder": "选择大类",
+    "searchPlaceholder": "按领域名称筛选…",
+    "selectCategory": "选择该大类全部",
+    "deselectCategory": "取消该大类",
+    "clearAll": "全部清除",
+    "remove": "移除",
+    "noResults": "没有匹配的领域"
   }
 }

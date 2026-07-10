@@ -4,22 +4,6 @@
 export const LOCALES = ["ja", "en", "zh", "ko"] as const;
 export type Locale = (typeof LOCALES)[number];
 
-export const FIELD_CODES = [
-  "field_math",
-  "field_physics",
-  "field_chemistry",
-  "field_biology",
-  "field_earth",
-  "field_medicine",
-  "field_pharmacy",
-  "field_agriculture",
-  "field_engineering",
-  "field_informatics",
-  "field_environment",
-  "field_interdisciplinary",
-] as const;
-export type FieldCode = (typeof FIELD_CODES)[number];
-
 export const JOB_TYPE_CODES = [
   "job_professor",
   "job_assoc_prof",

@@ -143,7 +143,8 @@
       "invalidDeadline": "Deadline must be today or later (within 2 years).",
       "invalidChoice": "Invalid selection.",
       "rateLimited": "Too many submissions from this email address. Please try again tomorrow.",
-      "sendFailed": "Something went wrong. Please try again later."
+      "sendFailed": "Something went wrong. Please try again later.",
+      "tooManyFields": "Too many research fields (max 50)"
     }
   },
   "manage": {
@@ -174,21 +175,6 @@
     "linkFlaggedBody": "The application URL of your listing \"{title}\" has been unreachable (404, etc.) for 3 consecutive days, so the listing has been temporarily hidden.\n\nPlease check the URL and update it from the management page below — saving your changes will republish the listing. It will also be republished automatically if the link recovers.\n\n{url}"
   },
   "filters": {
-    "field": {
-      "label": "Research Field",
-      "field_math": "Mathematics & Statistics",
-      "field_physics": "Physics",
-      "field_chemistry": "Chemistry",
-      "field_biology": "Biology & Life Sciences",
-      "field_earth": "Earth & Space Sciences",
-      "field_medicine": "Medicine, Dentistry & Health Sciences",
-      "field_pharmacy": "Pharmaceutical Sciences",
-      "field_agriculture": "Agriculture, Veterinary & Fisheries",
-      "field_engineering": "Engineering",
-      "field_informatics": "Information Science & Data Science",
-      "field_environment": "Environmental Science",
-      "field_interdisciplinary": "Interdisciplinary & Other"
-    },
     "jobType": {
       "label": "Position Type",
       "job_professor": "Professor",
@@ -218,5 +204,16 @@
     "en": "English",
     "zh": "中文",
     "ko": "한국어"
+  },
+  "researchFields": {
+    "label": "Research fields (detailed, multi-select)",
+    "help": "Select all applicable detailed fields (based on JREC-IN).",
+    "categoryPlaceholder": "Select a major field",
+    "searchPlaceholder": "Filter by field name…",
+    "selectCategory": "Select all in this category",
+    "deselectCategory": "Clear this category",
+    "clearAll": "Clear all",
+    "remove": "Remove",
+    "noResults": "No matching fields"
   }
 }

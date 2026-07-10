@@ -4,7 +4,6 @@ import { useActionState, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import {
   EMPLOYMENT_TYPE_CODES,
-  FIELD_CODES,
   JOB_TYPE_CODES,
   LOCALES,
   ORGANIZATION_TYPE_CODES,
@@ -13,11 +12,19 @@ import {
 import { COUNTRY_CODES, getCountryName } from "@/lib/countries";
 import { PREFECTURES } from "@/lib/prefectures";
 import type { FormState } from "@/app/[locale]/post/actions";
+import ResearchFieldSelect from "@/components/ResearchFieldSelect";
+
+// ResearchFieldSelect に渡す大分類ツリー（server の researchFields.ts と構造互換）
+type Named = { name_ja: string; name_en: string; name_zh: string; name_ko: string };
+type FieldTree = (Named & {
+  id: string;
+  fields: (Named & { id: string; category_id: string })[];
+})[];
 
 type InitialValues = {
   title?: string;
   summary?: string;
-  field?: string;
+  field_ids?: string[];
   job_type?: string;
   employment_type?: string;
   organization_type?: string;
@@ -32,6 +39,7 @@ type InitialValues = {
 type Props = {
   mode: "create" | "edit";
   action: (prev: FormState, formData: FormData) => Promise<FormState>;
+  fieldTree: FieldTree;
   initial?: InitialValues;
 };
 
@@ -39,7 +47,12 @@ const inputClass =
   "w-full rounded border border-gray-300 bg-white px-3 py-2 text-sm";
 const labelClass = "mb-1 block text-sm font-medium";
 
-export default function PostForm({ mode, action, initial = {} }: Props) {
+export default function PostForm({
+  mode,
+  action,
+  fieldTree,
+  initial = {},
+}: Props) {
   const locale = useLocale() as Locale;
   const t = useTranslations();
   const [state, formAction, isPending] = useActionState<FormState, FormData>(
@@ -148,28 +161,6 @@ export default function PostForm({ mode, action, initial = {} }: Props) {
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
-          <label className={labelClass} htmlFor="field">
-            {t("filters.field.label")}
-          </label>
-          <select
-            id="field"
-            name="field"
-            defaultValue={current.field ?? ""}
-            className={inputClass}
-          >
-            <option value="" disabled>
-              --
-            </option>
-            {FIELD_CODES.map((c) => (
-              <option key={c} value={c}>
-                {t(`filters.field.${c}`)}
-              </option>
-            ))}
-          </select>
-          {fieldError("field")}
-        </div>
-
-        <div>
           <label className={labelClass} htmlFor="job_type">
             {t("filters.jobType.label")}
           </label>
@@ -234,6 +225,17 @@ export default function PostForm({ mode, action, initial = {} }: Props) {
           </select>
           {fieldError("employment_type")}
         </div>
+      </div>
+
+      <div>
+        <label className={labelClass}>{t("researchFields.label")}</label>
+        <p className="mb-1 text-xs text-gray-500">{t("researchFields.help")}</p>
+        <ResearchFieldSelect
+          tree={fieldTree}
+          name="rf"
+          initialSelected={current.field_ids ?? []}
+        />
+        {fieldError("field_ids")}
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">

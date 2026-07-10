@@ -1,16 +1,21 @@
 import { useLocale, useTranslations } from "next-intl";
 import {
   EMPLOYMENT_TYPE_CODES,
-  FIELD_CODES,
   JOB_TYPE_CODES,
   ORGANIZATION_TYPE_CODES,
   type Locale,
 } from "@/lib/filters";
 import { COUNTRY_CODES, getCountryName } from "@/lib/countries";
 import { PREFECTURES } from "@/lib/prefectures";
+import ResearchFieldSelect from "@/components/ResearchFieldSelect";
+
+type Named = { name_ja: string; name_en: string; name_zh: string; name_ko: string };
+type FieldTree = (Named & {
+  id: string;
+  fields: (Named & { id: string; category_id: string })[];
+})[];
 
 export type FilterValues = {
-  field: string;
   jobType: string;
   employmentType: string;
   organizationType: string;
@@ -18,30 +23,25 @@ export type FilterValues = {
   prefecture: string;
   within: string;
   q: string;
+  researchFieldIds: string[];
 };
 
 const selectClass =
   "w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm focus:border-brand-primary focus:outline-none";
 
-export default function FilterForm({ values }: { values: FilterValues }) {
+export default function FilterForm({
+  values,
+  fieldTree,
+}: {
+  values: FilterValues;
+  fieldTree: FieldTree;
+}) {
   const locale = useLocale() as Locale;
   const t = useTranslations();
 
   return (
     <form method="get" action={`/${locale}/jobs`} className="rounded-lg border border-gray-200 bg-brand-bg p-6">
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        <label className="block text-sm">
-          <span className="mb-1 block font-medium">{t("filters.field.label")}</span>
-          <select name="field" defaultValue={values.field} className={selectClass}>
-            <option value="">{t("search.all")}</option>
-            {FIELD_CODES.map((c) => (
-              <option key={c} value={c}>
-                {t(`filters.field.${c}`)}
-              </option>
-            ))}
-          </select>
-        </label>
-
         <label className="block text-sm">
           <span className="mb-1 block font-medium">{t("filters.jobType.label")}</span>
           <select name="job" defaultValue={values.jobType} className={selectClass}>
@@ -115,6 +115,17 @@ export default function FilterForm({ values }: { values: FilterValues }) {
             <option value="90">{t("search.within90")}</option>
           </select>
         </label>
+      </div>
+
+      <div className="mt-3">
+        <span className="mb-1 block text-sm font-medium">
+          {t("researchFields.label")}
+        </span>
+        <ResearchFieldSelect
+          tree={fieldTree}
+          name="rf"
+          initialSelected={values.researchFieldIds}
+        />
       </div>
 
       <div className="mt-3 flex flex-col gap-3 sm:flex-row">

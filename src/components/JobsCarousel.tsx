@@ -7,23 +7,11 @@ import { getCountryName } from "@/lib/countries";
 import { getPrefectureLabel } from "@/lib/prefectures";
 import { localizedTitle } from "@/lib/localize";
 import { useDeadlineSoon } from "@/lib/useDeadlineSoon";
-import type { FieldCode, Locale } from "@/lib/filters";
+import type { Locale } from "@/lib/filters";
 import type { PublicListing } from "@/lib/types";
-// 分野ごとのビジュアル（カード上部の色帯）
-const FIELD_BG: Record<FieldCode, string> = {
-  field_math: "#e7ecf3",
-  field_physics: "#dde5ef",
-  field_chemistry: "#eef1f5",
-  field_biology: "#e7ecf3",
-  field_earth: "#dde5ef",
-  field_medicine: "#eef1f5",
-  field_pharmacy: "#e7ecf3",
-  field_agriculture: "#dde5ef",
-  field_engineering: "#eef1f5",
-  field_informatics: "#e7ecf3",
-  field_environment: "#dde5ef",
-  field_interdisciplinary: "#eef1f5",
-};
+
+// カード上部の色帯（分野別の出し分けは廃止し、中立の共通色に統一）
+const CARD_BG = "#e7ecf3";
 
 function JobCard({
   listing,
@@ -34,7 +22,7 @@ function JobCard({
 }) {
   const locale = useLocale() as Locale;
   const t = useTranslations();
-  const bg = FIELD_BG[listing.field];
+  const bg = CARD_BG;
   const deadline = new Date(`${listing.deadline}T00:00:00`);
   const isSoon = useDeadlineSoon(listing.deadline);
   const location =
@@ -53,9 +41,6 @@ function JobCard({
           style={{ backgroundColor: bg }}
         >
           {map}
-          <span className="absolute bottom-1.5 left-1.5 rounded bg-white/90 px-1.5 py-0.5 text-[10px] font-bold text-brand-primary">
-            {t(`filters.field.${listing.field}`)}
-          </span>
           {isSoon && (
             <span className="absolute top-2 right-2 rounded-full bg-brand-accent px-2 py-0.5 text-[10px] font-bold text-white">
               {t("listing.deadlineSoon")}

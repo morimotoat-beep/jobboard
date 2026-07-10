@@ -1,6 +1,5 @@
 import type {
   EmploymentTypeCode,
-  FieldCode,
   JobTypeCode,
   ListingStatus,
   Locale,
@@ -21,7 +20,6 @@ export type Listing = {
   summary_en: string | null;
   summary_zh: string | null;
   summary_ko: string | null;
-  field: FieldCode;
   job_type: JobTypeCode;
   employment_type: EmploymentTypeCode;
   organization_type: OrganizationTypeCode;
@@ -50,5 +48,19 @@ export type PublicListing = Omit<
   | "last_link_checked_at"
 >;
 
+// カードのバッジ表示用の大分類（研究分野マスターの大分類、ローカライズ名つき）
+export type ListingCategory = {
+  id: string;
+  name_ja: string;
+  name_en: string;
+  name_zh: string;
+  name_ko: string;
+};
+
+// 求人＋その求人が属する研究分野の大分類（重複排除・sort_order 昇順、最大11）
+export type PublicListingWithCategories = PublicListing & {
+  categories: ListingCategory[];
+};
+
 export const PUBLIC_LISTING_COLUMNS =
-  "id, title, summary, title_ja, title_en, title_zh, title_ko, summary_ja, summary_en, summary_zh, summary_ko, field, job_type, employment_type, organization_type, country, prefecture, deadline, external_url, post_language, status, created_at, updated_at";
+  "id, title, summary, title_ja, title_en, title_zh, title_ko, summary_ja, summary_en, summary_zh, summary_ko, job_type, employment_type, organization_type, country, prefecture, deadline, external_url, post_language, status, created_at, updated_at";

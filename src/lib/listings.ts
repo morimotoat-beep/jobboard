@@ -1,14 +1,22 @@
 import { createServiceClient } from "./supabase/server";
 import {
   EMPLOYMENT_TYPE_CODES,
-  FIELD_CODES,
   JOB_TYPE_CODES,
   ORGANIZATION_TYPE_CODES,
 } from "./filters";
 import { PREFECTURE_CODES } from "./prefectures";
 import { expandSynonyms } from "./searchSynonyms";
 import { translateQuery } from "./translate";
-import { PUBLIC_LISTING_COLUMNS, type Listing, type PublicListing } from "./types";
+import {
+  getCategoriesForListings,
+  getListingIdsForFields,
+} from "./researchFields";
+import {
+  PUBLIC_LISTING_COLUMNS,
+  type Listing,
+  type PublicListing,
+  type PublicListingWithCategories,
+} from "./types";
 
 export const PAGE_SIZE = 20;
 
@@ -31,7 +39,6 @@ function sanitizeForOr(term: string): string {
 }
 
 export type SearchFilters = {
-  field?: string;
   jobType?: string;
   employmentType?: string;
   organizationType?: string;
@@ -39,6 +46,9 @@ export type SearchFilters = {
   prefecture?: string;
   deadlineWithinDays?: number;
   keyword?: string;
+  // 研究分野マスターの細目 id。フィルタ内は OR（いずれかの細目に一致）、
+  // 他ファセットとは AND。大分類での絞り込みは UI 側で配下細目に展開して渡す。
+  researchFieldIds?: string[];
   page?: number;
 };
 
@@ -49,8 +59,19 @@ function todayUtc(): string {
 // 公開ルール（§6）：status=published かつ締切前のみ
 export async function searchListings(
   filters: SearchFilters
-): Promise<{ items: PublicListing[]; total: number }> {
+): Promise<{ items: PublicListingWithCategories[]; total: number }> {
   const supabase = createServiceClient();
+
+  // 研究分野（細目）フィルタ：該当する求人 id の許可リストに解決する。
+  // フィルタ内は OR（いずれかの細目に一致）、他ファセットとは AND。
+  // getListingIdsForFields は id を重複排除（distinct）して返すため、
+  // 複数細目に一致した求人が重複行になることはない。
+  const rfIds = filters.researchFieldIds ?? [];
+  let fieldAllowlist: string[] | null = null;
+  if (rfIds.length > 0) {
+    fieldAllowlist = await getListingIdsForFields(rfIds);
+    if (fieldAllowlist.length === 0) return { items: [], total: 0 };
+  }
 
   let query = supabase
     .from("listings")
@@ -58,10 +79,10 @@ export async function searchListings(
     .eq("status", "published")
     .gte("deadline", todayUtc());
 
+  // 研究分野フィルタ：該当求人 id に限定（他ファセットとは AND）
+  if (fieldAllowlist) query = query.in("id", fieldAllowlist);
+
   // 不正なコードはエラーにせず無視する（URLを直接書き換えられた場合など）
-  if (filters.field && (FIELD_CODES as readonly string[]).includes(filters.field)) {
-    query = query.eq("field", filters.field);
-  }
   if (filters.jobType && (JOB_TYPE_CODES as readonly string[]).includes(filters.jobType)) {
     query = query.eq("job_type", filters.jobType);
   }
@@ -160,7 +181,15 @@ export async function searchListings(
   if (error) {
     throw new Error(`求人の検索に失敗しました: ${error.message}`);
   }
-  return { items: (data ?? []) as unknown as PublicListing[], total: count ?? 0 };
+
+  // カード用に、この1ページ分の求人が属する大分類だけをまとめて引く
+  const items = (data ?? []) as unknown as PublicListing[];
+  const catMap = await getCategoriesForListings(items.map((i) => i.id));
+  const withCategories: PublicListingWithCategories[] = items.map((i) => ({
+    ...i,
+    categories: catMap.get(i.id) ?? [],
+  }));
+  return { items: withCategories, total: count ?? 0 };
 }
 
 // LP「新着求人」用

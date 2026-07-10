@@ -9,6 +9,20 @@ import {
   buildListingTranslations,
   CLEARED_TRANSLATION_COLUMNS,
 } from "@/lib/translate";
+import { getValidFieldIds, replaceListingFields } from "@/lib/researchFields";
+
+// listings に存在しない field_ids を除いた、insert/update 用のカラム集合
+function listingColumns(data: ListingInput): Omit<ListingInput, "field_ids"> {
+  const copy = { ...data };
+  delete (copy as { field_ids?: string[] }).field_ids;
+  return copy;
+}
+
+// 送信された細目 id をマスターと照合し、有効なものだけ返す
+async function validFieldIds(data: ListingInput): Promise<string[]> {
+  const valid = await getValidFieldIds();
+  return data.field_ids.filter((id) => valid.has(id));
+}
 
 export type FormState = {
   status: "idle" | "sent" | "updated" | "error";
@@ -59,15 +73,29 @@ export async function createListingAction(
     return { status: "error", errors: { _form: "rateLimited" }, values: data };
   }
 
+  // 研究分野（細目）をマスターと照合。新規掲載では最低1つ必須。
+  const fieldIds = await validFieldIds(data);
+  if (fieldIds.length === 0) {
+    return { status: "error", errors: { field_ids: "required" }, values: data };
+  }
+
   // 投稿確定時に1回だけ翻訳して保存（v1.1 §3。失敗時は原文のみで続行）
   const translations = await buildListingTranslations(data);
 
   const { data: inserted, error } = await supabase
     .from("listings")
-    .insert({ ...data, ...translations, status: "draft" })
+    .insert({ ...listingColumns(data), ...translations, status: "draft" })
     .select("id, edit_token")
     .single();
   if (error || !inserted) {
+    return { status: "error", errors: { _form: "sendFailed" }, values: data };
+  }
+
+  // 研究分野の細目を紐付け（失敗したら下書きごと破棄）
+  try {
+    await replaceListingFields(inserted.id, fieldIds);
+  } catch {
+    await supabase.from("listings").delete().eq("id", inserted.id);
     return { status: "error", errors: { _form: "sendFailed" }, values: data };
   }
 
@@ -114,6 +142,12 @@ export async function updateListingAction(
     return { status: "error", errors: { _form: "sendFailed" }, values: data };
   }
 
+  // 研究分野（細目）をマスターと照合。編集時も最低1つ必須。
+  const fieldIds = await validFieldIds(data);
+  if (fieldIds.length === 0) {
+    return { status: "error", errors: { field_ids: "required" }, values: data };
+  }
+
   // 締切切れ・リンク切れの求人は、編集（締切は必ず未来日になる）で再公開する
   const status =
     existing.status === "expired" || existing.status === "link_flagged"
@@ -134,13 +168,20 @@ export async function updateListingAction(
   const { error } = await supabase
     .from("listings")
     .update({
-      ...data,
+      ...listingColumns(data),
       ...translationUpdate,
       status,
       link_check_failures: 0,
     })
     .eq("edit_token", token);
   if (error) {
+    return { status: "error", errors: { _form: "sendFailed" }, values: data };
+  }
+
+  // 研究分野の細目を差し替え（全削除→再挿入）
+  try {
+    await replaceListingFields(existing.id, fieldIds);
+  } catch {
     return { status: "error", errors: { _form: "sendFailed" }, values: data };
   }
   return { status: "updated" };
