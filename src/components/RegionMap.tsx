@@ -24,7 +24,7 @@ export default function RegionMap({
       <rect width={MAP_W} height={MAP_H} fill="#eef3f8" />
       {data.paths.map((p) => (
         <path
-          key={p.id}
+          key={p.uid}
           d={p.d}
           fill={p.id === data.targetId ? "#7dc436" : "#ffffff"}
           stroke={p.id === data.targetId ? "#ffffff" : "#c3ccd9"}

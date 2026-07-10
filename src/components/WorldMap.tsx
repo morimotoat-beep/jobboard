@@ -52,10 +52,14 @@ const projection = geoNaturalEarth1().fitExtent(
   collection as any
 );
 const pathGen = geoPath(projection);
-const LAND_PATHS: { id: string; d: string }[] = landFeatures.map((f) => ({
-  id: String(f.id).padStart(3, "0"),
-  d: pathGen(f as any) ?? "",
-}));
+const LAND_PATHS: { id: string; uid: string; d: string }[] = landFeatures.map(
+  (f, i) => ({
+    id: String(f.id).padStart(3, "0"),
+    // f.id が未定義/重複でも一意になるキー（配列インデックスを付与）
+    uid: `${String(f.id)}-${i}`,
+    d: pathGen(f as any) ?? "",
+  })
+);
 /* eslint-enable @typescript-eslint/no-explicit-any */
 
 function project(code: string): { x: number; y: number } | null {
@@ -86,7 +90,7 @@ export default function WorldMap({ counts }: { counts: Record<string, number> })
           <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} className="w-full" aria-hidden="true">
             {LAND_PATHS.map((land) => (
               <path
-                key={land.id}
+                key={land.uid}
                 d={land.d}
                 fill={highlighted.has(land.id) ? "#7dc436" : "#ffffff"}
                 stroke={highlighted.has(land.id) ? "#ffffff" : "#c3ccd9"}
