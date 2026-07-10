@@ -208,6 +208,7 @@
   "researchFields": {
     "label": "研究领域（细目·可多选）",
     "help": "请从JREC-IN细目中选择适用项（可多选）。",
+    "categoryPlaceholder": "选择大类",
     "searchPlaceholder": "按领域名称筛选…",
     "selectCategory": "选择该大类全部",
     "deselectCategory": "取消该大类",
