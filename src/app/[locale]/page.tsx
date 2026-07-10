@@ -23,17 +23,22 @@ function PatternSection({
   title,
   desc,
   children,
+  paddingClass = "pt-11 pb-20",
+  contentClass = "mt-12",
 }: {
   bgClass: string;
   dark?: boolean;
   align?: "left" | "right";
   word: string;
   title: string;
-  desc?: string;
+  desc?: React.ReactNode;
   children?: React.ReactNode;
+  // 縦方向の余白を呼び出し側で上書きするためのフック（howto専用の圧縮に使用）
+  paddingClass?: string;
+  contentClass?: string;
 }) {
   return (
-    <section className={`relative overflow-hidden px-4 pt-11 pb-20 ${bgClass}`}>
+    <section className={`relative overflow-hidden px-4 ${paddingClass} ${bgClass}`}>
       {/* ネイビー地のときは白系の半透明円を左上・右下に置いて奥行きを出す */}
       {dark && (
         <>
@@ -75,7 +80,9 @@ function PatternSection({
         )}
       </Reveal>
       {children && (
-        <div className="relative z-10 mx-auto mt-12 max-w-5xl">{children}</div>
+        <div className={`relative z-10 mx-auto ${contentClass} max-w-5xl`}>
+          {children}
+        </div>
       )}
     </section>
   );
@@ -118,10 +125,28 @@ export default async function HomePage({
                 </span>
               </h1>
               <p className="mb-4 text-base leading-relaxed text-gray-700 sm:text-lg">
-                {t("lp.hero.sub")}
+                {locale === "ja" ? (
+                  <>
+                    {t("lp.hero.subA")}
+                    <br />
+                    {t("lp.hero.subB")}
+                  </>
+                ) : (
+                  t("lp.hero.sub")
+                )}
               </p>
               <p className="mx-auto mb-10 max-w-xl text-sm leading-relaxed text-gray-500">
-                {t("lp.hero.trust")}
+                {locale === "ja" ? (
+                  <>
+                    {t("lp.hero.trustA")}
+                    <br />
+                    {t("lp.hero.trustB")}
+                    <br />
+                    {t("lp.hero.trustC")}
+                  </>
+                ) : (
+                  t("lp.hero.trust")
+                )}
               </p>
               <div className="flex flex-col justify-center gap-3 sm:flex-row">
                 <Link
@@ -150,7 +175,17 @@ export default async function HomePage({
           align="left"
           word="GLOBAL"
           title={t("lp.map.heading")}
-          desc={t("lp.map.desc")}
+          desc={
+            locale === "ja" ? (
+              <>
+                {t("lp.map.descA")}
+                <br className="sm:hidden" />
+                {t("lp.map.descB")}
+              </>
+            ) : (
+              t("lp.map.desc")
+            )
+          }
         >
           <Reveal delay={150}>
             <WorldGlobe counts={counts} />
@@ -217,7 +252,17 @@ export default async function HomePage({
           align="left"
           word="FEATURES"
           title={t("lp.features.heading")}
-          desc={t("lp.features.desc")}
+          desc={
+            locale === "ja" ? (
+              <>
+                {t("lp.features.descA")}
+                <br className="sm:hidden" />
+                {t("lp.features.descB")}
+              </>
+            ) : (
+              t("lp.features.desc")
+            )
+          }
         >
           <FeatureCards />
         </PatternSection>
@@ -230,9 +275,11 @@ export default async function HomePage({
           word="HOW TO USE"
           title={t("lp.howto.heading")}
           desc={t("lp.howto.desc")}
+          paddingClass="pt-8 pb-[60px]"
+          contentClass="mt-9"
         >
-          <Reveal className="mb-10 text-center">
-            <span className="inline-block rounded-full bg-brand-point px-6 py-2 text-sm font-bold text-brand-primary">
+          <Reveal className="mb-[30px] text-center">
+            <span className="inline-block rounded-full bg-brand-point px-6 py-[6px] text-sm font-bold text-brand-primary">
               {t("lp.howto.badge")}
             </span>
           </Reveal>
@@ -245,7 +292,17 @@ export default async function HomePage({
           align="left"
           word="LINKS"
           title={t("lp.links.heading")}
-          desc={t("lp.links.desc")}
+          desc={
+            locale === "ja" ? (
+              <>
+                {t("lp.links.descA")}
+                <br className="sm:hidden" />
+                {t("lp.links.descB")}
+              </>
+            ) : (
+              t("lp.links.desc")
+            )
+          }
         >
           <Reveal delay={100}>
             <JobSitesPreview />
