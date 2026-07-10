@@ -123,7 +123,7 @@ function HowtoPanel({ side }: { side: Side }) {
   return (
     <div className="flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-[0_4px_14px_rgba(0,0,0,0.18)]">
       {/* 上部：中央の丸アイコン＋タイトル＋サブタイトル */}
-      <div className="flex flex-col items-center px-8 pt-8 text-center">
+      <div className="flex flex-col items-center px-8 pt-[21px] text-center">
         <span
           className={`mb-4 flex h-14 w-14 items-center justify-center rounded-full ${cfg.tile}`}
         >
@@ -138,11 +138,11 @@ function HowtoPanel({ side }: { side: Side }) {
       </div>
 
       {/* 区切り線 */}
-      <div className="mx-8 my-6 border-t border-gray-200" />
+      <div className="mx-8 my-[18px] border-t border-gray-200" />
 
       {/* 3ステップ（アイコン＋小見出し＋説明文） */}
-      <div className="flex flex-1 flex-col px-8 pb-8">
-        <ol className="space-y-5">
+      <div className="flex flex-1 flex-col px-8 pb-6">
+        <ol className="space-y-[15px]">
           {cfg.steps.map((step) => {
             const StepIcon = step.icon;
             return (
@@ -165,10 +165,10 @@ function HowtoPanel({ side }: { side: Side }) {
           })}
         </ol>
 
-        <div className="mt-auto pt-8">
+        <div className="mt-auto pt-6">
           <Link
             href={cfg.href}
-            className={`block rounded-md px-6 py-3 text-center text-sm font-bold shadow-sm transition ${cfg.button}`}
+            className={`block rounded-md px-6 py-[9px] text-center text-sm font-bold shadow-sm transition ${cfg.button}`}
           >
             {t(cfg.ctaKey)} <span aria-hidden="true">→</span>
           </Link>
@@ -185,7 +185,7 @@ export default function HowtoCards() {
   return (
     <>
       {/* PC・タブレット：2カラム */}
-      <div className="hidden gap-6 md:grid md:grid-cols-2">
+      <div className="hidden gap-[18px] md:grid md:grid-cols-2">
         {SIDES.map((side, i) => (
           <Reveal key={side} delay={i * 150} className="h-full">
             <HowtoPanel side={side} />
@@ -195,7 +195,7 @@ export default function HowtoCards() {
 
       {/* スマホ：タブ切替 */}
       <div className="md:hidden">
-        <div className="mb-5 grid grid-cols-2 gap-1 rounded-full border border-gray-200 bg-white p-1 shadow-sm">
+        <div className="mb-[15px] grid grid-cols-2 gap-1 rounded-full border border-gray-200 bg-white p-1 shadow-sm">
           {SIDES.map((side) => (
             <button
               key={side}
