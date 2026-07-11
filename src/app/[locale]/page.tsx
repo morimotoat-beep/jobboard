@@ -1,5 +1,6 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import Header from "@/components/Header";
+import LandingPrefetch from "@/components/LandingPrefetch";
 import FeatureCards from "@/components/FeatureCards";
 import HowtoCards from "@/components/HowtoCards";
 import JobSitesPreview from "@/components/JobSitesPreview";
@@ -104,6 +105,8 @@ export default async function HomePage({
   return (
     <div className="flex min-h-screen flex-col overflow-x-hidden">
       <Header />
+      {/* スクロールしないと現れる下部 CTA でも即遷移するよう /jobs・/post を先読み */}
+      <LandingPrefetch />
       <main className="flex-1">
         {/* 1. ヒーロー（白） */}
         <section className="bg-waves relative overflow-hidden px-4 pt-20 pb-24">
