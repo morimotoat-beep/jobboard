@@ -207,6 +207,7 @@
   },
   "researchFields": {
     "label": "Research fields (detailed, multi-select)",
+    "sectionTitle": "Research fields",
     "help": "Select all applicable detailed fields (based on JREC-IN).",
     "categoryPlaceholder": "Select a major field",
     "searchPlaceholder": "Filter by field name…",

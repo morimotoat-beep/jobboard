@@ -207,6 +207,7 @@
   },
   "researchFields": {
     "label": "연구 분야(세부·복수 선택)",
+    "sectionTitle": "연구 분야",
     "help": "JREC-IN 기준 세부 분야에서 해당되는 항목을 선택하세요(복수 가능).",
     "categoryPlaceholder": "대분류 선택",
     "searchPlaceholder": "분야명으로 검색…",
