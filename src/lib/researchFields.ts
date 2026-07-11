@@ -1,5 +1,6 @@
 import "server-only";
 import { cache } from "react";
+import { unstable_cache } from "next/cache";
 import { createServiceClient } from "./supabase/server";
 import type { Locale } from "./filters";
 import type { ListingCategory } from "./types";
@@ -30,9 +31,11 @@ export function fieldName(
   return item[`name_${locale}` as const] || item.name_ja || item.name_en || "";
 }
 
-// 大分類＋配下細目の入れ子ツリー（sort_order 昇順）。マスターは静的なので
-// リクエスト内では cache でメモ化する。
-export const getResearchFieldTree = cache(
+// 研究分野マスター（大分類＋配下細目、sort_order 昇順）を DB から取得する内部関数。
+// マスターはアプリからは更新されない静的データなので、リクエストをまたいで
+// 1時間キャッシュし、/jobs・/post 表示時の DB 往復をなくす（更新はマイグレーション
+// による再シード時のみで、その際は自然失効を待てばよい）。
+const fetchResearchFieldTree = unstable_cache(
   async (): Promise<ResearchCategoryNode[]> => {
     const supabase = createServiceClient();
     const [cats, fields] = await Promise.all([
@@ -62,7 +65,15 @@ export const getResearchFieldTree = cache(
       ...c,
       fields: byCat.get(c.id) ?? [],
     }));
-  }
+  },
+  ["research-field-tree"],
+  { revalidate: 3600 }
+);
+
+// リクエスト内では React cache でメモ化しつつ、実データは上の unstable_cache で
+// リクエストをまたいで共有する。
+export const getResearchFieldTree = cache(
+  (): Promise<ResearchCategoryNode[]> => fetchResearchFieldTree()
 );
 
 // 既存 field_id 集合（有効な細目のみ）。フォーム送信値の検証に使う。

@@ -151,12 +151,14 @@ export default async function HomePage({
               <div className="flex flex-col justify-center gap-3 sm:flex-row">
                 <Link
                   href="/jobs"
+                  prefetch
                   className="rounded-md bg-brand-primary px-8 py-3 text-center font-bold text-white shadow-sm transition hover:brightness-90"
                 >
                   {t("lp.hero.ctaFind")} →
                 </Link>
                 <Link
                   href="/post"
+                  prefetch
                   className="rounded-md bg-brand-green px-8 py-3 text-center font-bold text-white shadow-sm transition hover:brightness-95"
                 >
                   {t("lp.hero.ctaPost")} →
@@ -212,6 +214,7 @@ export default async function HomePage({
                 <p className="mb-5 text-sm text-white/80">{t("lp.jobs.empty")}</p>
                 <Link
                   href="/post"
+                  prefetch
                   className="inline-block rounded-md bg-brand-point px-8 py-2.5 font-bold text-brand-primary transition hover:brightness-95"
                 >
                   {t("lp.hero.ctaPost")}
@@ -239,6 +242,7 @@ export default async function HomePage({
           <Reveal className="mt-10 text-center">
             <Link
               href="/jobs"
+              prefetch
               className="inline-block rounded-md bg-brand-point px-8 py-3 font-bold text-brand-primary transition hover:brightness-95"
             >
               {t("lp.jobs.viewAll")} →

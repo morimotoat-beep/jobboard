@@ -1,6 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
+import { revalidateTag } from "next/cache";
 import {
   createAdminSession,
   destroyAdminSession,
@@ -8,6 +9,7 @@ import {
   verifyPassword,
 } from "@/lib/adminAuth";
 import { createServiceClient } from "@/lib/supabase/server";
+import { LISTINGS_CACHE_TAG } from "@/lib/listings";
 
 const UUID_RE =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -48,6 +50,8 @@ export async function adminSetStatusAction(formData: FormData): Promise<void> {
   if (error) {
     throw new Error(`状態の変更に失敗しました: ${error.message}`);
   }
+  // 公開/非公開の切り替えを /jobs に反映するため検索キャッシュを失効させる
+  revalidateTag(LISTINGS_CACHE_TAG, { expire: 0 });
   redirect("/admin");
 }
 
@@ -61,5 +65,7 @@ export async function adminDeleteAction(formData: FormData): Promise<void> {
   if (error) {
     throw new Error(`削除に失敗しました: ${error.message}`);
   }
+  // 削除を /jobs に反映するため検索キャッシュを失効させる
+  revalidateTag(LISTINGS_CACHE_TAG, { expire: 0 });
   redirect("/admin");
 }

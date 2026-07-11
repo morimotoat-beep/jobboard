@@ -2,7 +2,9 @@
 
 import { getLocale, getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
+import { revalidateTag } from "next/cache";
 import { createServiceClient } from "@/lib/supabase/server";
+import { LISTINGS_CACHE_TAG } from "@/lib/listings";
 import { parseListingForm, type FieldErrors, type ListingInput } from "@/lib/validation";
 import { sendEmail } from "@/lib/email";
 import {
@@ -184,6 +186,8 @@ export async function updateListingAction(
   } catch {
     return { status: "error", errors: { _form: "sendFailed" }, values: data };
   }
+  // 公開中求人の内容が変わった（再公開含む）ので検索キャッシュを失効させる
+  revalidateTag(LISTINGS_CACHE_TAG, { expire: 0 });
   return { status: "updated" };
 }
 
@@ -202,6 +206,8 @@ export async function publishListingAction(formData: FormData): Promise<void> {
     console.error("publishListingAction error:", error);
     redirect(`/${locale}/manage/${token}?error=1`);
   }
+  // 下書き→公開で /jobs に新たに載るので検索キャッシュを失効させる
+  revalidateTag(LISTINGS_CACHE_TAG, { expire: 0 });
   redirect(`/${locale}/manage/${token}?published=1`);
 }
 
@@ -218,5 +224,7 @@ export async function deleteListingAction(formData: FormData): Promise<void> {
     console.error("deleteListingAction error:", error);
     redirect(`/${locale}/manage/${token}?error=1`);
   }
+  // 削除した求人が /jobs に残らないよう検索キャッシュを失効させる
+  revalidateTag(LISTINGS_CACHE_TAG, { expire: 0 });
   redirect(`/${locale}`);
 }

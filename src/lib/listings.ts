@@ -1,3 +1,4 @@
+import { unstable_cache } from "next/cache";
 import { createServiceClient } from "./supabase/server";
 import {
   EMPLOYMENT_TYPE_CODES,
@@ -19,6 +20,10 @@ import {
 } from "./types";
 
 export const PAGE_SIZE = 20;
+
+// 公開求人の検索結果キャッシュの無効化タグ。
+// 掲載の公開・編集・削除・管理操作時に revalidateTag でまとめて失効させる。
+export const LISTINGS_CACHE_TAG = "listings";
 
 // 自由文検索の対象カラム（各言語カラムに原文がミラーされている）
 const SEARCH_TEXT_COLUMNS = [
@@ -56,7 +61,7 @@ function todayUtc(): string {
 }
 
 // 公開ルール（§6）：status=published かつ締切前のみ
-export async function searchListings(
+async function searchListingsUncached(
   filters: SearchFilters
 ): Promise<{ items: PublicListingWithCategories[]; total: number }> {
   const supabase = createServiceClient();
@@ -182,6 +187,33 @@ export async function searchListings(
     categories: catMap.get(i.id) ?? [],
   }));
   return { items: withCategories, total: count ?? 0 };
+}
+
+// 検索結果をフィルター条件ごとに 60 秒キャッシュする。
+// LP から最頻の「フィルターなし・1ページ目」を含め全パターンが対象。
+// 求人は 60 秒古くても実害がなく、投稿・編集・削除・管理操作時は
+// revalidateTag(LISTINGS_CACHE_TAG) で即時失効させて反映する。
+const cachedSearchListings = unstable_cache(
+  (filters: SearchFilters) => searchListingsUncached(filters),
+  ["searchListings"],
+  { tags: [LISTINGS_CACHE_TAG], revalidate: 60 }
+);
+
+export async function searchListings(
+  filters: SearchFilters
+): Promise<{ items: PublicListingWithCategories[]; total: number }> {
+  // キャッシュキーを安定させるため、条件を正規化（順序固定・rf はソート）してから渡す。
+  const normalized: SearchFilters = {
+    jobType: filters.jobType ?? "",
+    employmentType: filters.employmentType ?? "",
+    organizationType: filters.organizationType ?? "",
+    country: filters.country ?? "",
+    prefecture: filters.prefecture ?? "",
+    keyword: filters.keyword?.trim() ?? "",
+    researchFieldIds: [...(filters.researchFieldIds ?? [])].sort(),
+    page: Math.max(1, filters.page ?? 1),
+  };
+  return cachedSearchListings(normalized);
 }
 
 // LP「新着求人」用

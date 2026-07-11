@@ -42,12 +42,14 @@ export default function Header() {
         <nav className="flex items-center gap-2">
           <Link
             href="/jobs"
+            prefetch
             className="rounded-md bg-brand-primary px-3.5 py-1.5 text-sm font-bold whitespace-nowrap text-white shadow-sm transition hover:brightness-90"
           >
             {t("nav.findJobs")}
           </Link>
           <Link
             href="/post"
+            prefetch
             className="rounded-md bg-brand-green px-3.5 py-1.5 text-sm font-bold whitespace-nowrap text-white shadow-sm transition hover:brightness-95"
           >
             {t("nav.postJob")}
