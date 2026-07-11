@@ -29,12 +29,15 @@ create table if not exists public.listings (
     'field_engineering', 'field_informatics', 'field_environment',
     'field_interdisciplinary'
   )),
-  job_type text not null check (job_type in (
+  -- 企業求人は職種なしのため nullable（アカデミア求人は必須。CHECK は NULL を通過）
+  job_type text check (job_type in (
     'job_professor', 'job_assoc_prof', 'job_lecturer', 'job_assistant_prof',
     'job_fixed_faculty', 'job_postdoc', 'job_technical', 'job_grad_student'
   )),
+  -- 雇用形態：アカデミア群＋企業群（機関種別で出し分け。ラベルは messages/*.json）
   employment_type text not null check (employment_type in (
-    'emp_fixed', 'emp_permanent', 'emp_tenure_track'
+    'emp_fixed', 'emp_permanent', 'emp_tenure_track',
+    'emp_regular', 'emp_contract', 'emp_dispatch', 'emp_gyomu', 'emp_other'
   )),
   -- 機関種別（募集元の種類）
   organization_type text not null default 'university' check (organization_type in (

@@ -81,10 +81,6 @@
     "any": "指定なし",
     "country": "国・地域",
     "prefecture": "都道府県",
-    "deadline": "締切",
-    "within7": "7日以内",
-    "within30": "30日以内",
-    "within90": "90日以内",
     "keywordPlaceholder": "タイトル・要約から検索",
     "searchButton": "この条件で検索",
     "results": "{count}件の求人",
@@ -196,7 +192,14 @@
       "label": "雇用形態",
       "emp_fixed": "任期付（有期）",
       "emp_permanent": "常勤（無期）",
-      "emp_tenure_track": "テニュアトラック"
+      "emp_tenure_track": "テニュアトラック",
+      "emp_regular": "正社員",
+      "emp_contract": "契約社員",
+      "emp_dispatch": "派遣社員",
+      "emp_gyomu": "業務委託",
+      "emp_other": "その他",
+      "groupAcademia": "アカデミア",
+      "groupCompany": "企業"
     },
     "organizationType": {
       "label": "機関種別",

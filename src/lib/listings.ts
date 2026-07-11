@@ -44,7 +44,6 @@ export type SearchFilters = {
   organizationType?: string;
   country?: string;
   prefecture?: string;
-  deadlineWithinDays?: number;
   keyword?: string;
   // 研究分野マスターの細目 id。フィルタ内は OR（いずれかの細目に一致）、
   // 他ファセットとは AND。大分類での絞り込みは UI 側で配下細目に展開して渡す。
@@ -108,13 +107,6 @@ export async function searchListings(
       query = query.eq("prefecture", filters.prefecture);
     }
   }
-  if (filters.deadlineWithinDays && filters.deadlineWithinDays > 0) {
-    const until = new Date(Date.now() + filters.deadlineWithinDays * 86400000)
-      .toISOString()
-      .slice(0, 10);
-    query = query.lte("deadline", until);
-  }
-
   // 自由文検索：原文キーワードを日英に翻訳し、全翻訳カラムを横断して部分一致検索する。
   // これにより「英語で検索した人が日本語求人の英訳カラムにも当たる」など、
   // 言語をまたいだ取りこぼしを減らす（v1.2）。

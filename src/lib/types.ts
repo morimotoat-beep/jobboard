@@ -20,7 +20,8 @@ export type Listing = {
   summary_en: string | null;
   summary_zh: string | null;
   summary_ko: string | null;
-  job_type: JobTypeCode;
+  // 企業求人は職種の概念がないため null（アカデミア求人は必須）
+  job_type: JobTypeCode | null;
   employment_type: EmploymentTypeCode;
   organization_type: OrganizationTypeCode;
   country: string; // ISO 3166-1 alpha-2

@@ -75,10 +75,6 @@
     "any": "무관",
     "country": "국가/지역",
     "prefecture": "도도부현(일본)",
-    "deadline": "마감일",
-    "within7": "7일 이내",
-    "within30": "30일 이내",
-    "within90": "90일 이내",
     "keywordPlaceholder": "제목·요약 검색",
     "searchButton": "검색",
     "results": "{count}건의 공고",
@@ -190,7 +186,14 @@
       "label": "고용 형태",
       "emp_fixed": "임기제(계약직)",
       "emp_permanent": "정규직(무기한)",
-      "emp_tenure_track": "테뉴어 트랙"
+      "emp_tenure_track": "테뉴어 트랙",
+      "emp_regular": "정규직",
+      "emp_contract": "계약직",
+      "emp_dispatch": "파견직",
+      "emp_gyomu": "업무위탁",
+      "emp_other": "기타",
+      "groupAcademia": "학계",
+      "groupCompany": "기업"
     },
     "organizationType": {
       "label": "기관 종류",

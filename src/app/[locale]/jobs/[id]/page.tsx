@@ -63,9 +63,11 @@ export default async function JobDetailPage({
             <span className="rounded bg-brand-card px-2 py-0.5 font-medium">
               {t(`languageNames.${listing.post_language}`)}
             </span>
-            <span className="rounded bg-brand-tab px-2 py-0.5">
-              {t(`filters.jobType.${listing.job_type}`)}
-            </span>
+            {listing.job_type && (
+              <span className="rounded bg-brand-tab px-2 py-0.5">
+                {t(`filters.jobType.${listing.job_type}`)}
+              </span>
+            )}
             <span className="rounded bg-brand-tab px-2 py-0.5">
               {t(`filters.employmentType.${listing.employment_type}`)}
             </span>

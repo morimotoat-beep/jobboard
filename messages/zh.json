@@ -75,10 +75,6 @@
     "any": "不限",
     "country": "国家/地区",
     "prefecture": "都道府县（日本）",
-    "deadline": "截止日期",
-    "within7": "7天内",
-    "within30": "30天内",
-    "within90": "90天内",
     "keywordPlaceholder": "搜索标题与摘要",
     "searchButton": "搜索",
     "results": "共{count}条职位",
@@ -190,7 +186,14 @@
       "label": "聘用形式",
       "emp_fixed": "固定期限（聘期制）",
       "emp_permanent": "长期（无固定期限）",
-      "emp_tenure_track": "终身教职轨道"
+      "emp_tenure_track": "终身教职轨道",
+      "emp_regular": "正式员工",
+      "emp_contract": "合同工",
+      "emp_dispatch": "派遣员工",
+      "emp_gyomu": "业务委托",
+      "emp_other": "其他",
+      "groupAcademia": "学术机构",
+      "groupCompany": "企业"
     },
     "organizationType": {
       "label": "机构类型",
