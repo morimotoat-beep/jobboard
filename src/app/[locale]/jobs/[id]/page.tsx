@@ -7,6 +7,11 @@ import { formatLocation } from "@/components/ListingCard";
 import { Link } from "@/i18n/navigation";
 import { getPublishedListing } from "@/lib/listings";
 import {
+  fieldName,
+  getListingFieldIds,
+  getResearchFieldTree,
+} from "@/lib/researchFields";
+import {
   isMachineTranslated,
   localizedSummary,
   localizedTitle,
@@ -30,6 +35,20 @@ export default async function JobDetailPage({
   const loc = locale as Locale;
   const deadline = new Date(`${listing.deadline}T00:00:00`);
   const dateFormat = new Intl.DateTimeFormat(loc, { dateStyle: "medium" });
+
+  // この求人の研究分野（細目）を大分類ごとにグルーピング。
+  // tree は大分類 sort_order → 細目 sort_order 昇順で整列済み。
+  const [fieldIds, tree] = await Promise.all([
+    getListingFieldIds(listing.id),
+    getResearchFieldTree(),
+  ]);
+  const selectedFieldIds = new Set(fieldIds);
+  const researchGroups = tree
+    .map((cat) => ({
+      cat,
+      fields: cat.fields.filter((f) => selectedFieldIds.has(f.id)),
+    }))
+    .filter((g) => g.fields.length > 0);
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -97,6 +116,34 @@ export default async function JobDetailPage({
               className="block h-auto w-full"
             />
           </div>
+
+          {/* 研究分野：大分類ごとに配下の選択細目を表示（細目0件の旧求人は非表示） */}
+          {researchGroups.length > 0 && (
+            <section className="mb-6">
+              <h3 className="mb-2 text-sm font-bold text-gray-500">
+                {t("researchFields.sectionTitle")}
+              </h3>
+              <div className="space-y-2">
+                {researchGroups.map(({ cat, fields }) => (
+                  <div key={cat.id}>
+                    <p className="mb-1 text-xs font-bold text-brand-primary">
+                      {fieldName(cat, loc)}
+                    </p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {fields.map((f) => (
+                        <span
+                          key={f.id}
+                          className="rounded bg-brand-tab px-2 py-0.5 text-xs text-brand-primary"
+                        >
+                          {fieldName(f, loc)}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
 
           <p className="mb-8 text-sm leading-relaxed whitespace-pre-wrap">
             {localizedSummary(listing, loc)}

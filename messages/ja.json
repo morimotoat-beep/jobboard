@@ -213,6 +213,7 @@
   },
   "researchFields": {
     "label": "研究分野（詳細・複数選択）",
+    "sectionTitle": "研究分野",
     "help": "JREC-IN準拠の細目から、当てはまるものを選んでください（複数可）。",
     "categoryPlaceholder": "大分類を選択",
     "searchPlaceholder": "分野名で絞り込み…",
