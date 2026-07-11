@@ -37,7 +37,6 @@ export default async function JobsPage({
     organizationType: first(sp.org),
     country: first(sp.country),
     prefecture: first(sp.pref),
-    within: first(sp.within),
     q: first(sp.q),
     researchFieldIds: many(sp.rf),
   };
@@ -49,7 +48,6 @@ export default async function JobsPage({
     organizationType: values.organizationType,
     country: values.country,
     prefecture: values.prefecture,
-    deadlineWithinDays: values.within ? parseInt(values.within, 10) : undefined,
     keyword: values.q,
     researchFieldIds: values.researchFieldIds,
     page,
@@ -64,7 +62,6 @@ export default async function JobsPage({
     org: values.organizationType,
     country: values.country,
     pref: values.prefecture,
-    within: values.within,
     q: values.q,
   };
   for (const [k, v] of Object.entries(entries)) {

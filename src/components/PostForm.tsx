@@ -3,7 +3,8 @@
 import { useActionState, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import {
-  EMPLOYMENT_TYPE_CODES,
+  ACADEMIA_EMPLOYMENT_CODES,
+  COMPANY_EMPLOYMENT_CODES,
   JOB_TYPE_CODES,
   LOCALES,
   ORGANIZATION_TYPE_CODES,
@@ -25,7 +26,7 @@ type InitialValues = {
   title?: string;
   summary?: string;
   field_ids?: string[];
-  job_type?: string;
+  job_type?: string | null;
   employment_type?: string;
   organization_type?: string;
   country?: string;
@@ -60,6 +61,15 @@ export default function PostForm({
     { status: "idle" }
   );
   const [country, setCountry] = useState(initial.country ?? "JP");
+  // 機関種別カスケード：職種の表示可否・雇用形態の選択肢を切り替える
+  const [org, setOrg] = useState(initial.organization_type ?? "");
+  const [emp, setEmp] = useState(initial.employment_type ?? "");
+  const onOrgChange = (next: string) => {
+    setOrg(next);
+    const allowed: readonly string[] =
+      next === "company" ? COMPANY_EMPLOYMENT_CODES : ACADEMIA_EMPLOYMENT_CODES;
+    if (emp && !allowed.includes(emp)) setEmp("");
+  };
   const today = new Date().toISOString().slice(0, 10);
 
   // React 19 はアクション完了後にフォームを自動リセットするため、
@@ -160,28 +170,7 @@ export default function PostForm({
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <div>
-          <label className={labelClass} htmlFor="job_type">
-            {t("filters.jobType.label")}
-          </label>
-          <select
-            id="job_type"
-            name="job_type"
-            defaultValue={current.job_type ?? ""}
-            className={inputClass}
-          >
-            <option value="" disabled>
-              --
-            </option>
-            {JOB_TYPE_CODES.map((c) => (
-              <option key={c} value={c}>
-                {t(`filters.jobType.${c}`)}
-              </option>
-            ))}
-          </select>
-          {fieldError("job_type")}
-        </div>
-
+        {/* 機関種別（カスケードの起点） */}
         <div>
           <label className={labelClass} htmlFor="organization_type">
             {t("filters.organizationType.label")}
@@ -189,7 +178,8 @@ export default function PostForm({
           <select
             id="organization_type"
             name="organization_type"
-            defaultValue={current.organization_type ?? ""}
+            value={org}
+            onChange={(e) => onOrgChange(e.target.value)}
             className={inputClass}
           >
             <option value="" disabled>
@@ -204,6 +194,32 @@ export default function PostForm({
           {fieldError("organization_type")}
         </div>
 
+        {/* 職種：企業のときは非表示（企業求人は職種なし） */}
+        {org !== "company" && (
+          <div>
+            <label className={labelClass} htmlFor="job_type">
+              {t("filters.jobType.label")}
+            </label>
+            <select
+              id="job_type"
+              name="job_type"
+              defaultValue={current.job_type ?? ""}
+              className={inputClass}
+            >
+              <option value="" disabled>
+                --
+              </option>
+              {JOB_TYPE_CODES.map((c) => (
+                <option key={c} value={c}>
+                  {t(`filters.jobType.${c}`)}
+                </option>
+              ))}
+            </select>
+            {fieldError("job_type")}
+          </div>
+        )}
+
+        {/* 雇用形態：機関種別で選択肢を切替 */}
         <div>
           <label className={labelClass} htmlFor="employment_type">
             {t("filters.employmentType.label")}
@@ -211,13 +227,17 @@ export default function PostForm({
           <select
             id="employment_type"
             name="employment_type"
-            defaultValue={current.employment_type ?? ""}
+            value={emp}
+            onChange={(e) => setEmp(e.target.value)}
             className={inputClass}
           >
             <option value="" disabled>
               --
             </option>
-            {EMPLOYMENT_TYPE_CODES.map((c) => (
+            {(org === "company"
+              ? COMPANY_EMPLOYMENT_CODES
+              : ACADEMIA_EMPLOYMENT_CODES
+            ).map((c) => (
               <option key={c} value={c}>
                 {t(`filters.employmentType.${c}`)}
               </option>

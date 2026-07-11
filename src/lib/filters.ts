@@ -16,12 +16,40 @@ export const JOB_TYPE_CODES = [
 ] as const;
 export type JobTypeCode = (typeof JOB_TYPE_CODES)[number];
 
-export const EMPLOYMENT_TYPE_CODES = [
+// 雇用形態：アカデミア群と企業群に分け、機関種別（organization_type）で出し分ける。
+export const ACADEMIA_EMPLOYMENT_CODES = [
   "emp_fixed",
   "emp_permanent",
   "emp_tenure_track",
 ] as const;
+export const COMPANY_EMPLOYMENT_CODES = [
+  "emp_regular",
+  "emp_contract",
+  "emp_dispatch",
+  "emp_gyomu",
+  "emp_other",
+] as const;
+export const EMPLOYMENT_TYPE_CODES = [
+  ...ACADEMIA_EMPLOYMENT_CODES,
+  ...COMPANY_EMPLOYMENT_CODES,
+] as const;
 export type EmploymentTypeCode = (typeof EMPLOYMENT_TYPE_CODES)[number];
+
+// 機関種別に対応する雇用形態コード群。
+// company=企業群 / university・research_institute=アカデミア群 / それ以外（すべて）=両方。
+export function employmentCodesForOrg(
+  org: string
+): readonly EmploymentTypeCode[] {
+  if (org === "company") return COMPANY_EMPLOYMENT_CODES;
+  if (org === "university" || org === "research_institute")
+    return ACADEMIA_EMPLOYMENT_CODES;
+  return EMPLOYMENT_TYPE_CODES;
+}
+
+// 職種セレクトを表示するか（企業は職種の概念がないため非表示）。
+export function showJobTypeForOrg(org: string): boolean {
+  return org !== "company";
+}
 
 // 機関種別（募集元の種類）
 export const ORGANIZATION_TYPE_CODES = [

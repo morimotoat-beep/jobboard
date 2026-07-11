@@ -1,5 +1,6 @@
 import {
-  EMPLOYMENT_TYPE_CODES,
+  ACADEMIA_EMPLOYMENT_CODES,
+  COMPANY_EMPLOYMENT_CODES,
   JOB_TYPE_CODES,
   LOCALES,
   ORGANIZATION_TYPE_CODES,
@@ -12,7 +13,8 @@ export type ListingInput = {
   summary: string;
   // 研究分野マスター（細目）の選択。listings 列ではなく listing_research_fields に保存する。
   field_ids: string[];
-  job_type: string;
+  // 企業求人は職種なし → null（アカデミア求人は必須）
+  job_type: string | null;
   employment_type: string;
   organization_type: string;
   country: string;
@@ -68,14 +70,24 @@ export function parseListingForm(formData: FormData): {
   } else if (data.field_ids.length > MAX_RESEARCH_FIELDS) {
     errors.field_ids = "tooManyFields";
   }
-  if (!(JOB_TYPE_CODES as readonly string[]).includes(data.job_type)) {
-    errors.job_type = "invalidChoice";
-  }
-  if (!(EMPLOYMENT_TYPE_CODES as readonly string[]).includes(data.employment_type)) {
-    errors.employment_type = "invalidChoice";
-  }
+  // 機関種別を起点に、職種／雇用形態の妥当性を機関種別に応じて判定する。
   if (!(ORGANIZATION_TYPE_CODES as readonly string[]).includes(data.organization_type)) {
     errors.organization_type = "invalidChoice";
+  }
+  if (data.organization_type === "company") {
+    // 企業求人：職種の概念がないため保存しない（null）。雇用形態は企業群から。
+    data.job_type = null;
+    if (!(COMPANY_EMPLOYMENT_CODES as readonly string[]).includes(data.employment_type)) {
+      errors.employment_type = "invalidChoice";
+    }
+  } else {
+    // アカデミア（大学／研究機関）：職種必須、雇用形態はアカデミア群から。
+    if (!(JOB_TYPE_CODES as readonly string[]).includes(data.job_type ?? "")) {
+      errors.job_type = "invalidChoice";
+    }
+    if (!(ACADEMIA_EMPLOYMENT_CODES as readonly string[]).includes(data.employment_type)) {
+      errors.employment_type = "invalidChoice";
+    }
   }
   if (!(COUNTRY_CODES as readonly string[]).includes(data.country)) {
     errors.country = "invalidChoice";

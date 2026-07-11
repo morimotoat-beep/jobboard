@@ -64,9 +64,11 @@ function JobCard({
             <span className="rounded border border-brand-primary/30 bg-white px-1.5 py-0.5 text-[10px] font-medium text-brand-primary">
               {t(`filters.organizationType.${listing.organization_type}`)}
             </span>
-            <span className="rounded bg-brand-tab px-1.5 py-0.5 text-[10px]">
-              {t(`filters.jobType.${listing.job_type}`)}
-            </span>
+            {listing.job_type && (
+              <span className="rounded bg-brand-tab px-1.5 py-0.5 text-[10px]">
+                {t(`filters.jobType.${listing.job_type}`)}
+              </span>
+            )}
             <span className="rounded bg-brand-tab px-1.5 py-0.5 text-[10px]">
               {t(`filters.employmentType.${listing.employment_type}`)}
             </span>

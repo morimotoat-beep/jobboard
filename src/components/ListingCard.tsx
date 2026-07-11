@@ -46,9 +46,11 @@ export default function ListingCard({
               {c[`name_${locale}` as const] || c.name_ja}
             </span>
           ))}
-          <span className="rounded bg-brand-tab px-2 py-0.5">
-            {t(`filters.jobType.${listing.job_type}`)}
-          </span>
+          {listing.job_type && (
+            <span className="rounded bg-brand-tab px-2 py-0.5">
+              {t(`filters.jobType.${listing.job_type}`)}
+            </span>
+          )}
           <span className="rounded bg-brand-tab px-2 py-0.5">
             {t(`filters.employmentType.${listing.employment_type}`)}
           </span>

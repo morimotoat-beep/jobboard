@@ -75,10 +75,6 @@
     "any": "Any",
     "country": "Country / Region",
     "prefecture": "Prefecture (Japan)",
-    "deadline": "Deadline",
-    "within7": "Within 7 days",
-    "within30": "Within 30 days",
-    "within90": "Within 90 days",
     "keywordPlaceholder": "Search title and summary",
     "searchButton": "Search",
     "results": "{count} positions found",
@@ -190,7 +186,14 @@
       "label": "Employment Type",
       "emp_fixed": "Fixed-term",
       "emp_permanent": "Permanent",
-      "emp_tenure_track": "Tenure-track"
+      "emp_tenure_track": "Tenure-track",
+      "emp_regular": "Full-time (permanent)",
+      "emp_contract": "Contract employee",
+      "emp_dispatch": "Temporary/dispatched staff",
+      "emp_gyomu": "Contractor (outsourced)",
+      "emp_other": "Other",
+      "groupAcademia": "Academia",
+      "groupCompany": "Company"
     },
     "organizationType": {
       "label": "Organization type",
