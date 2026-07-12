@@ -25,7 +25,7 @@ export default function Header() {
   }, [langOpen]);
 
   return (
-    <header className="border-b border-gray-200 bg-white px-4 py-3">
+    <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/95 px-4 py-3 shadow-sm backdrop-blur supports-[backdrop-filter]:bg-white/80">
       <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-x-3 gap-y-2">
         {/* ロゴ：囲みなしで白地に直接置く */}
         <Link href="/" className="flex items-center">
@@ -43,14 +43,14 @@ export default function Header() {
           <Link
             href="/jobs"
             prefetch
-            className="rounded-md bg-brand-primary px-3.5 py-1.5 text-sm font-bold whitespace-nowrap text-white shadow-sm transition hover:brightness-90"
+            className="btn-fx rounded-md bg-brand-primary px-3.5 py-1.5 text-sm font-bold whitespace-nowrap text-white shadow-sm transition hover:brightness-90"
           >
             {t("nav.findJobs")}
           </Link>
           <Link
             href="/post"
             prefetch
-            className="rounded-md bg-brand-green px-3.5 py-1.5 text-sm font-bold whitespace-nowrap text-white shadow-sm transition hover:brightness-95"
+            className="btn-fx rounded-md bg-brand-green px-3.5 py-1.5 text-sm font-bold whitespace-nowrap text-white shadow-sm transition hover:brightness-95"
           >
             {t("nav.postJob")}
           </Link>
@@ -62,7 +62,7 @@ export default function Header() {
               onClick={() => setLangOpen((v) => !v)}
               aria-haspopup="true"
               aria-expanded={langOpen}
-              className="flex items-center gap-1.5 rounded-md border border-gray-300 px-3 py-1.5 text-sm font-medium whitespace-nowrap text-brand-primary transition hover:bg-brand-tab"
+              className="btn-fx flex items-center gap-1.5 rounded-md border border-gray-300 px-3 py-1.5 text-sm font-medium whitespace-nowrap text-brand-primary transition hover:bg-brand-tab"
             >
               <svg
                 width="16"

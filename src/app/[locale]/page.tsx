@@ -1,6 +1,7 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import Header from "@/components/Header";
 import LandingPrefetch from "@/components/LandingPrefetch";
+import ButtonMotion from "@/components/ButtonMotion";
 import FeatureCards from "@/components/FeatureCards";
 import HowtoCards from "@/components/HowtoCards";
 import JobSitesPreview from "@/components/JobSitesPreview";
@@ -107,6 +108,8 @@ export default async function HomePage({
       <Header />
       {/* スクロールしないと現れる下部 CTA でも即遷移するよう /jobs・/post を先読み */}
       <LandingPrefetch />
+      {/* LP内の .btn-fx ボタンを出現時に一度だけ揺らす */}
+      <ButtonMotion />
       <main className="flex-1">
         {/* 1. ヒーロー（白） */}
         <section className="bg-waves relative overflow-hidden px-4 pt-20 pb-24">
@@ -155,14 +158,14 @@ export default async function HomePage({
                 <Link
                   href="/jobs"
                   prefetch
-                  className="rounded-md bg-brand-primary px-8 py-3 text-center font-bold text-white shadow-sm transition hover:brightness-90"
+                  className="btn-fx rounded-md bg-brand-primary px-8 py-3 text-center font-bold text-white shadow-sm transition hover:brightness-90"
                 >
                   {t("lp.hero.ctaFind")} →
                 </Link>
                 <Link
                   href="/post"
                   prefetch
-                  className="rounded-md bg-brand-green px-8 py-3 text-center font-bold text-white shadow-sm transition hover:brightness-95"
+                  className="btn-fx rounded-md bg-brand-green px-8 py-3 text-center font-bold text-white shadow-sm transition hover:brightness-95"
                 >
                   {t("lp.hero.ctaPost")} →
                 </Link>
@@ -218,7 +221,7 @@ export default async function HomePage({
                 <Link
                   href="/post"
                   prefetch
-                  className="inline-block rounded-md bg-brand-point px-8 py-2.5 font-bold text-brand-primary transition hover:brightness-95"
+                  className="btn-fx inline-block rounded-md bg-brand-point px-8 py-2.5 font-bold text-brand-primary transition hover:brightness-95"
                 >
                   {t("lp.hero.ctaPost")}
                 </Link>
@@ -246,7 +249,7 @@ export default async function HomePage({
             <Link
               href="/jobs"
               prefetch
-              className="inline-block rounded-md bg-brand-point px-8 py-3 font-bold text-brand-primary transition hover:brightness-95"
+              className="btn-fx inline-block rounded-md bg-brand-point px-8 py-3 font-bold text-brand-primary transition hover:brightness-95"
             >
               {t("lp.jobs.viewAll")} →
             </Link>

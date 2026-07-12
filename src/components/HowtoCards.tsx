@@ -168,7 +168,7 @@ function HowtoPanel({ side }: { side: Side }) {
         <div className="mt-auto pt-6">
           <Link
             href={cfg.href}
-            className={`block rounded-md px-6 py-[9px] text-center text-sm font-bold shadow-sm transition ${cfg.button}`}
+            className={`btn-fx block rounded-md px-6 py-[9px] text-center text-sm font-bold shadow-sm transition ${cfg.button}`}
           >
             {t(cfg.ctaKey)} <span aria-hidden="true">→</span>
           </Link>

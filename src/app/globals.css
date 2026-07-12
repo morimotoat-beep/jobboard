@@ -49,3 +49,41 @@ body {
   background-size: cover;
   background-position: center;
 }
+
+/* ===== ボタン共通エフェクト（.btn-fx を付けたCTAに適用） =====
+   ホバー拡大は transition、出現時のwobbleは animation と担当を分け、
+   transform の取り合いを避ける。対象ボタンには元々 Tailwind の
+   `transition` が付いているのでトランジションはそれを流用する。 */
+
+/* ホバー拡大：ホバー可能なポインタ端末だけに適用（タッチで張り付かせない） */
+@media (hover: hover) and (pointer: fine) {
+  .btn-fx:hover {
+    transform: scale(1.04);
+    box-shadow: 0 8px 20px rgba(30, 58, 95, 0.18);
+  }
+}
+
+/* 出現時のwobble（ビューポート進入で ButtonMotion が btn-wobble を一度だけ付与） */
+@keyframes btnWobble {
+  0% { transform: rotate(0deg); }
+  20% { transform: rotate(-3deg); }
+  40% { transform: rotate(2.4deg); }
+  60% { transform: rotate(-1.6deg); }
+  80% { transform: rotate(0.8deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.btn-wobble {
+  animation: btnWobble 500ms ease-in-out;
+}
+
+/* モーション控えめ設定の端末では揺れ・ホバー拡大を無効化 */
+@media (prefers-reduced-motion: reduce) {
+  .btn-wobble {
+    animation: none;
+  }
+  .btn-fx:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
