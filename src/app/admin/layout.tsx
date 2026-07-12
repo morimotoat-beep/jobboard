@@ -3,7 +3,7 @@ import "../globals.css";
 
 // 管理画面は運営者専用のため日本語のみ（多言語化しない）
 export const metadata: Metadata = {
-  title: "管理画面 | アカデミアノート Jobs",
+  title: "管理画面 | Academia Jobs",
   robots: { index: false, follow: false },
 };
 

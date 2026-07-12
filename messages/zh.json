@@ -1,6 +1,6 @@
 {
   "common": {
-    "siteTitle": "Academia Note Jobs",
+    "siteTitle": "Academia Jobs",
     "tagline": "面向研究人员的招聘信息网站"
   },
   "home": {
@@ -165,9 +165,9 @@
     "errorBanner": "处理失败，请稍后重试。"
   },
   "email": {
-    "confirmSubject": "【Academia Note Jobs】确认您的招聘信息",
+    "confirmSubject": "【Academia Jobs】确认您的招聘信息",
     "confirmBody": "我们已收到您发布的招聘信息。\n\n请点击以下链接确认内容，并按下发布按钮后即可公开。\n此链接也用于之后的编辑和删除，请妥善保管。\n\n{url}\n\n如果这不是您本人的操作，请忽略此邮件。",
-    "linkFlaggedSubject": "【Academia Note Jobs】您发布的招聘信息链接无法访问",
+    "linkFlaggedSubject": "【Academia Jobs】您发布的招聘信息链接无法访问",
     "linkFlaggedBody": "您发布的招聘信息「{title}」的申请·详情URL已连续3天无法访问（404等），该信息已被暂时隐藏。\n\n请确认URL是否正确，并通过以下管理页面修改保存后即可重新发布。如链接恢复，也会自动重新发布。\n\n{url}"
   },
   "filters": {

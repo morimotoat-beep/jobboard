@@ -28,9 +28,34 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "common" });
+  const title = t("siteTitle");
+  const description = t("tagline");
   return {
-    title: t("siteTitle"),
-    description: t("tagline"),
+    metadataBase: new URL("https://jobs.academianote.site"),
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      siteName: "Academia Jobs",
+      url: "https://jobs.academianote.site",
+      locale,
+      type: "website",
+      images: [
+        {
+          url: "/OPG-job.png",
+          width: 1200,
+          height: 630,
+          alt: "Academia Jobs",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ["/OPG-job.png"],
+    },
   };
 }
 

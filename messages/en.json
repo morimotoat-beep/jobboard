@@ -1,6 +1,6 @@
 {
   "common": {
-    "siteTitle": "Academia Note Jobs",
+    "siteTitle": "Academia Jobs",
     "tagline": "Job board for researchers"
   },
   "home": {
@@ -165,9 +165,9 @@
     "errorBanner": "Something went wrong. Please try again in a moment."
   },
   "email": {
-    "confirmSubject": "[Academia Note Jobs] Confirm your job listing",
+    "confirmSubject": "[Academia Jobs] Confirm your job listing",
     "confirmBody": "We received your job listing.\n\nOpen the link below to review it and press the publish button to make it public.\nKeep this link safe — it is also used to edit or delete the listing later.\n\n{url}\n\nIf you did not request this, please ignore this email.",
-    "linkFlaggedSubject": "[Academia Note Jobs] We could not reach your listing's link",
+    "linkFlaggedSubject": "[Academia Jobs] We could not reach your listing's link",
     "linkFlaggedBody": "The application URL of your listing \"{title}\" has been unreachable (404, etc.) for 3 consecutive days, so the listing has been temporarily hidden.\n\nPlease check the URL and update it from the management page below — saving your changes will republish the listing. It will also be republished automatically if the link recovers.\n\n{url}"
   },
   "filters": {

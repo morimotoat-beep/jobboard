@@ -32,8 +32,8 @@ export default function Header() {
           <Image
             src="/logo.png"
             alt={t("common.siteTitle")}
-            width={600}
-            height={135}
+            width={559}
+            height={87}
             priority
             className="h-8 w-auto"
           />
