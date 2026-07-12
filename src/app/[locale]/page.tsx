@@ -134,8 +134,9 @@ export default async function HomePage({
                 {locale === "ja" ? (
                   <>
                     {t("lp.hero.subA")}
-                    <br />
                     {t("lp.hero.subB")}
+                    <br className="sm:hidden" />
+                    {t("lp.hero.subC")}
                   </>
                 ) : (
                   t("lp.hero.sub")
@@ -147,6 +148,8 @@ export default async function HomePage({
                     {t("lp.hero.trustA")}
                     <br />
                     {t("lp.hero.trustB")}
+                    <br className="sm:hidden" />
+                    {t("lp.hero.trustB2")}
                     <br />
                     {t("lp.hero.trustC")}
                   </>
@@ -284,7 +287,17 @@ export default async function HomePage({
           align="right"
           word="HOW TO USE"
           title={t("lp.howto.heading")}
-          desc={t("lp.howto.desc")}
+          desc={
+            locale === "ja" ? (
+              <>
+                {t("lp.howto.descA")}
+                <br className="sm:hidden" />
+                {t("lp.howto.descB")}
+              </>
+            ) : (
+              t("lp.howto.desc")
+            )
+          }
           paddingClass="pt-8 pb-[60px]"
           contentClass="mt-9"
         >
