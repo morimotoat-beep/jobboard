@@ -134,6 +134,7 @@ export default async function HomePage({
                 {locale === "ja" ? (
                   <>
                     {t("lp.hero.subA")}
+                    <br className="sm:hidden" />
                     {t("lp.hero.subB")}
                     <br className="sm:hidden" />
                     {t("lp.hero.subC")}
