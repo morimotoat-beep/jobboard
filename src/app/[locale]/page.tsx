@@ -2,6 +2,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import Header from "@/components/Header";
 import LandingPrefetch from "@/components/LandingPrefetch";
 import FeatureCards from "@/components/FeatureCards";
+import HeroNetwork from "@/components/HeroNetwork";
 import HowtoCards from "@/components/HowtoCards";
 import JobSitesPreview from "@/components/JobSitesPreview";
 import JobsCarousel from "@/components/JobsCarousel";
@@ -110,11 +111,70 @@ export default async function HomePage({
       <main className="flex-1">
         {/* 1. ヒーロー（白） */}
         <section className="bg-waves relative overflow-hidden px-4 pt-20 pb-24">
+          {/* 研究ネットワークの装飾レイヤー（bg-waves の上・コンテンツ z-10 の下） */}
+          <HeroNetwork />
+          {/* 最背面の巨大ゴースト文字（既存 text-watermark を流用） */}
           <div
             aria-hidden="true"
             className="text-watermark pointer-events-none absolute top-6 -left-[3vw] text-[14vw] leading-none font-black tracking-tight whitespace-nowrap select-none sm:-top-3 sm:text-[10vw]"
           >
-            NEXT STAGE
+            RESEARCH
+          </div>
+          {/* 極薄の単語を散らしてアカデミアの空気感を出す（大4語＋mono4語） */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 overflow-hidden select-none"
+          >
+            {/* 大きめ・font-black：モバイルでもこの4語は表示 */}
+            <span
+              className="absolute top-[6%] left-[1%] font-black whitespace-nowrap text-brand-primary"
+              style={{ fontSize: "11vw", opacity: 0.05, transform: "rotate(-5deg)" }}
+            >
+              ACADEMIA
+            </span>
+            <span
+              className="absolute top-[58%] left-[34%] font-black whitespace-nowrap text-brand-primary"
+              style={{ fontSize: "9vw", opacity: 0.05, transform: "rotate(4deg)" }}
+            >
+              DISCOVERY
+            </span>
+            <span
+              className="absolute top-[26%] right-[1%] font-black whitespace-nowrap text-brand-primary"
+              style={{ fontSize: "10vw", opacity: 0.045, transform: "rotate(-3deg)" }}
+            >
+              SCIENCE
+            </span>
+            <span
+              className="absolute bottom-[5%] left-[5%] font-black whitespace-nowrap text-brand-primary"
+              style={{ fontSize: "8vw", opacity: 0.055, transform: "rotate(3deg)" }}
+            >
+              INNOVATION
+            </span>
+            {/* 小さめ・font-mono：モバイルでは非表示 */}
+            <span
+              className="absolute top-[18%] left-[26%] hidden font-mono whitespace-nowrap text-brand-primary sm:block"
+              style={{ fontSize: "2.4vw", opacity: 0.06, transform: "rotate(3deg)" }}
+            >
+              Professor
+            </span>
+            <span
+              className="absolute top-[22%] right-[24%] hidden font-mono whitespace-nowrap text-brand-primary sm:block"
+              style={{ fontSize: "2.2vw", opacity: 0.06, transform: "rotate(-4deg)" }}
+            >
+              PhD
+            </span>
+            <span
+              className="absolute top-[72%] left-[9%] hidden font-mono whitespace-nowrap text-brand-primary sm:block"
+              style={{ fontSize: "2.4vw", opacity: 0.06, transform: "rotate(5deg)" }}
+            >
+              Postdoc
+            </span>
+            <span
+              className="absolute top-[50%] right-[13%] hidden font-mono whitespace-nowrap text-brand-primary sm:block"
+              style={{ fontSize: "2.2vw", opacity: 0.06, transform: "rotate(-6deg)" }}
+            >
+              Industry
+            </span>
           </div>
           <div className="relative z-10 mx-auto max-w-3xl text-center">
             <Reveal>
