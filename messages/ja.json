@@ -1,6 +1,6 @@
 {
   "common": {
-    "siteTitle": "Academia Jobs",
+    "siteTitle": "Academia Notes Jobs",
     "tagline": "研究者のための求人情報サイト"
   },
   "home": {
@@ -175,9 +175,9 @@
     "errorBanner": "処理に失敗しました。時間をおいてもう一度お試しください。"
   },
   "email": {
-    "confirmSubject": "【Academia Jobs】求人投稿の確認",
+    "confirmSubject": "【Academia Notes Jobs】求人投稿の確認",
     "confirmBody": "求人の投稿を受け付けました。\n\n以下のリンクから掲載内容を確認し、「公開する」ボタンを押すと掲載されます。\nこのリンクは掲載後の編集・削除にも使用します。大切に保管してください。\n\n{url}\n\n※このメールに心当たりがない場合は破棄してください。",
-    "linkFlaggedSubject": "【Academia Jobs】掲載求人のリンクが確認できません",
+    "linkFlaggedSubject": "【Academia Notes Jobs】掲載求人のリンクが確認できません",
     "linkFlaggedBody": "掲載中の求人「{title}」の応募・詳細URLに3日連続でアクセスできない状態（404等）を確認したため、求人を一時非表示にしました。\n\nURLをご確認のうえ、以下の管理ページから修正・保存いただくと再公開されます。リンクが回復した場合は自動的に再公開されます。\n\n{url}"
   },
   "filters": {

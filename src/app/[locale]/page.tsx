@@ -122,7 +122,7 @@ export default async function HomePage({
           <div className="relative z-10 mx-auto max-w-3xl text-center">
             <Reveal>
               <p className="mb-6 text-xs font-bold tracking-[0.35em] text-gray-400 uppercase">
-                Academia Jobs
+                Academia Notes Jobs
               </p>
               <h1 className="mb-6 text-3xl leading-snug font-bold tracking-tight text-brand-primary [word-break:keep-all] sm:text-4xl lg:text-5xl">
                 <span className="block">{t("lp.hero.title1")}</span>

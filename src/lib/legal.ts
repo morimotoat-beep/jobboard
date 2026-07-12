@@ -17,7 +17,7 @@ const TERMS: Partial<Record<Locale, LegalDoc>> = {
     sections: [
       {
         heading: "第1条（適用）",
-        body: "本規約は、Academia Jobs（以下「当サイト」）の利用に関する条件を定めるものです。利用者は、本規約に同意のうえ当サイトを利用するものとします。",
+        body: "本規約は、Academia Notes Jobs（以下「当サイト」）の利用に関する条件を定めるものです。利用者は、本規約に同意のうえ当サイトを利用するものとします。",
       },
       {
         heading: "第2条（サービス内容）",
@@ -51,7 +51,7 @@ const TERMS: Partial<Record<Locale, LegalDoc>> = {
     sections: [
       {
         heading: "1. Scope",
-        body: "These terms govern the use of Academia Jobs (the \"Site\"). By using the Site, you agree to these terms.",
+        body: "These terms govern the use of Academia Notes Jobs (the \"Site\"). By using the Site, you agree to these terms.",
       },
       {
         heading: "2. Nature of the Service",

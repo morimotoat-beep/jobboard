@@ -37,7 +37,7 @@ export async function generateMetadata({
     openGraph: {
       title,
       description,
-      siteName: "Academia Jobs",
+      siteName: "Academia Notes Jobs",
       url: "https://jobs.academianote.site",
       locale,
       type: "website",
@@ -46,7 +46,7 @@ export async function generateMetadata({
           url: "/OPG-job.png",
           width: 1200,
           height: 630,
-          alt: "Academia Jobs",
+          alt: "Academia Notes Jobs",
         },
       ],
     },
