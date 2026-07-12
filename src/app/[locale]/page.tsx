@@ -104,13 +104,13 @@ export default async function HomePage({
   ]);
 
   return (
-    <div className="flex min-h-screen flex-col overflow-x-clip">
+    <div className="flex min-h-screen flex-col">
       <Header />
       {/* スクロールしないと現れる下部 CTA でも即遷移するよう /jobs・/post を先読み */}
       <LandingPrefetch />
       {/* LP内の .btn-fx ボタンを出現時に一度だけ揺らす */}
       <ButtonMotion />
-      <main className="flex-1">
+      <main className="flex-1 overflow-x-clip">
         {/* 1. ヒーロー（白） */}
         <section className="bg-waves relative overflow-hidden px-4 pt-20 pb-24">
           <div
