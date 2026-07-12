@@ -104,7 +104,7 @@ export default async function HomePage({
   ]);
 
   return (
-    <div className="flex min-h-screen flex-col overflow-x-hidden">
+    <div className="flex min-h-screen flex-col overflow-x-clip">
       <Header />
       {/* スクロールしないと現れる下部 CTA でも即遷移するよう /jobs・/post を先読み */}
       <LandingPrefetch />
